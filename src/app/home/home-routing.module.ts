@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { SignupComponent } from './signup/signup.component';
 import { SingleCourseComponent } from './single-course/single-course.component';
+import {ContactComponent} from "./contact/contact.component";
 
 const routes: Routes = [
   {path:'', component:HomeComponent},
@@ -13,8 +14,8 @@ const routes: Routes = [
   {path:'course',component:SingleCourseComponent},
   {path:'login',component:LoginComponent},
   {path:'signup',component:SignupComponent},
-  {path:'**',component:NotFoundComponent},
-
+  {path:'contact',component:ContactComponent},
+  {path:'**',component:NotFoundComponent}
 ];
 
 @NgModule({
