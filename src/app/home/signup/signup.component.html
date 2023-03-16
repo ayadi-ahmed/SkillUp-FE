@@ -1,1 +1,138 @@
-<p>signup works!</p>
+
+<section class="page-wrapper woocommerce single">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-xl-7">
+                
+                <div class="signup-form">
+                    <div class="form-header">
+                        <h2 class="font-weight-bold mb-3">Sign Up</h2>
+                        <button type="button"  class="btn btn-warning col-xl-5" (click)="typecandidat()">candidat</button>
+                        <button type="button" class="btn btn-light col-xl-5" (click)="typecentre()" >centre</button>
+                        <p class="woocommerce-register">
+                            Already have an account? <a href="#" >Log in</a>
+                        </p>
+                    </div>
+
+                    
+                    <form name="form" #f="ngForm" (ngSubmit)="onSubmit(f)" >
+
+                        
+                            <div class="col-xl-6" *ngIf="step==1">
+                            
+                                    <label>First Name&nbsp;<span class="required">*</span></label>
+                                    <input type="text" class="form-control" name="first_name" minlength="2" #name="ngModel" [class.is-invalid]="name.invalid && name.touched"  [(ngModel)]="first_name"  required>
+
+                                    <div *ngIf="name.errors && (name.invalid || name.touched)">
+                                      <small class="text-danger" *ngIf="name.errors['minlength']">at least 2 character</small>
+                                      <small class="text-danger" *ngIf="name.errors['required']">first name is required</small>
+                                    </div>
+                                
+                            
+                                    <label>Last Name&nbsp;<span class="required">*</span></label>
+                                    <input type="text"  class="form-control"   name="prenom" minlength="2" #prenom="ngModel" (ngModel)="prenom" placeholder="Last Name" [class.is-invalid]="prenom.invalid && prenom.touched" required>
+                                
+                                <div *ngIf="prenom.errors && (prenom.invalid || prenom.touched)">
+                                    <small class="text-danger" *ngIf="prenom.errors['minlength']">at least 2 character</small>
+                                    <small class="text-danger" *ngIf="prenom.errors['required']">last name is required</small>
+  
+                                </div>
+                            
+                            
+                                <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+                                    <label>User Name&nbsp;<span class="required">*</span></label>
+                                    <input type="text" class="form-control" name="user-name"  value="" placeholder="Username">
+                                </p>
+                            </div>
+                            <div *ngIf="step==2">
+
+                            <div class="col-xl-6">
+                                <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+                                    <label>Email&nbsp;<span class="required">*</span></label>
+                                    <input type="email" class="form-control" name="email" value="" placeholder="Your Email">
+                                </p>
+                            </div>
+                            
+                            <div class="col-xl-6">
+                                
+                                    <label>telephone</label>
+                                    <input type="tel" class="form-control" name="tel" value=""  pattern="^\d{8}$" [class.is-invalid]="tel.invalid && tel.touched" #tel="ngModel" (ngModel)="tel" placeholder="votre tel">
+                                    <div *ngIf="tel.errors && (tel.invalid || tel.touched)">
+                                    <small class="text-danger" *ngIf="tel.errors['pattern']">tel must be 8digits</small>
+                                    </div>
+                            </div>
+
+                            <div class="col-xl-6" *ngIf="typeUser=='candidat'">
+                                <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+                                    <label>fonction</label>
+                                    <input type="text" class="form-control" name="fonction" value="" placeholder="fonction">
+                                </p>
+                            </div>
+                        
+                        <div class="col-xl-6" *ngIf="typeUser=='centre'">
+                            <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+                                <label>Address</label>
+                                <input type="text" class="form-control" name="address" value="" placeholder="address">
+                            </p>
+                        </div>
+                    </div>
+                        <div *ngIf="step==3">
+
+                            <div class="col-xl-6" *ngIf="typeUser=='candidat'">
+                                <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+                                    <label>Date naissance&nbsp;<span class="required">*</span></label>
+                                    <input type="date" class="form-control" name="dateNaissance" value="" placeholder="Your Date of birth">
+                                </p>
+                            </div>
+                        
+
+                            <div class="col-xl-6">
+                                    <label>Password&nbsp;<span class="required">*</span></label>
+                                    <input type="password" class="form-control" name="mdp" #mdp="ngModel" [class.is-invalid]="mdp.invalid && mdp.touched" minlength="6" (ngModel)="mdp" value="" placeholder="Password" required>
+                                    <div *ngIf="mdp.errors && (mdp.invalid || mdp.touched)">
+                                        <small class="text-danger" *ngIf="mdp.errors['minlength']">password must be at least 6 characters</small>
+                                        <small class="text-danger" *ngIf="mdp.errors['required']">password is required</small>
+                                    </div>
+                            </div>
+                            <div class="col-xl-6">
+                               
+                                    <label>Re-Enter Password&nbsp;<span class="required">*</span></label>
+                                    <input type="password" class="form-control" #rmdp="ngModel" ngModel name="re-password" [class.is-invalid]="mdp.invalid && mdp.touched" value="" [class.is-invalid]="mdp.invalid && mdp.touched" placeholder="Re-Enter Password">
+                                    <div *ngIf="rmdp.touched">
+                                    <small class="text-danger" *ngIf="mdp.value !=rmdp.value">must be the same of password</small><br>
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="">
+                                    <p class="woocommerce-LostPassword lost_password">
+                                        <a href="#">Forgot password?</a>
+                                    </p>
+                                    <p class="form-row">
+                                        <label class="woocommerce-form__label woocommerce-form__label-for-checkbox woocommerce-form-login__policy">
+                                            <input class="woocommerce-form__input woocommerce-form__input-checkbox" name="policy" type="checkbox" id="policy" value="forever"> <span>Accept the Terms and Privacy Policy</span>
+                                        </label>
+                                    </p>
+                                    
+                                    
+                               </div>
+                            </div>
+                        </div>
+
+                            
+                        
+                      
+                        <p class="woocommerce-FormRow form-row">
+                            <button class="btn btn-primary" type="submit" name="previous" (click)="previousStep()" value="previous" *ngIf="step!=1">previous</button>
+                            <button class="btn btn-primary" type="submit" name="next" (click)="nextStep()" *ngIf="step!=3" value="next">next</button>
+                            <button class="btn btn-primary" type="submit" name="register" value="Register">Register</button>
+                        </p>
+                    </form>
+                <form action="">
+                    
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--shop register end-->

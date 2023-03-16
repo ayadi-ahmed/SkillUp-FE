@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import {FormsModule} from '@angular/forms';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './home/header/header.component';
@@ -19,12 +19,13 @@ import { SingleCourseComponent } from './single-course/single-course.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { ContactComponent } from './home/contact/contact.component';
+import { InstructorComponent } from './instructor/instructor.component';
 
 
 @NgModule({
   declarations: [
     HomeComponent,
-    HeaderComponent,
     BannerComponent,
     FeaturesComponent,
     CourseCategoryComponent,
@@ -34,16 +35,18 @@ import { NotFoundComponent } from './not-found/not-found.component';
     HowItWorksComponent,
     TestimonialsComponent,
     BecomePartnerComponent,
-    FooterComponent,
     CoursesComponent,
     SingleCourseComponent,
     LoginComponent,
     SignupComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ContactComponent,
+    InstructorComponent,
   ],
   imports: [
     CommonModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+    FormsModule
   ]
 })
 export class HomeModule { }
