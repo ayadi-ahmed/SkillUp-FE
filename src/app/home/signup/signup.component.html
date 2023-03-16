@@ -21,7 +21,7 @@
                             <div class="col-xl-6" *ngIf="step==1">
                             
                                     <label>First Name&nbsp;<span class="required">*</span></label>
-                                    <input type="text" class="form-control" name="first_name" minlength="2" #name="ngModel" [class.is-invalid]="name.invalid && name.touched"  [(ngModel)]="first_name"  required>
+                                    <input type="text" class="form-control" name="first_name" minlength="2" #name="ngModel" [class.is-invalid]="name.invalid && name.touched"  [(ngModel)]="user.first_name"  required>
 
                                     <div *ngIf="name.errors && (name.invalid || name.touched)">
                                       <small class="text-danger" *ngIf="name.errors['minlength']">at least 2 character</small>
@@ -30,7 +30,7 @@
                                 
                             
                                     <label>Last Name&nbsp;<span class="required">*</span></label>
-                                    <input type="text"  class="form-control"   name="prenom" minlength="2" #prenom="ngModel" (ngModel)="prenom" placeholder="Last Name" [class.is-invalid]="prenom.invalid && prenom.touched" required>
+                                    <input type="text"  class="form-control"   name="prenom" minlength="2" #prenom="ngModel" (ngModel)="user.prenom" placeholder="Last Name" [class.is-invalid]="prenom.invalid && prenom.touched" required>
                                 
                                 <div *ngIf="prenom.errors && (prenom.invalid || prenom.touched)">
                                     <small class="text-danger" *ngIf="prenom.errors['minlength']">at least 2 character</small>

@@ -7,10 +7,11 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-first_name:any;
-tel:any;
-prenom:any;
-mdp:any;
+user={first_name:"",
+tel:"",
+prenom:"",
+mdp:"",
+}
 step=1;
 typeUser='candidat'
   constructor() {
