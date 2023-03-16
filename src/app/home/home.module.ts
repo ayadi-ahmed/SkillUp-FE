@@ -17,13 +17,10 @@ import { SingleCourseComponent } from './single-course/single-course.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-<<<<<<< HEAD
-import { ContactComponent } from './home/contact/contact.component';
 import { InstructorComponent } from './instructor/instructor.component';
-=======
+
 import { ContactComponent } from './contact/contact.component';
 import { PricingComponent } from './pricing/pricing.component';
->>>>>>> 4e0277de8419b19c2ce854cc7a273d4aebfe66a9
 
 
 @NgModule({
@@ -44,11 +41,10 @@ import { PricingComponent } from './pricing/pricing.component';
     SignupComponent,
     NotFoundComponent,
     ContactComponent,
-<<<<<<< HEAD
+
     InstructorComponent,
-=======
+
     PricingComponent
->>>>>>> 4e0277de8419b19c2ce854cc7a273d4aebfe66a9
   ],
   imports: [
     CommonModule,
