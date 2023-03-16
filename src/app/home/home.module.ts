@@ -18,6 +18,7 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ContactComponent } from './contact/contact.component';
+import { PricingComponent } from './pricing/pricing.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { ContactComponent } from './contact/contact.component';
     LoginComponent,
     SignupComponent,
     NotFoundComponent,
-    ContactComponent
+    ContactComponent,
+    PricingComponent
   ],
   imports: [
     CommonModule,

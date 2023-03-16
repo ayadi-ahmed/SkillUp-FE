@@ -7,6 +7,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { SignupComponent } from './signup/signup.component';
 import { SingleCourseComponent } from './single-course/single-course.component';
 import {ContactComponent} from "./contact/contact.component";
+import {PricingComponent} from "./pricing/pricing.component";
 
 const routes: Routes = [
   {path:'', component:HomeComponent},
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path:'login',component:LoginComponent},
   {path:'signup',component:SignupComponent},
   {path:'contact',component:ContactComponent},
+  {path:'pricing',component:PricingComponent},
   {path:'**',component:NotFoundComponent}
 ];
 
