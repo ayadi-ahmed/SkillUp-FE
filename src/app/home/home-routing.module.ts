@@ -19,16 +19,10 @@ const routes: Routes = [
   {path:'course',component:SingleCourseComponent},
   {path:'login',component:LoginComponent},
   {path:'signup',component:SignupComponent},
-
-  {path:"contact",component:ContactComponent},
   {path:'instructors',component:InstructorComponent},
-  {path:'**',component:NotFoundComponent},
-
-
   {path:'contact',component:ContactComponent},
   {path:'pricing',component:PricingComponent},
   {path:'**',component:NotFoundComponent}
-
 ];
 
 @NgModule({

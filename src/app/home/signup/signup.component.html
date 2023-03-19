@@ -121,10 +121,10 @@
                             
                         
                       
-                        <p class="woocommerce-FormRow form-row">
+                        <p class="woocommerce-FormRow form-row justify-content-between">
                             <button class="btn btn-primary" type="submit" name="previous" (click)="previousStep()" value="previous" *ngIf="step!=1">previous</button>
                             <button class="btn btn-primary" type="submit" name="next" (click)="nextStep()" *ngIf="step!=3" value="next">next</button>
-                            <button class="btn btn-primary" type="submit" name="register" value="Register">Register</button>
+                            <button class="btn btn-primary" type="submit" name="register" *ngIf="step==3" value="Register">Register</button>
                         </p>
                     </form>
                 <form action="">

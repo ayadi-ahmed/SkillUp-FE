@@ -24,32 +24,37 @@ import { PricingComponent } from './pricing/pricing.component';
 
 
 @NgModule({
-  declarations: [
-    HomeComponent,
-    BannerComponent,
-    FeaturesComponent,
-    CourseCategoryComponent,
-    StatsComponent,
-    PopularCoursesComponent,
-    SmallBannerComponent,
-    HowItWorksComponent,
-    TestimonialsComponent,
-    BecomePartnerComponent,
-    CoursesComponent,
-    SingleCourseComponent,
-    LoginComponent,
-    SignupComponent,
-    NotFoundComponent,
-    ContactComponent,
+    declarations: [
+        HomeComponent,
+        BannerComponent,
+        FeaturesComponent,
+        CourseCategoryComponent,
+        StatsComponent,
+        PopularCoursesComponent,
+        SmallBannerComponent,
+        HowItWorksComponent,
+        TestimonialsComponent,
+        BecomePartnerComponent,
+        CoursesComponent,
+        SingleCourseComponent,
+        LoginComponent,
+        SignupComponent,
+        NotFoundComponent,
+        ContactComponent,
 
-    InstructorComponent,
+        InstructorComponent,
 
-    PricingComponent
-  ],
-  imports: [
-    CommonModule,
-    HomeRoutingModule,
-    FormsModule
-  ]
+        PricingComponent
+    ],
+    exports: [
+        PopularCoursesComponent,
+        InstructorComponent,
+        CoursesComponent
+    ],
+    imports: [
+        CommonModule,
+        HomeRoutingModule,
+        FormsModule
+    ]
 })
 export class HomeModule { }
