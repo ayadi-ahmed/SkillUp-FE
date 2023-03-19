@@ -26,26 +26,27 @@ import { MatListModule } from '@angular/material/list';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 @NgModule({
-  declarations: [
-    HomeComponent,
-    BannerComponent,
-    FeaturesComponent,
-    CourseCategoryComponent,
-    StatsComponent,
-    PopularCoursesComponent,
-    SmallBannerComponent,
-    HowItWorksComponent,
-    TestimonialsComponent,
-    BecomePartnerComponent,
-    CoursesComponent,
-    SingleCourseComponent,
-    LoginComponent,
-    SignupComponent,
-    NotFoundComponent,
-    ContactComponent,
+    declarations: [
+        HomeComponent,
+        BannerComponent,
+        FeaturesComponent,
+        CourseCategoryComponent,
+        StatsComponent,
+        PopularCoursesComponent,
+        SmallBannerComponent,
+        HowItWorksComponent,
+        TestimonialsComponent,
+        BecomePartnerComponent,
+        CoursesComponent,
+        SingleCourseComponent,
+        LoginComponent,
+        SignupComponent,
+        NotFoundComponent,
+        ContactComponent,
 
-    InstructorComponent,
+        InstructorComponent,
 
+<<<<<<< HEAD
     PricingComponent,
       ChatbotComponent
   ],
@@ -58,5 +59,19 @@ import { MatIconModule } from '@angular/material/icon';
     MatInputModule,
     MatIconModule
   ]
+=======
+        PricingComponent
+    ],
+    exports: [
+        PopularCoursesComponent,
+        InstructorComponent,
+        CoursesComponent
+    ],
+    imports: [
+        CommonModule,
+        HomeRoutingModule,
+        FormsModule
+    ]
+>>>>>>> de7d1748565b5e4fe53254ce1189bebc6e950c80
 })
 export class HomeModule { }

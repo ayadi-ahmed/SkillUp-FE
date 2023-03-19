@@ -10,8 +10,13 @@
   },
   "private": true,
   "dependencies": {
+<<<<<<< HEAD
     "@angular/animations": "^14.3.0",
     "@angular/cdk": "^13.3.9",
+=======
+    "@angular/animations": "^14.2.0",
+    "@angular/cdk": "^13.0.0",
+>>>>>>> de7d1748565b5e4fe53254ce1189bebc6e950c80
     "@angular/common": "^14.2.0",
     "@angular/compiler": "^14.2.0",
     "@angular/core": "^14.2.0",

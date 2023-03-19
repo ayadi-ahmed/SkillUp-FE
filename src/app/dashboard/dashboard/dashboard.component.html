@@ -1,0 +1,18 @@
+<div style="height: 100%; display: flex">
+    <div style="width: 50px;padding: 10px;height: 100%;">
+        <span (click)="drawer.toggle()" class="material-symbols-outlined">menu</span>
+        <a routerLink="dashboard/messages"><span class="material-symbols-outlined">chat</span></a>
+        <a routerLink="courses"><span class="material-symbols-outlined">bookmark</span></a>
+        <a routerLink="dashboard/profile"><span class="material-symbols-outlined">account_circle</span></a>
+    </div>
+    <mat-drawer-container class="example-container" [hasBackdrop]="false">
+        <mat-drawer #drawer mode="side">
+            <a routerLink="dashboard/messages">Messages</a>
+            <a routerLink="courses">Favoris</a>
+            <a routerLink="dashboard/profile">Profile</a>
+        </mat-drawer>
+        <mat-drawer-content>
+            <router-outlet></router-outlet>
+        </mat-drawer-content>
+    </mat-drawer-container>
+</div>

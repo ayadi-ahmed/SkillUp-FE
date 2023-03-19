@@ -20,17 +20,17 @@ const routes: Routes = [
   {path:'course',component:SingleCourseComponent},
   {path:'login',component:LoginComponent},
   {path:'signup',component:SignupComponent},
-
-  {path:"contact",component:ContactComponent},
   {path:'instructors',component:InstructorComponent},
+<<<<<<< HEAD
   {path:'chat',component:ChatbotComponent},
   {path:'**',component:NotFoundComponent},
 
 
+=======
+>>>>>>> de7d1748565b5e4fe53254ce1189bebc6e950c80
   {path:'contact',component:ContactComponent},
   {path:'pricing',component:PricingComponent},
   {path:'**',component:NotFoundComponent}
-
 ];
 
 @NgModule({
