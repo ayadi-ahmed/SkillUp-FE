@@ -11,6 +11,7 @@ import { ContactComponent } from './home/contact/contact.component';
 import { InstructorComponent } from './instructor/instructor.component';
 
 import {PricingComponent} from "./pricing/pricing.component";
+import { ChatbotComponent } from './chatbot/chatbot.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
 
   {path:"contact",component:ContactComponent},
   {path:'instructors',component:InstructorComponent},
+  {path:'chat',component:ChatbotComponent},
   {path:'**',component:NotFoundComponent},
 
 

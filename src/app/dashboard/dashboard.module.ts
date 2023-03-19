@@ -6,6 +6,8 @@ import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { BuyAbonnementComponent } from './buy-abonnement/buy-abonnement.component';
 import { MessagesComponent } from './messages/messages.component';
+import { AddTrainingComponent } from './add-training/add-training.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -13,11 +15,14 @@ import { MessagesComponent } from './messages/messages.component';
     CartComponent,
     CheckoutComponent,
     BuyAbonnementComponent,
-    MessagesComponent
+    MessagesComponent,
+    AddTrainingComponent
   ],
     imports: [
         CommonModule,
-        DashboardRoutingModule
+        DashboardRoutingModule,
+        FormsModule,
+        ReactiveFormsModule
     ]
 })
 export class DashboardModule { }

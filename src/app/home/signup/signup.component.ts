@@ -13,6 +13,7 @@ prenom:"",
 mdp:"",
 }
 step=1;
+
 typeUser='candidat'
   constructor() {
     

@@ -1,0 +1,28 @@
+<div class="form-card">
+    <h2>NEW TRAINING</h2>
+    <form [formGroup]="formation">
+        <div class="form-group">
+            <label for="subject">Subject</label>
+            <textarea  id="sujet" type="text" formControlName="sujet" ></textarea>
+        </div>
+        <div class="form-group">
+            <label for="location">Location</label>
+            <input  id="sujet" type="text" formControlName="lieu" >
+        </div>
+        <div class="form-group">
+            <label for="datedebut">Start date</label>
+            <input  id="dateDebut" type="date" formControlName="dateDebut" >
+        </div>
+        <div class="form-group">
+            <label for="datefin">End date</label>
+            <input  id="datefin" type="date" formControlName="dateFin" >
+        </div>
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input  id="price" type="text" formControlName="prix" >
+        </div>
+        <div class="action-buttons">
+            <button type="submit" (click)="onsubmit()">Add</button>
+        </div>
+    </form>
+</div>

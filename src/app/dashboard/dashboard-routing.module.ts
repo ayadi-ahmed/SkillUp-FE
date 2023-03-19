@@ -6,6 +6,7 @@ import {CheckoutComponent} from "./checkout/checkout.component";
 import {BuyAbonnementComponent} from "./buy-abonnement/buy-abonnement.component";
 import {NotFoundComponent} from "../home/not-found/not-found.component";
 import {MessagesComponent} from "./messages/messages.component";
+import { AddTrainingComponent } from './add-training/add-training.component';
 
 const routes: Routes = [
   {path:'', component:DashboardComponent},
@@ -13,7 +14,9 @@ const routes: Routes = [
   {path:'checkout', component:CheckoutComponent},
   {path:'buy-abonnement', component:BuyAbonnementComponent},
   {path:'messages', component:MessagesComponent},
-  {path:'**',component:NotFoundComponent}
+  {path:'add-training', component:AddTrainingComponent},
+  {path:'**',component:NotFoundComponent},
+  
 
 ];
 

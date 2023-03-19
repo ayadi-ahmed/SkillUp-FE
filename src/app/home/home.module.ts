@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home/home.component';
 import { BannerComponent } from './home/banner/banner.component';
@@ -21,8 +21,10 @@ import { InstructorComponent } from './instructor/instructor.component';
 
 import { ContactComponent } from './contact/contact.component';
 import { PricingComponent } from './pricing/pricing.component';
-
-
+import { ChatbotComponent } from './chatbot/chatbot.component';
+import { MatListModule } from '@angular/material/list';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -44,12 +46,17 @@ import { PricingComponent } from './pricing/pricing.component';
 
     InstructorComponent,
 
-    PricingComponent
+    PricingComponent,
+      ChatbotComponent
   ],
   imports: [
     CommonModule,
     HomeRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    MatListModule,
+    MatInputModule,
+    MatIconModule
   ]
 })
 export class HomeModule { }
