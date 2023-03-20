@@ -6,7 +6,11 @@ import {CheckoutComponent} from "./checkout/checkout.component";
 import {BuyAbonnementComponent} from "./buy-abonnement/buy-abonnement.component";
 import {NotFoundComponent} from "../home/not-found/not-found.component";
 import {MessagesComponent} from "./messages/messages.component";
+<<<<<<< HEAD
+import { AddTrainingComponent } from './add-training/add-training.component';
+=======
 import {ProfileComponent} from "./Profile-Training-Center/profile/profile.component";
+>>>>>>> de7d1748565b5e4fe53254ce1189bebc6e950c80
 
 const routes: Routes = [
   {path:'', component:DashboardComponent},
@@ -14,8 +18,14 @@ const routes: Routes = [
   {path:'checkout', component:CheckoutComponent},
   {path:'buy-abonnement', component:BuyAbonnementComponent},
   {path:'messages', component:MessagesComponent},
+<<<<<<< HEAD
+  {path:'add-training', component:AddTrainingComponent},
+  {path:'**',component:NotFoundComponent},
+  
+=======
   {path:'profile', component:ProfileComponent},
   {path:'**',component:NotFoundComponent}
+>>>>>>> de7d1748565b5e4fe53254ce1189bebc6e950c80
 
 ];
 

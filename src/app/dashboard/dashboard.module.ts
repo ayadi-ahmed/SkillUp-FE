@@ -6,6 +6,25 @@ import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { BuyAbonnementComponent } from './buy-abonnement/buy-abonnement.component';
 import { MessagesComponent } from './messages/messages.component';
+<<<<<<< HEAD
+import { AddTrainingComponent } from './add-training/add-training.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+@NgModule({
+  declarations: [
+    DashboardComponent,
+    CartComponent,
+    CheckoutComponent,
+    BuyAbonnementComponent,
+    MessagesComponent,
+    AddTrainingComponent
+  ],
+    imports: [
+        CommonModule,
+        DashboardRoutingModule,
+        FormsModule,
+        ReactiveFormsModule
+=======
 import {MatSidenavModule} from "@angular/material/sidenav";
 import { ProfileComponent } from './Profile-Training-Center/profile/profile.component';
 import {MatTabsModule} from "@angular/material/tabs";
@@ -39,6 +58,7 @@ import { CenterCoursesComponent } from './Profile-Training-Center/center-courses
         MatCardModule,
         MatDividerModule,
         HomeModule
+>>>>>>> de7d1748565b5e4fe53254ce1189bebc6e950c80
     ]
 })
 export class DashboardModule { }

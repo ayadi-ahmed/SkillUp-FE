@@ -12,12 +12,22 @@ import {DashboardModule} from "./dashboard/dashboard.module";
     HeaderComponent,
     FooterComponent
   ],
+<<<<<<< HEAD
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+  
+  
+    
+  ],
+=======
     imports: [
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
         DashboardModule,
     ],
+>>>>>>> de7d1748565b5e4fe53254ce1189bebc6e950c80
   providers: [],
   bootstrap: [AppComponent]
 })
