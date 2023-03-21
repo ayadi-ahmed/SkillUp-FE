@@ -14,9 +14,9 @@ import {MatTabsModule} from "@angular/material/tabs";
 import {MatButtonModule} from "@angular/material/button";
 import {MatCardModule} from "@angular/material/card";
 import {MatDividerModule} from "@angular/material/divider";
-import {HomeModule} from "../home/home.module";
 import {InstructorsComponent} from './Profile-Training-Center/instructors/instructors.component';
 import {CenterCoursesComponent} from './Profile-Training-Center/center-courses/center-courses.component';
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 @NgModule({
     declarations: [
@@ -41,9 +41,9 @@ import {CenterCoursesComponent} from './Profile-Training-Center/center-courses/c
         MatButtonModule,
         MatCardModule,
         MatDividerModule,
-        HomeModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        MatTooltipModule
     ]
 })
 export class DashboardModule {
