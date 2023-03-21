@@ -15,7 +15,7 @@ import {BecomePartnerComponent} from './home/become-partner/become-partner.compo
 import {CoursesComponent} from './courses/courses.component';
 import {SingleCourseComponent} from './single-course/single-course.component';
 import {LoginComponent} from './login/login.component';
-import {SignupComponent} from './signup/signup.component';
+import {SignupComponent} from './sign-up/signup/signup.component';
 import {NotFoundComponent} from './not-found/not-found.component';
 import {InstructorComponent} from './instructor/instructor.component';
 import {ContactComponent} from './contact/contact.component';
@@ -23,6 +23,11 @@ import {PricingComponent} from './pricing/pricing.component';
 import {MatListModule} from '@angular/material/list';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
+import { SignupCenterComponent } from './sign-up/signup-center/signup-center.component';
+import {MatStepperModule} from "@angular/material/stepper";
+import {MatButtonModule} from "@angular/material/button";
+import {MatCardModule} from "@angular/material/card";
+import { SignupCandidatComponent } from './sign-up/signup-candidat/signup-candidat.component';
 
 @NgModule({
     declarations: [
@@ -44,6 +49,8 @@ import {MatIconModule} from '@angular/material/icon';
         ContactComponent,
         InstructorComponent,
         PricingComponent,
+        SignupCenterComponent,
+        SignupCandidatComponent,
     ],
     exports: [
         PopularCoursesComponent,
@@ -58,7 +65,10 @@ import {MatIconModule} from '@angular/material/icon';
         MatListModule,
         MatInputModule,
         MatIconModule,
-        FormsModule
+        FormsModule,
+        MatStepperModule,
+        MatButtonModule,
+        MatCardModule
     ],
 })
 export class HomeModule {}
