@@ -23,11 +23,12 @@ import {PricingComponent} from './pricing/pricing.component';
 import {MatListModule} from '@angular/material/list';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
-import { SignupCenterComponent } from './sign-up/signup-center/signup-center.component';
+import {SignupCenterComponent} from './sign-up/signup-center/signup-center.component';
 import {MatStepperModule} from "@angular/material/stepper";
 import {MatButtonModule} from "@angular/material/button";
 import {MatCardModule} from "@angular/material/card";
-import { SignupCandidatComponent } from './sign-up/signup-candidat/signup-candidat.component';
+import {SignupCandidatComponent} from './sign-up/signup-candidat/signup-candidat.component';
+
 
 @NgModule({
     declarations: [
@@ -68,7 +69,8 @@ import { SignupCandidatComponent } from './sign-up/signup-candidat/signup-candid
         FormsModule,
         MatStepperModule,
         MatButtonModule,
-        MatCardModule
+        MatCardModule,
     ],
 })
-export class HomeModule {}
+export class HomeModule {
+}
