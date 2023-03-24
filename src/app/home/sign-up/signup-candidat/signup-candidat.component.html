@@ -11,251 +11,112 @@
 </section>
 <section class="section-padding">
     <div class="container">
-        <mat-stepper linear>
-            <form #candidatForm="ngForm">
-                <mat-step>
-                    <ng-template matStepLabel>Fill out your essential data</ng-template>
-                    <div class="row m-3">
-                        <div class="col-xl-6">
-                            <p><label>First Name&nbsp;<span class="required">*</span></label></p>
-                            <input type="text" class="form-control" name="name" minlength="3"
-                                   #name="ngModel"
-                                   [class.is-invalid]="name.invalid && name.touched" [(ngModel)]="user.prenom"
-                                   required>
+        <form #candidatForm="ngForm">
+            <div class="row m-3">
+                <div class="col-xl-6">
+                    <p><label>First Name&nbsp;<span class="required">*</span></label></p>
+                    <input type="text" class="form-control" name="name" minlength="3"
+                           #name="ngModel"
+                           [class.is-invalid]="name.invalid && name.touched" [(ngModel)]="user.prenom"
+                           required>
 
-                            <div *ngIf="name.errors && name.touched">
-                                <small class="text-danger" *ngIf="name.errors['minlength']">at least 3
-                                    characters</small>
-                                <small class="text-danger" *ngIf="name.errors['required']">first name is
-                                    required</small>
-                            </div>
-                        </div>
-                        <div class="col-xl-6">
-                            <p><label>Last Name&nbsp;<span class="required">*</span></label></p>
-                            <input type="text" class="form-control" name="lastName" minlength="3"
-                                   #lastName="ngModel"
-                                   [class.is-invalid]="lastName.invalid && lastName.touched" [(ngModel)]="user.nom"
-                                   required>
-
-                            <div *ngIf="lastName.errors && lastName.touched">
-                                <small class="text-danger" *ngIf="lastName.errors['minlength']">at least 3
-                                    characters</small>
-                                <small class="text-danger" *ngIf="lastName.errors['required']">lastName is
-                                    required</small>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-6">
-                            <p><label>Email&nbsp;<span class="required">*</span></label></p>
-                            <input type="email" class="form-control" name="email"
-                                   pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" #email="ngModel"
-                                   [class.is-invalid]="email.invalid && email.touched"
-                                   [(ngModel)]="user.email"
-                                   required>
-
-                            <div *ngIf="email.errors && email.touched">
-                                <small class="text-danger" *ngIf="email.errors['required']">email is
-                                    required</small>
-                                <small class="text-danger" *ngIf="email.errors['pattern']">invalid
-                                    email</small>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-6">
-                            <p><label>Phone number&nbsp;<span class="required">*</span></label></p>
-                            <input type="tel" class="form-control" name="tel"
-                                   pattern="[- +()0-9]+"
-                                   minlength="8"
-                                   maxlength="8"
-                                   #tel="ngModel"
-                                   [class.is-invalid]="tel.invalid && tel.touched" [(ngModel)]="user.tel"
-                                   required>
-
-                            <div *ngIf="tel.errors && tel.touched">
-                                <small class="text-danger" *ngIf="tel.errors['required']">phone number is
-                                    required</small>
-                                <small class="text-danger"
-                                       *ngIf="tel.errors['pattern'] || tel.errors['minlength'] || tel.errors['maxlength']">invalid
-                                    phone number</small>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-6">
-                            <p><label>Occupation&nbsp;<span class="required">*</span></label></p>
-                            <input type="text" class="form-control" name="occupation" minlength="3"
-                                   #occupation="ngModel"
-                                   [class.is-invalid]="occupation.invalid && occupation.touched"
-                                   [(ngModel)]="user.fonction"
-                                   required>
-
-                            <div *ngIf="occupation.errors && occupation.touched">
-                                <small class="text-danger" *ngIf="occupation.errors['minlength']">at least 3
-                                    characters</small>
-                                <small class="text-danger" *ngIf="occupation.errors['required']">occupation is
-                                    required</small>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-6">
-                            <p><label>Date of birth&nbsp;<span class="required">*</span></label></p>
-                            <input type="date" class="form-control" name="dateNaissance"
-                                   #dateNaissance="ngModel"
-                                   [class.is-invalid]="dateNaissance.invalid && dateNaissance.touched"
-                                   [(ngModel)]="user.dateNaissance"
-                                   required>
-
-                            <div *ngIf="dateNaissance.errors && dateNaissance.touched">
-                                <small class="text-danger" *ngIf="dateNaissance.errors['required']">date of birth is
-                                    required</small>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-6">
-                            <p><label>Password&nbsp;<span class="required">*</span></label></p>
-                            <input type="password" class="form-control" name="password"
-                                   minlength="8" #password="ngModel"
-                                   [class.is-invalid]="password.invalid && password.touched"
-                                   [(ngModel)]="user.password"
-                                   required>
-
-                            <div *ngIf="password.errors && password.touched">
-                                <small class="text-danger" *ngIf="password.errors['required']">password is
-                                    required</small>
-                                <small class="text-danger" *ngIf="password.errors['minlength']">at least 8
-                                    characters</small>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-6">
-                            <p><label>Re-Enter Password&nbsp;<span class="required">*</span></label></p>
-                            <input type="password" class="form-control" name="password2"
-                                   #password2="ngModel"
-                                   pattern="{{password.value}}"
-                                   [class.is-invalid]="password2.invalid && password2.touched" ngModel
-                                   required>
-
-                            <div *ngIf="password2.errors && password2.touched">
-                                <small class="text-danger" *ngIf="password2.errors['required']">password is
-                                    required</small>
-                                <small class="text-danger" *ngIf="password2.errors['pattern']">must be the
-                                    same of
-                                    password</small>
-                            </div>
-                        </div>
+                    <div *ngIf="name.errors && name.touched">
+                        <small class="text-danger" *ngIf="name.errors['minlength']">at least 3
+                            characters</small>
+                        <small class="text-danger" *ngIf="name.errors['required']">first name is
+                            required</small>
                     </div>
+                </div>
+                <div class="col-xl-6">
+                    <p><label>Last Name&nbsp;<span class="required">*</span></label></p>
+                    <input type="text" class="form-control" name="lastName" minlength="3"
+                           #lastName="ngModel"
+                           [class.is-invalid]="lastName.invalid && lastName.touched" [(ngModel)]="user.nom"
+                           required>
 
-                    <div style="text-align: right">
-                        <button class="btn btn-primary" style="background-color: #015abc" matStepperNext
-                                [disabled]="name.errors || lastName.errors || email.errors || tel.errors || occupation.errors || password.errors || password2.errors">
-                            Next
-                        </button>
+                    <div *ngIf="lastName.errors && lastName.touched">
+                        <small class="text-danger" *ngIf="lastName.errors['minlength']">at least 3
+                            characters</small>
+                        <small class="text-danger" *ngIf="lastName.errors['required']">lastName is
+                            required</small>
                     </div>
-                </mat-step>
+                </div>
 
-                <mat-step>
-                    <ng-template matStepLabel>Fill out your address</ng-template>
-                    <div class="row m-3">
-                        <div class="col-xl-6">
-                            <p><label>Address&nbsp;<span class="required">*</span></label></p>
-                            <input type="text" class="form-control" name="address" minlength="3"
-                                   #address="ngModel"
-                                   [class.is-invalid]="address.invalid && address.touched"
-                                   [(ngModel)]="user.address"
-                                   required>
+                <div class="col-xl-6">
+                    <p><label>Email&nbsp;<span class="required">*</span></label></p>
+                    <input type="email" class="form-control" name="email"
+                           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" #email="ngModel"
+                           [class.is-invalid]="email.invalid && email.touched"
+                           [(ngModel)]="user.email"
+                           required>
 
-                            <div *ngIf="address.errors && address.touched">
-                                <small class="text-danger" *ngIf="address.errors['minlength']">at least 3
-                                    characters</small>
-                                <small class="text-danger" *ngIf="address.errors['required']">address is
-                                    required</small>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-6">
-                            <p><label>State&nbsp;<span class="required">*</span></label></p>
-                            <input type="text" class="form-control" name="state"
-                                   minlength="3" #state="ngModel"
-                                   [class.is-invalid]="state.invalid && state.touched"
-                                   [(ngModel)]="user.state"
-                                   required>
-
-                            <div *ngIf="state.errors && state.touched">
-                                <small class="text-danger" *ngIf="state.errors['required']">state is
-                                    required</small>
-                                <small class="text-danger" *ngIf="state.errors['minlength']">at least 3
-                                    characters</small>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-6">
-                            <p><label>City&nbsp;<span class="required">*</span></label></p>
-                            <input type="text" class="form-control" name="city"
-                                   #city="ngModel"
-                                   [class.is-invalid]="city.invalid && city.touched" [(ngModel)]="user.city"
-                                   required>
-
-                            <div *ngIf="city.errors && city.touched">
-                                <small class="text-danger" *ngIf="city.errors['required']">city is
-                                    required</small>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-6">
-                            <p><label>Zip code&nbsp;<span class="required">*</span></label></p>
-                            <input type="text" class="form-control" name="zip"
-                                   #zip="ngModel"
-                                   pattern="[- +()0-9]+"
-                                   minlength="4"
-                                   maxlength="4"
-                                   [class.is-invalid]="zip.invalid && zip.touched" [(ngModel)]="user.zip"
-                                   required>
-
-                            <div *ngIf="zip.errors && zip.touched">
-                                <small class="text-danger" *ngIf="zip.errors['required']">zip is
-                                    required</small>
-                                <small class="text-danger"
-                                       *ngIf="zip.errors['minlength'] || zip.errors['maxlength'] || zip.errors['pattern']">invalid
-                                    zip code</small>
-                            </div>
-                        </div>
+                    <div *ngIf="email.errors && email.touched">
+                        <small class="text-danger" *ngIf="email.errors['required']">email is
+                            required</small>
+                        <small class="text-danger" *ngIf="email.errors['pattern']">invalid
+                            email</small>
                     </div>
+                </div>
 
-                    <div style="display: flex; justify-content: space-between">
-                        <button class="btn btn-primary" style="background-color: #015abc" matStepperPrevious>Back
-                        </button>
-                        <button class="btn btn-primary" style="background-color: #015abc" matStepperNext
-                                [disabled]="address.errors || state.errors || city.errors || zip.errors">
-                            Next
-                        </button>
+                <div class="col-xl-6">
+                    <p><label>Phone number&nbsp;<span class="required">*</span></label></p>
+                    <input type="tel" class="form-control" name="tel"
+                           pattern="[- +()0-9]+"
+                           minlength="8"
+                           maxlength="8"
+                           #tel="ngModel"
+                           [class.is-invalid]="tel.invalid && tel.touched" [(ngModel)]="user.tel"
+                           required>
+
+                    <div *ngIf="tel.errors && tel.touched">
+                        <small class="text-danger" *ngIf="tel.errors['required']">phone number is
+                            required</small>
+                        <small class="text-danger"
+                               *ngIf="tel.errors['pattern'] || tel.errors['minlength'] || tel.errors['maxlength']">invalid
+                            phone number</small>
                     </div>
-                </mat-step>
+                </div>
 
-                <mat-step>
-                    <ng-template matStepLabel>choose your profile picture</ng-template>
-                    <div class="row m-3">
-                        <div class="col-xl-6">
-                            <p><label>Profile picture</label></p>
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="customFile"
-                                       style="cursor: pointer">
-                                <label class="custom-file-label" for="customFile" style="cursor: pointer">Choose
-                                    file</label>
-                            </div>
-                        </div>
+                <div class="col-xl-6">
+                    <p><label>Password&nbsp;<span class="required">*</span></label></p>
+                    <input type="password" class="form-control" name="password"
+                           minlength="8" #password="ngModel"
+                           [class.is-invalid]="password.invalid && password.touched"
+                           [(ngModel)]="user.password"
+                           required>
+
+                    <div *ngIf="password.errors && password.touched">
+                        <small class="text-danger" *ngIf="password.errors['required']">password is
+                            required</small>
+                        <small class="text-danger" *ngIf="password.errors['minlength']">at least 8
+                            characters</small>
                     </div>
+                </div>
 
-                    <div style="display: flex; justify-content: space-between">
-                        <button class="btn btn-primary" style="background-color: #015abc" matStepperPrevious>Back
-                        </button>
-                        <button class="btn btn-primary" style="background-color: #015abc" type="submit"
-                                (click)="submit()"
-                                [disabled]="address.errors || state.errors || city.errors || zip.errors || name.errors || lastName.errors || email.errors || tel.errors || occupation.errors || password.errors || password2.errors"
-                        >Done
-                        </button>
+                <div class="col-xl-6">
+                    <p><label>Re-Enter Password&nbsp;<span class="required">*</span></label></p>
+                    <input type="password" class="form-control" name="password2"
+                           #password2="ngModel"
+                           pattern="{{password.value}}"
+                           [class.is-invalid]="password2.invalid && password2.touched" ngModel
+                           required>
+
+                    <div *ngIf="password2.errors && password2.touched">
+                        <small class="text-danger" *ngIf="password2.errors['required']">password is
+                            required</small>
+                        <small class="text-danger" *ngIf="password2.errors['pattern']">must be the
+                            same of
+                            password</small>
                     </div>
-                </mat-step>
-            </form>
-
-        </mat-stepper>
+                </div>
+            </div>
+            <div class="container text-right">
+                <button class="btn btn-primary" style="background-color: #015abc" type="submit"
+                        (click)="submit()"
+                        [disabled]="name.errors || lastName.errors || email.errors || tel.errors || password.errors || password2.errors"
+                >Done
+                </button>
+            </div>
+        </form>
     </div>
 </section>
