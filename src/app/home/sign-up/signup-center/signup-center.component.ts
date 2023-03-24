@@ -1,29 +1,46 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 
 @Component({
-  selector: 'app-signup-center',
-  templateUrl: './signup-center.component.html',
-  styleUrls: ['./signup-center.component.css']
+    selector: 'app-signup-center',
+    templateUrl: './signup-center.component.html',
+    styleUrls: ['./signup-center.component.css']
 })
 export class SignupCenterComponent implements OnInit {
 
 
-  public user = {
-    name: '',
-    email: '',
-    address: '',
-    tel: '',
-    state: '',
-    city: '',
-    zip: '',
-    password: ''
-  }
-  constructor() {}
-  ngOnInit(): void {
-  }
+    public user = {
+        firstName: '',
+        lastName: '',
+        dateOfBirth: '',
+        email: '',
+        address: '',
+        tel: '',
+        state: '',
+        city: '',
+        zip: '',
+        password: ''
+    }
 
-  submit() {
-    console.log(this.user);
-  }
+    public center = {
+        name: '', 
+        tel: '',
+        email: '',
+        address: '',
+        taxIdentificationNumber: '',
+        creationDate: '',
+        categorie: '',
+        description: '',
+        logo: ''
+    }
+
+    constructor() {
+    }
+
+    ngOnInit(): void {
+    }
+
+    submit() {
+        console.log(this.user,this.center);
+    }
 }
