@@ -17,7 +17,8 @@
                     <p><label>First Name&nbsp;<span class="required">*</span></label></p>
                     <input type="text" class="form-control" name="name" minlength="3"
                            #name="ngModel"
-                           [class.is-invalid]="name.invalid && name.touched" [(ngModel)]="user.prenom"
+                           [class.is-invalid]="name.invalid && name.touched"
+                           [(ngModel)]="candidat.prenom"
                            required>
 
                     <div *ngIf="name.errors && name.touched">
@@ -31,7 +32,8 @@
                     <p><label>Last Name&nbsp;<span class="required">*</span></label></p>
                     <input type="text" class="form-control" name="lastName" minlength="3"
                            #lastName="ngModel"
-                           [class.is-invalid]="lastName.invalid && lastName.touched" [(ngModel)]="user.nom"
+                           [class.is-invalid]="lastName.invalid && lastName.touched"
+                           [(ngModel)]="candidat.nom"
                            required>
 
                     <div *ngIf="lastName.errors && lastName.touched">
@@ -47,7 +49,7 @@
                     <input type="email" class="form-control" name="email"
                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" #email="ngModel"
                            [class.is-invalid]="email.invalid && email.touched"
-                           [(ngModel)]="user.email"
+                           [(ngModel)]="candidat.email"
                            required>
 
                     <div *ngIf="email.errors && email.touched">
@@ -65,7 +67,8 @@
                            minlength="8"
                            maxlength="8"
                            #tel="ngModel"
-                           [class.is-invalid]="tel.invalid && tel.touched" [(ngModel)]="user.tel"
+                           [class.is-invalid]="tel.invalid && tel.touched"
+                           [(ngModel)]="candidat.tel"
                            required>
 
                     <div *ngIf="tel.errors && tel.touched">
@@ -79,10 +82,10 @@
 
                 <div class="col-xl-6">
                     <p><label>Password&nbsp;<span class="required">*</span></label></p>
-                    <input type="password" class="form-control" name="password"
+                    <input type="password" class="form-control" name="mdp"
                            minlength="8" #password="ngModel"
                            [class.is-invalid]="password.invalid && password.touched"
-                           [(ngModel)]="user.password"
+                           [(ngModel)]="candidat.mdp"
                            required>
 
                     <div *ngIf="password.errors && password.touched">
@@ -98,7 +101,8 @@
                     <input type="password" class="form-control" name="password2"
                            #password2="ngModel"
                            pattern="{{password.value}}"
-                           [class.is-invalid]="password2.invalid && password2.touched" ngModel
+                           [class.is-invalid]="password2.invalid && password2.touched"
+                           ngModel
                            required>
 
                     <div *ngIf="password2.errors && password2.touched">
@@ -112,7 +116,7 @@
             </div>
             <div class="container text-right">
                 <button class="btn btn-primary" style="background-color: #015abc" type="submit"
-                        (click)="submit()"
+                        (click)="addCandidat()"
                         [disabled]="name.errors || lastName.errors || email.errors || tel.errors || password.errors || password2.errors"
                 >Done
                 </button>

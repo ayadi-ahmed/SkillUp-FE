@@ -6,7 +6,7 @@ import {environment} from "../../environments/environment";
 @Injectable({
     providedIn: 'root'
 })
-export class UserAuthentificationService {
+export class AuthentificationService {
 
     private apiServerUrl = environment.apiBaseUrl;
 

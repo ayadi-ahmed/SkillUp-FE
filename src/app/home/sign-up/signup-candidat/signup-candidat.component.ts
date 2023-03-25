@@ -1,36 +1,48 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Candidat} from "../../../Entities/candidat";
+import {NgForm} from "@angular/forms";
+import {CandidatService} from "../../../Services/candidat.service";
+import {HttpErrorResponse} from "@angular/common/http";
+import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-signup-candidat',
-  templateUrl: './signup-candidat.component.html',
-  styleUrls: ['./signup-candidat.component.css']
+    selector: 'app-signup-candidat',
+    templateUrl: './signup-candidat.component.html',
+    styleUrls: ['./signup-candidat.component.css']
 })
 export class SignupCandidatComponent implements OnInit {
 
-  user = {
-    nom: "",
-    prenom: "",
-    dateNaissance: "",
-    tel: "",
-    adresse: "",
-    fonction: "",
-    email: "",
-    password: "",
-    address: "",
-    state: "",
-    city: "",
-    zip: ""
-  }
+    public candidat: Candidat = {
+        adresse: "",
+        dateNaissance: "",
+        email: "",
+        fonction: "",
+        id: 0,
+        mdp: "",
+        nom: "",
+        prenom: "",
+        role: null,
+        tel: null
+    }
 
-  constructor() {
+    constructor(private candidatService:CandidatService,
+                private router: Router) {
+    }
 
-  }
+    ngOnInit(): void {
+    }
 
-  ngOnInit(): void {
-  }
-
-  submit() {
-    console.log(this.user);
-  }
+    addCandidat() {
+        this.candidatService
+            .addCandidat(this.candidat)
+            .subscribe(
+            (response:any) => {
+                this.router.navigate(['/signup'])
+            },
+            (error: HttpErrorResponse) => {
+                console.log(error.message);
+            }
+        )
+    }
 }
 
