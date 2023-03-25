@@ -1,17 +1,18 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Candidat} from "../../../Entities/candidat";
-import {NgForm} from "@angular/forms";
 import {CandidatService} from "../../../Services/candidat.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
+import {Subscription} from "rxjs";
 
 @Component({
     selector: 'app-signup-candidat',
     templateUrl: './signup-candidat.component.html',
     styleUrls: ['./signup-candidat.component.css']
 })
-export class SignupCandidatComponent implements OnInit {
+export class SignupCandidatComponent implements OnInit, OnDestroy {
 
+    private subscription: Subscription | undefined;
     public candidat: Candidat = {
         adresse: "",
         dateNaissance: "",
@@ -25,24 +26,30 @@ export class SignupCandidatComponent implements OnInit {
         tel: null
     }
 
-    constructor(private candidatService:CandidatService,
+    constructor(private candidatService: CandidatService,
                 private router: Router) {
     }
 
     ngOnInit(): void {
     }
 
+    ngOnDestroy() {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
+    }
+
     addCandidat() {
-        this.candidatService
+        this.subscription = this.candidatService
             .addCandidat(this.candidat)
             .subscribe(
-            (response:any) => {
-                this.router.navigate(['/signup'])
-            },
-            (error: HttpErrorResponse) => {
-                console.log(error.message);
-            }
-        )
+                (response: any) => {
+                    this.router.navigate(['/signup'])
+                },
+                (error: HttpErrorResponse) => {
+                    console.log(error.message);
+                }
+            )
     }
 }
 

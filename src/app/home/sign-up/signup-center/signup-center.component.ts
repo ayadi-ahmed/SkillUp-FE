@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {Manager} from "../../../Entities/manager";
 import {TrainingCenter} from "../../../Entities/training-center";
@@ -6,14 +6,16 @@ import {ManagerService} from "../../../Services/manager.service";
 import {TrainingCenterService} from "../../../Services/training-center.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
+import {Subscription} from "rxjs";
 
 @Component({
     selector: 'app-signup-center',
     templateUrl: './signup-center.component.html',
     styleUrls: ['./signup-center.component.css']
 })
-export class SignupCenterComponent implements OnInit {
+export class SignupCenterComponent implements OnInit, OnDestroy {
 
+    private subscription: Subscription | undefined;
     public manager: Manager = {
         id: 0,
         email: "",
@@ -48,9 +50,14 @@ export class SignupCenterComponent implements OnInit {
 
     ngOnInit(): void {
     }
+    ngOnDestroy() {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
+    }
 
     addCenter() {
-        this.managerService
+        this.subscription = this.managerService
             .addManager(this.manager)
             .subscribe(
                 (response: Manager) => {
