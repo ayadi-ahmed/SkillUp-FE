@@ -21,7 +21,7 @@
                             <input type="text" class="form-control" name="firstName" minlength="3"
                                    #firstName="ngModel"
                                    [class.is-invalid]="firstName.invalid && firstName.touched"
-                                   [(ngModel)]="user.firstName"
+                                   [(ngModel)]="manager.prenom"
                                    required>
 
                             <div *ngIf="firstName.errors && firstName.touched">
@@ -36,7 +36,7 @@
                             <p><label>Last Name&nbsp;<span class="required">*</span></label></p>
                             <input type="text" class="form-control" name="lastName" minlength="3"
                                    #lastName="ngModel"
-                                   [class.is-invalid]="lastName.invalid && lastName.touched" [(ngModel)]="user.lastName"
+                                   [class.is-invalid]="lastName.invalid && lastName.touched" [(ngModel)]="manager.nom"
                                    required>
 
                             <div *ngIf="lastName.errors && lastName.touched">
@@ -53,7 +53,7 @@
                             <input type="date" class="form-control" name="dateOfBirth"
                                    #dateOfBirth="ngModel"
                                    [class.is-invalid]="dateOfBirth.invalid && dateOfBirth.touched"
-                                   [(ngModel)]="user.dateOfBirth"
+                                   [(ngModel)]="manager.dateNaissance"
                                    required>
 
                             <div *ngIf="dateOfBirth.errors && dateOfBirth.touched">
@@ -69,7 +69,7 @@
                                    minlength="8"
                                    maxlength="8"
                                    #tel="ngModel"
-                                   [class.is-invalid]="tel.invalid && tel.touched" [(ngModel)]="user.tel"
+                                   [class.is-invalid]="tel.invalid && tel.touched" [(ngModel)]="manager.tel"
                                    required>
 
                             <div *ngIf="tel.errors && tel.touched">
@@ -86,7 +86,7 @@
                             <input type="email" class="form-control" name="email"
                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" #email="ngModel"
                                    [class.is-invalid]="email.invalid && email.touched"
-                                   [(ngModel)]="user.email"
+                                   [(ngModel)]="manager.email"
                                    required>
 
                             <div *ngIf="email.errors && email.touched">
@@ -102,7 +102,7 @@
                             <input type="password" class="form-control" name="password"
                                    minlength="8" #password="ngModel"
                                    [class.is-invalid]="password.invalid && password.touched"
-                                   [(ngModel)]="user.password"
+                                   [(ngModel)]="manager.mdp"
                                    required>
 
                             <div *ngIf="password.errors && password.touched">
@@ -146,7 +146,7 @@
                             <p><label>Name&nbsp;<span class="required">*</span></label></p>
                             <input type="text" class="form-control" name="name" minlength="3"
                                    #name="ngModel"
-                                   [class.is-invalid]="name.invalid && name.touched" [(ngModel)]="center.name"
+                                   [class.is-invalid]="name.invalid && name.touched" [(ngModel)]="center.nom"
                                    required>
 
                             <div *ngIf="name.errors && name.touched">
@@ -162,7 +162,7 @@
                             <input type="text" class="form-control" name="taxIdentificationNumber"
                                    #taxIdentificationNumber="ngModel"
                                    [class.is-invalid]="taxIdentificationNumber.invalid && taxIdentificationNumber.touched"
-                                   [(ngModel)]="center.taxIdentificationNumber"
+                                   [(ngModel)]="center.matriculeFiscal"
                                    required>
 
                             <div *ngIf="taxIdentificationNumber.errors && taxIdentificationNumber.touched">
@@ -213,7 +213,7 @@
                             <input type="text" class="form-control" name="address" minlength="3"
                                    #centerAddress="ngModel"
                                    [class.is-invalid]="centerAddress.invalid && centerAddress.touched"
-                                   [(ngModel)]="center.address"
+                                   [(ngModel)]="center.adresse"
                                    required>
 
                             <div *ngIf="centerAddress.errors && centerAddress.touched">
@@ -229,7 +229,7 @@
                             <input type="date" class="form-control" name="dateOfBirth"
                                    #creationDate="ngModel"
                                    [class.is-invalid]="creationDate.invalid && creationDate.touched"
-                                   [(ngModel)]="center.creationDate"
+                                   [(ngModel)]="center.dateCreation"
                                    required>
 
                             <div *ngIf="creationDate.errors && creationDate.touched">
@@ -244,7 +244,7 @@
                                     name="categorie"
                                     #categorie="ngModel"
                                     [class.is-invalid]="categorie.invalid && categorie.touched"
-                                    [(ngModel)]="center.categorie"
+                                    ngModel
                                     required>
                                 <option selected value="">choose a categorie</option>
                                 <option value="saab">categorie 1</option>
@@ -298,7 +298,7 @@
                         <button class="btn btn-primary" style="background-color: #015abc" matStepperPrevious>Back
                         </button>
                         <button class="btn btn-primary" style="background-color: #015abc" type="submit"
-                                (click)="submit()"
+                                (click)="addCenter()"
                                 matStepperNext
                                 [disabled]="logo.errors || categorie.errors || creationDate.errors || description.errors || centerAddress.errors || centerTel.errors || centerEmail.errors || name.errors || firstName.errors || lastName.errors || tel.errors || dateOfBirth.errors || email.errors || password.errors || password2.errors"
                         >Done
