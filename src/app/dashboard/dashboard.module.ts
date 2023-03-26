@@ -17,6 +17,10 @@ import {MatDividerModule} from "@angular/material/divider";
 import {InstructorsComponent} from './Profile-Training-Center/instructors/instructors.component';
 import {CenterCoursesComponent} from './Profile-Training-Center/center-courses/center-courses.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
+import { AddCenterComponent } from './Profile-Training-Center/add-center/add-center.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { FavorisComponent } from './favoris/favoris.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
     declarations: [
@@ -29,6 +33,10 @@ import {MatTooltipModule} from "@angular/material/tooltip";
         InstructorsComponent,
         CenterCoursesComponent,
         AddTrainingComponent,
+        AddCenterComponent,
+        SidebarComponent,
+        FavorisComponent,
+        SettingsComponent,
     ],
     exports: [
         DashboardComponent
