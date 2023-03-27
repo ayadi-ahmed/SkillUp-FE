@@ -21,6 +21,8 @@ import { AddCenterComponent } from './Profile-Training-Center/add-center/add-cen
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { FavorisComponent } from './favoris/favoris.component';
 import { SettingsComponent } from './settings/settings.component';
+import { StatsComponent } from './stats/stats.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
     declarations: [
@@ -37,6 +39,8 @@ import { SettingsComponent } from './settings/settings.component';
         SidebarComponent,
         FavorisComponent,
         SettingsComponent,
+        StatsComponent,
+        HeaderComponent,
     ],
     exports: [
         DashboardComponent

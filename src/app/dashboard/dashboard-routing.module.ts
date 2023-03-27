@@ -10,18 +10,23 @@ import { AddTrainingComponent } from './add-training/add-training.component';
 import {ProfileComponent} from "./Profile-Training-Center/profile/profile.component";
 import {AddCenterComponent} from "./Profile-Training-Center/add-center/add-center.component";
 import {FavorisComponent} from "./favoris/favoris.component";
+import {StatsComponent} from "./stats/stats.component";
 
 const routes: Routes = [
-  {path:'', component:DashboardComponent},
-  {path:'cart', component:CartComponent},
-  {path:'checkout', component:CheckoutComponent},
-  {path:'buy-abonnement', component:BuyAbonnementComponent},
-  {path:'messages', component:MessagesComponent},
-  {path:'add-training', component:AddTrainingComponent},
-  {path:'add-center', component:AddCenterComponent},
-  {path:'favoris', component:FavorisComponent},
-  {path:'profile', component:ProfileComponent},
-  {path:'settings', component:ProfileComponent},
+  {path:'', component:DashboardComponent,
+    children: [
+      {path:'cart', component:CartComponent},
+      {path:'checkout', component:CheckoutComponent},
+      {path:'buy-abonnement', component:BuyAbonnementComponent},
+      {path:'messages', component:MessagesComponent},
+      {path:'add-training', component:AddTrainingComponent},
+      {path:'add-center', component:AddCenterComponent},
+      {path:'favoris', component:FavorisComponent},
+      {path:'profile', component:ProfileComponent},
+      {path:'settings', component:ProfileComponent},
+      {path:'stats', component:StatsComponent},
+    ]},
+
   {path:'**',component:NotFoundComponent}
 
 ];
