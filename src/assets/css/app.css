@@ -1221,7 +1221,7 @@ a {
 
 .chat-list {
 	position: relative;
-	height: 300px
+	height: 400px
 }
 
 .chat-list .list-group-item {
@@ -1259,7 +1259,7 @@ a {
 .chat-content {
 	position: relative;
 	width: auto;
-	height: 520px
+	height: 520px;
 }
 
 .chat-content-leftside .chat-left-msg {

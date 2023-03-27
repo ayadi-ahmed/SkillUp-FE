@@ -56,7 +56,8 @@ import {SignupCandidatComponent} from './sign-up/signup-candidat/signup-candidat
     exports: [
         PopularCoursesComponent,
         InstructorComponent,
-        CoursesComponent
+        CoursesComponent,
+        StatsComponent
     ],
     imports: [
         CommonModule,
