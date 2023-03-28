@@ -19,4 +19,7 @@ export class FormationService {
   public getFormationById(id: number): Observable<any> {
     return this.http.get<any>(this.formationUrl + `/api/formation/${id}`);
   }
+  public affectSeanceToFormation(seanceId: number, formationId: number): Observable<any> {
+    return this.http.get<any>(this.formationUrl + `/api/formation/seance/${seanceId}/formation/${formationId}`);
+  }
 }
