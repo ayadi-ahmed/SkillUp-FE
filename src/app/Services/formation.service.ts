@@ -16,4 +16,7 @@ export class FormationService {
   public addFormation(formation:any):Observable<any> {
     return this.http.post(this.formationUrl+`/api/formation/add`,formation)
   }
+  public getFormationById(id: number): Observable<any> {
+    return this.http.get<any>(this.formationUrl + `/api/formation/${id}`);
+  }
 }

@@ -113,7 +113,8 @@
 
                 <div class="col-lg-8 order-lg-12">
                     <div class="row">
-                        <div class="col-md-6">
+
+                        <div class="col-md-6" *ngFor="let formation of formations">
                             <div class="single-course-inner">
                                 <div class="thumb">
                                     <img src="assets/images/course/img_3.jpg" alt="img">
@@ -124,8 +125,7 @@
                                             <span class="u-thumb"><img src="assets/images/course/course-2.jpg" alt="img"></span>
                                             <span class="align-self-center">Nancy Reyes</span>
                                         </div>
-                                        <h6><a routerLink="/course">Fox nymphs grab quick-jived waltz. Brick quiz
-                                            whangs</a></h6>
+                                        <h6><a class="cursor-pointer" (click)="getDetails(formation.id)">{{formation.titre}}</a></h6>
                                     </div>
                                     <div class="emt-course-meta">
                                         <div class="row">
@@ -137,103 +137,7 @@
                                             </div>
                                             <div class="col-6">
                                                 <div class="price text-right">
-                                                    Price: <span>$54.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="single-course-inner">
-                                <div class="thumb">
-                                    <img src="assets/images/course/img_3.jpg" alt="img">
-                                </div>
-                                <div class="details">
-                                    <div class="details-inner">
-                                        <div class="emt-user">
-                                            <span class="u-thumb"><img src="assets/img/author/2.png" alt="img"></span>
-                                            <span class="align-self-center">Joe Powell</span>
-                                        </div>
-                                        <h6><a routerLink="/course">Aenean sed nibh a magna posuere tempo
-                                            faucib</a></h6>
-                                    </div>
-                                    <div class="emt-course-meta">
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <div class="rating">
-                                                    <i class="fa fa-star"></i> 4.3
-                                                    <span>(23)</span>
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="price text-right">
-                                                    Price: <span>$54.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="single-course-inner">
-                                <div class="thumb">
-                                    <img src="assets/images/course/img_3.jpg" alt="img">
-                                </div>
-                                <div class="details">
-                                    <div class="details-inner">
-                                        <div class="emt-user">
-                                            <span class="u-thumb"><img src="assets/img/author/3.png" alt="img"></span>
-                                            <span class="align-self-center">Timothy Willis</span>
-                                        </div>
-                                        <h6><a routerLink="/course">Praesent eu dolor eu orci vehicula euismod</a>
-                                        </h6>
-                                    </div>
-                                    <div class="emt-course-meta">
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <div class="rating">
-                                                    <i class="fa fa-star"></i> 4.9
-                                                    <span>(73)</span>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="price text-right">
-                                                    Price: <span>$74.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="single-course-inner">
-                                <div class="thumb">
-                                    <img src="assets/images/course/img_3.jpg" alt="img">
-                                </div>
-                                <div class="details">
-                                    <div class="details-inner">
-                                        <div class="emt-user">
-                                            <span class="u-thumb"><img src="assets/img/author/4.png" alt="img"></span>
-                                            <span class="align-self-center">Walter Griffin</span>
-                                        </div>
-                                        <h6><a routerLink="/course">Duis vestibulum elit vel neque pharetra
-                                            vulputate</a></h6>
-                                    </div>
-                                    <div class="emt-course-meta">
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <div class="rating">
-                                                    <i class="fa fa-star"></i> 4.8
-                                                    <span>(53)</span>
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="price text-right">
-                                                    Price: <span>$64.00</span>
+                                                    Price: <span>{{formation.prix}} TND</span>
                                                 </div>
                                             </div>
                                         </div>

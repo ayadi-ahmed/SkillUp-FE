@@ -29,4 +29,10 @@ export class TrainingCenterService {
   public deleteTrainingCenter(id: number): Observable<any> {
     return this.http.delete<any>(this.apiServerUrl + `/api/CentreFormation/delete/${id}`);
   }
+  public getAllByManagerId(managerId: number):Observable<any> {
+    return this.http.get<any>(this.apiServerUrl+`/api/CentreFormation/manager/${managerId}`);
+  }
+  public affectFormationToCenter(formationId: number, centreId: number): Observable<any> {
+    return this.http.get<any>(this.apiServerUrl + `/api/CentreFormation/${centreId}/formation/${formationId}`);
+  }
 }

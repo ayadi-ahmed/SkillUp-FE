@@ -28,7 +28,7 @@
             <div class="d-flex align-items-center justify-content-between">
                 <div class="site-logo">
                     <a href="index.html">
-                        <img src="assets/images/logo.png" alt="" class="img-fluid" />
+                        <img src="assets/images/logo.png" alt="" class="img-fluid"/>
                     </a>
                 </div>
 
@@ -94,9 +94,14 @@
                     <a href="#" class="nav-close"><i class="fal fa-times"></i></a>
                 </nav>
 
-                <div class="header-btn d-none d-xl-block">
+                <div class="header-btn d-none d-xl-block" *ngIf="!isLoggedIn()">
                     <a routerLink="/login" class="login">Login</a>
                     <a routerLink="/signup" class="btn btn-main-2 btn-sm-2 rounded">Sign up</a>
+                </div>
+
+                <div class="header-btn d-none d-xl-block" *ngIf="isLoggedIn()">
+                    <img routerLink="/dashboard/stats" src="assets/images/avatars/avatar-2.png" class="user-img cursor-pointer" alt="user avatar">
+                    <a class="btn btn-main-2 btn-sm-2 rounded" (click)="disconnect()">Log out</a>
                 </div>
 
             </div>
