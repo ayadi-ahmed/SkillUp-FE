@@ -1,85 +1,115 @@
 <div class="wrapper">
-  <div class="page-wrapper">
-    <div class="page-content">
-      <!--breadcrumb-->
-      <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-       
-        <div class="ms-auto">
-          <div class="btn-group">
-            <button type="button" class="btn btn-primary">Settings</button>
-            <button type="button" class="btn btn-primary split-bg-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown">	<span class="visually-hidden">Toggle Dropdown</span>
-            </button>
-            <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end">	<a class="dropdown-item" href="javascript:;">Action</a>
-              <a class="dropdown-item" href="javascript:;">Another action</a>
-              <a class="dropdown-item" href="javascript:;">Something else here</a>
-              <div class="dropdown-divider"></div>	<a class="dropdown-item" href="javascript:;">Separated link</a>
+    <div class="page-wrapper">
+        <div class="page-content">
+            <div>
+                <div class="card">
+                    <div class="card-body p-4">
+                        <div class="mb-3">
+
+                        </div>
+                        <div class="col-xl-6">
+                            <label for="center" class="form-label">Add New Training To</label>
+                            <select id="center" class="form-select" required [(ngModel)]="centerId">
+                                <option selected value="">choose a center</option>
+                                <option *ngFor="let centre of centers" [value]="centre.id">{{centre.nom}}</option>
+                            </select>
+                        </div>
+                        <hr/>
+                        <div class="form-body mt-4">
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <div class="border border-3 p-4 rounded">
+                                        <div class="mb-3">
+                                            <label for="inputProductTitle" class="form-label">Training Title</label>
+                                            <input type="email" class="form-control" id="inputProductTitle"
+                                                   placeholder="Enter training title" name="titre"
+                                                   [(ngModel)]="formation.titre">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="inputProductDescription" class="form-label">Description</label>
+                                            <textarea class="form-control" id="inputProductDescription" rows="3"
+                                                      name="description" [(ngModel)]="formation.description"></textarea>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="inputProductDescription" class="form-label">Training
+                                                Images</label>
+                                            <input id="image-uploadify" type="file"
+                                                   accept=".xlsx,.xls,image/*,.doc,audio/*,.docx,video/*,.ppt,.pptx,.txt,.pdf"
+                                                   multiple name="img" [(ngModel)]="formation.img">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="border border-3 p-4 rounded">
+                                        <div class="row g-3">
+
+                                            <label for="inputCompareatprice" class="form-label">start Date</label>
+                                            <input type="date" class="form-control" id="inputCompareatprice"
+                                                   name="dateDebut" [(ngModel)]="formation.dateDebut">
+                                        </div>
+
+                                        <label for="inputCostPerPrice" class="form-label">End Date</label>
+                                        <input type="date" class="form-control" id="inputCostPerPrice" name="dateFin"
+                                               [(ngModel)]="formation.dateFin">
+
+
+                                        <label for="inputPrice" class="form-label">Price</label>
+                                        <input type="text" class="form-control" id="inputPrice" placeholder="00.00"
+                                               name="prx" [(ngModel)]="formation.prix">
+                                        <label for="inputPrice" class="form-label">Maximum Students</label>
+                                        <input type="text" class="form-control" name="nbMaxCan"
+                                               [(ngModel)]="formation.nbMaxCan">
+
+                                        <div class="d-grid">
+                                            <button type="button" class="btn btn-primary" (click)="addFormation()">Save
+                                                Training
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!--end row-->
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <!--end breadcrumb-->
 
-      <div class="card">
-        <div class="card-body p-4">
-          <h5 class="card-title">Add New Training</h5>
-          <hr/>
-          <div class="form-body mt-4">
-            <div class="row">
-              <div class="col-lg-8">
-                <div class="border border-3 p-4 rounded">
-                  <div class="mb-3">
-                    <label for="inputProductTitle" class="form-label">Training Title</label>
-                    <input type="email" class="form-control" id="inputProductTitle" placeholder="Enter training title" name="titre" [(ngModel)]="formation.titre">
-                  </div>
-                  <div class="mb-3">
-                    <label for="inputProductDescription" class="form-label">Description</label>
-                    <textarea class="form-control" id="inputProductDescription" rows="3" name="description" [(ngModel)]="formation.description"></textarea>
-                  </div>
-                  
-                  <div class="mb-3">
-                    <label for="inputProductDescription" class="form-label">Training Images</label>
-                    <input id="image-uploadify" type="file" accept=".xlsx,.xls,image/*,.doc,audio/*,.docx,video/*,.ppt,.pptx,.txt,.pdf" multiple name="img" [(ngModel)]="formation.img">
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4">
-                <div class="border border-3 p-4 rounded">
-                  <div class="row g-3">
-                    
-                      <label for="inputCompareatprice" class="form-label">start Date</label>
-                      <input type="date" class="form-control" id="inputCompareatprice" name="dateDebut" [(ngModel)]="formation.dateDebut">
+
+
+            <div class="container">
+                <div class="row" *ngFor="let center of centers">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>{{center.nom}}</h3>
+                        </div>
+                       <div class="card-body" *ngFor="let course of center.formations">
+                           <div class="course-item cat1 cat5 col-lg-3 col-md-6 col-sm-6">
+                               <div class=" course-style-5 bg-white">
+                                   <div class="course-header">
+                                       <div class="course-thumb">
+                                           <img src="assets/images/course/img_05.jpg" alt="" class="img-fluid">
+                                           <div class="course-price">{{course.prix}} TND</div>
+                                       </div>
+                                   </div>
+
+                                   <div class="course-content">
+                                       <div class="course-meta meta-style-1">
+                                           <span class="lessons"><i class="far fa-play-circle me-2"></i>26 Lectures</span>
+                                           <span class="label">Beginner</span>
+                                       </div>
+                                       <h4><a href="#">{{course.titre}}</a></h4>
+
+                                       <div class="course-footer mt-20 d-flex align-items-center justify-content-between">
+                                           <span class="students"><i class="far fa-user-alt me-2"></i>{{course.nbMaxCan}} Students</span>
+                                           <a href="#" class="rounded-btn"><i class="fa fa-long-arrow-right"></i></a>
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
                     </div>
-                    
-                      <label for="inputCostPerPrice" class="form-label">End Date</label>
-                      <input type="date" class="form-control" id="inputCostPerPrice" name="dateFin" [(ngModel)]="formation.dateFin">
-                    
-                    
-                      <label for="inputPrice" class="form-label">Price</label>
-                      <input type="text" class="form-control" id="inputPrice" placeholder="00.00" name="prx" [(ngModel)]="formation.prx">
-                      <label for="inputPrice" class="form-label">Maximum Students</label>
-                      <input type="text" class="form-control" id="inputPrice" name="nbMaxCan" [(ngModel)]="formation.nbMaxCan">
-                    
-                      <div class="d-grid">
-                        <button type="button" class="btn btn-primary" (click)="addFormation()">Save Training</button>
-                      </div>
-                    </div>
-                  </div>
                 </div>
-              </div>
-            </div><!--end row-->
-          </div>
+            </div>
         </div>
-      </div>
-
-
     </div>
-  <!--end page wrapper -->
-  <!--start overlay-->
-  <div class="overlay toggle-icon"></div>
-  <!--end overlay-->
-  <!--Start Back To Top Button--> <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
-  <!--End Back To Top Button-->
-  <footer class="page-footer">
-    <p class="mb-0">Copyright © 2021. All right reserved.</p>
-  </footer>
-
+</div>

@@ -28,7 +28,7 @@
         <div class="menu-title">Message</div>
       </a>
 
-      <a routerLink="/dashboard/add-center" >
+      <a routerLink="/dashboard/add-center" *ngIf="role == 'MANAGER'">
         <div class="parent-icon"><i class="bx bx-building-house"></i>
         </div>
         <div class="menu-title">Mes Centres</div>
@@ -44,10 +44,23 @@
         </div>
         <div class="menu-title">Favoris</div>
       </a>
+      
       <a href="/dashboard/settings">
         <div class="parent-icon"><i class="bx bx-cog"></i>
         </div>
         <div class="menu-title">Settings</div>
+      </a>
+
+      <a routerLink="/">
+        <div class="parent-icon"><i class="bx bx-chevron-left"></i>
+        </div>
+        <div class="menu-title">Home</div>
+      </a>
+
+      <a class="cursor-pointer" (click)="disconnect()">
+        <div class="parent-icon"><i class="bx bx-log-out"></i>
+        </div>
+        <div class="menu-title">Log out</div>
       </a>
 
     </li>
