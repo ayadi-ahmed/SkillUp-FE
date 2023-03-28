@@ -7,12 +7,20 @@
                         <div class="mb-3">
 
                         </div>
-                        <div class="col-xl-6 d-flex align-items-center justify-content-between">
+                        <div class="col-xl-6">
                             <label for="center" class="form-label">Add New Training To</label>
-                            <select id="center" class="form-select" required [(ngModel)]="centerId">
+                            <select id="center" class="form-select"
+                                    required
+                                    [(ngModel)]="centerId"
+                                    #center="ngModel"
+                                    [class.is-invalid]="center.invalid && center.touched">
                                 <option selected value="">choose a center</option>
                                 <option *ngFor="let centre of centers" [value]="centre.id">{{centre.nom}}</option>
                             </select>
+                        </div>
+                        <div class="col-xl-6" *ngIf="center.errors && center.touched">
+                            <small class="text-danger" *ngIf="center.errors['required']">you have to choose a
+                                center</small>
                         </div>
                         <hr/>
                         <div class="form-body mt-4">
@@ -20,47 +28,134 @@
                                 <div class="col-lg-8">
                                     <div class="border border-3 p-4 rounded">
                                         <div class="mb-3">
-                                            <label for="inputProductTitle" class="form-label">Training Title</label>
-                                            <input type="email" class="form-control" id="inputProductTitle"
+                                            <label for="trainingTitle" class="form-label">Training Title</label>
+                                            <input type="text" class="form-control" id="trainingTitle"
                                                    placeholder="Enter training title" name="titre"
-                                                   [(ngModel)]="formation.titre">
+                                                   required
+                                                   minlength="2"
+                                                   [(ngModel)]="formation.titre"
+                                                   #titre="ngModel"
+                                                   [class.is-invalid]="titre.invalid && titre.touched">
                                         </div>
-                                        <div class="mb-3">
-                                            <label for="inputProductDescription" class="form-label">Description</label>
-                                            <textarea class="form-control" id="inputProductDescription" rows="3"
-                                                      name="description" [(ngModel)]="formation.description"></textarea>
+                                        <div class="mb-3" *ngIf="titre.errors && titre.touched">
+                                            <small class="text-danger" *ngIf="titre.errors['minlength']">at least 2
+                                                characters</small>
+                                            <small class="text-danger" *ngIf="titre.errors['required']">title is
+                                                required</small>
                                         </div>
 
+
                                         <div class="mb-3">
-                                            <label for="inputProductDescription" class="form-label">Training
-                                                Images</label>
-                                            <input id="image-uploadify" type="file"
-                                                   accept=".xlsx,.xls,image/*,.doc,audio/*,.docx,video/*,.ppt,.pptx,.txt,.pdf"
-                                                   multiple name="img" [(ngModel)]="formation.img">
+                                            <label for="trainingDescription" class="form-label">Description</label>
+                                            <textarea class="form-control" id="trainingDescription" rows="3"
+                                                      name="description" [(ngModel)]="formation.description"
+                                                      minlength="10"
+                                                      required
+                                                      #description="ngModel"
+                                                      [class.is-invalid]="description.invalid && description.touched">
+
+                                            </textarea>
                                         </div>
+                                        <div class="mb-3" *ngIf="description.errors && description.touched">
+                                            <small class="text-danger" *ngIf="description.errors['minlength']">at least
+                                                10
+                                                characters</small>
+                                            <small class="text-danger" *ngIf="description.errors['required']">description
+                                                is
+                                                required</small>
+                                        </div>
+
+
+                                        <div class="mb-3">
+                                            <label for="trainingImg" class="form-label">Training
+                                                Images</label>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input cursor-pointer"
+                                                       id="trainingImg"
+                                                       accept="image/*"
+                                                       required
+                                                       multiple name="img" [(ngModel)]="formation.img"
+                                                       #img="ngModel"
+                                                       [class.is-invalid]="img.invalid && img.touched">
+                                                <label class="custom-file-label cursor-pointer" for="trainingImg">Choose
+                                                    image</label>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3" *ngIf="img.errors && img.touched">
+                                            <small class="text-danger" *ngIf="img.errors['required']">Image is
+                                                required</small>
+                                        </div>
+
+
                                     </div>
                                 </div>
 
                                 <div class="col-lg-4">
                                     <div class="border border-3 p-4 rounded">
-                                        <div class="row g-3">
-
-                                            <label for="inputCompareatprice" class="form-label">start Date</label>
-                                            <input type="date" class="form-control" id="inputCompareatprice"
-                                                   name="dateDebut" [(ngModel)]="formation.dateDebut">
+                                        <div class="mb-3">
+                                            <label for="trainingDateDebut" class="form-label">start Date</label>
+                                            <input type="date" class="form-control" id="trainingDateDebut"
+                                                   name="dateDebut"
+                                                   [(ngModel)]="formation.dateDebut"
+                                                   required
+                                                   #dateDebut="ngModel"
+                                                   [class.is-invalid]="dateDebut.invalid && dateDebut.touched">
+                                        </div>
+                                        <div class="mb-3" *ngIf="dateDebut.errors && dateDebut.touched">
+                                            <small class="text-danger" *ngIf="dateDebut.errors['required']">start date
+                                                is
+                                                required</small>
                                         </div>
 
-                                        <label for="inputCostPerPrice" class="form-label">End Date</label>
-                                        <input type="date" class="form-control" id="inputCostPerPrice" name="dateFin"
-                                               [(ngModel)]="formation.dateFin">
+
+                                        <div class="mb-3">
+                                            <label for="trainingDateFin" class="form-label">End Date</label>
+                                            <input type="date" class="form-control" id="trainingDateFin"
+                                                   name="dateFin"
+                                                   [(ngModel)]="formation.dateFin"
+                                                   required
+                                                   #dateFin="ngModel"
+                                                   [class.is-invalid]="dateFin.invalid && dateFin.touched">
+                                        </div>
+                                        <div class="mb-3" *ngIf="dateFin.errors && dateFin.touched">
+                                            <small class="text-danger" *ngIf="dateFin.errors['required']">end date
+                                                is
+                                                required</small>
+                                        </div>
 
 
-                                        <label for="inputPrice" class="form-label">Price</label>
-                                        <input type="text" class="form-control" id="inputPrice" placeholder="00.00"
-                                               name="prx" [(ngModel)]="formation.prix">
-                                        <label for="inputPrice" class="form-label">Maximum Students</label>
-                                        <input type="text" class="form-control" name="nbMaxCan"
-                                               [(ngModel)]="formation.nbMaxCan">
+                                        <div class="mb-3">
+                                            <label for="trainingPrice" class="form-label">Price</label>
+                                            <input type="number" class="form-control" id="trainingPrice"
+                                                   placeholder="00.00"
+                                                   name="prix"
+                                                   [(ngModel)]="formation.prix"
+                                                   required
+                                                   #prix="ngModel"
+                                                   [class.is-invalid]="prix.invalid && prix.touched">
+                                        </div>
+                                        <div class="mb-3" *ngIf="prix.errors && prix.touched">
+                                            <small class="text-danger" *ngIf="prix.errors['required']">price
+                                                is
+                                                required</small>
+                                        </div>
+
+
+                                        <div class="mb-3">
+                                            <label for="trainingNbMax" class="form-label">Maximum Students</label>
+                                            <input type="number" class="form-control" id="trainingNbMax"
+                                                   name="nbMaxCan"
+                                                   [(ngModel)]="formation.nbMaxCan"
+                                                   required
+                                                   #nbMaxCan="ngModel"
+                                                   [class.is-invalid]="nbMaxCan.invalid && nbMaxCan.touched">
+                                        </div>
+                                        <div class="mb-3" *ngIf="nbMaxCan.errors && nbMaxCan.touched">
+                                            <small class="text-danger" *ngIf="nbMaxCan.errors['required']">maximum students
+                                                is
+                                                required</small>
+                                        </div>
+
                                     </div>
 
                                 </div>
@@ -73,38 +168,40 @@
                                                      [formGroupName]="i">
                                                     <h4>Session {{i + 1}}</h4>
                                                     <div class="mb-3">
-                                                        <label for="inputProductTitle" class="form-label">Start
+                                                        <label for="date" class="form-label">Start
                                                             date</label>
-                                                        <input type="date" class="form-control"
-                                                               placeholder="Enter training title" name="titre"
-                                                               formControlName="date">
+                                                        <input type="date" class="form-control" id="date"
+                                                               placeholder="Enter training title" name="date"
+                                                               formControlName="date"
+                                                        required>
                                                     </div>
 
                                                     <div class="mb-3">
-                                                        <label for="inputProductDescription" class="form-label">Start
+                                                        <label for="heureDebut" class="form-label">Start
                                                             time</label>
-                                                        <input type="time" class="form-control" name="description"
-                                                               formControlName="heureDebut">
+                                                        <input type="time" class="form-control" id="heureDebut" name="heureDebut"
+                                                               formControlName="heureDebut" required>
                                                     </div>
 
                                                     <div class="mb-3">
-                                                        <label for="inputProductDescription" class="form-label">End
+                                                        <label for="heureFin" class="form-label">End
                                                             time</label>
-                                                        <input type="time" class="form-control" name="description"
-                                                               formControlName="heureFin">
+                                                        <input type="time" class="form-control" id="heureFin" name="heureFin"
+                                                               formControlName="heureFin" required>
                                                     </div>
 
                                                 </div>
 
                                             </div>
 
-                                            <button class="btn btn-primary" (click)="addSession()">Add session</button>
+                                            <button class="btn btn-primary" [disabled]="form.invalid" (click)="addSession()">Add session</button>
 
                                         </form>
 
                                         <div class="d-grid m-2">
-                                            <button type="button" class="btn btn-primary" (click)="addFormation()">Save
-                                                Training
+                                            <button type="button" class="btn btn-primary" (click)="addFormation()"
+                                                    [disabled]="center.errors || titre.errors || description.errors || img.errors || dateDebut.errors || dateFin.errors || prix.errors || nbMaxCan.errors || form.invalid">
+                                                    Save Training
                                             </button>
                                         </div>
                                     </div>
