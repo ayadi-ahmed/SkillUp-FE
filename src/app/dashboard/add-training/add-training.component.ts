@@ -6,6 +6,9 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {AuthentificationService} from "../../Services/authentification.service";
 import {TrainingCenterService} from "../../Services/training-center.service";
 import {Subscription} from "rxjs";
+import {FormArray, FormControl, FormGroup} from "@angular/forms";
+import {SeanceService} from "../../Services/seance.service";
+import {Seance} from "../../Entities/Seance";
 
 @Component({
     selector: 'app-add-training',
@@ -13,6 +16,8 @@ import {Subscription} from "rxjs";
     styleUrls: ['./add-training.component.css']
 })
 export class AddTrainingComponent implements OnInit, OnDestroy {
+    form!: FormGroup;
+
     public formation: course = {
         id: 0,
         description: '',
@@ -32,11 +37,35 @@ export class AddTrainingComponent implements OnInit, OnDestroy {
     constructor(private formationservice: FormationService,
                 private router: Router,
                 private authentificationService: AuthentificationService,
-                private trainingCenterService: TrainingCenterService) {
+                private trainingCenterService: TrainingCenterService,
+                private seanceService: SeanceService) {
     }
 
     ngOnInit(): void {
+        this.form = new FormGroup({
+            session: new FormArray([
+                new FormGroup({
+                    date: new FormControl(''),
+                    heureDebut: new FormControl(''),
+                    heureFin: new FormControl('')
+                })
+            ])
+        });
         this.getCentersByManagerId()
+    }
+
+    get session(): FormArray {
+        return this.form.get('session') as FormArray;
+    }
+
+    addSession() {
+        this.session.push(
+            new FormGroup({
+                date: new FormControl(''),
+                heureDebut: new FormControl(''),
+                heureFin: new FormControl('')
+            })
+        );
     }
 
     getCentersByManagerId() {
@@ -55,6 +84,15 @@ export class AddTrainingComponent implements OnInit, OnDestroy {
         this.subscription2 = this.formationservice.addFormation(this.formation)
             .subscribe(
                 (response: course) => {
+                    for (let s of this.form.value.session) {
+                        let seance = {
+                            id: 0,
+                            date: s.date,
+                            heureDebut: s.heureDebut,
+                            heureFin: s.heureFin
+                        }
+                        this.addSeance(seance, response.id);
+                    }
                     this.trainingCenterService.affectFormationToCenter(response.id, this.centerId)
                         .subscribe(
                             (response: any) => {
@@ -70,6 +108,17 @@ export class AddTrainingComponent implements OnInit, OnDestroy {
                 });
     }
 
+    addSeance(seance: Seance, formationId: number) {
+        this.seanceService.addSeance(seance).subscribe(
+            (response: Seance) => {
+                this.formationservice.affectSeanceToFormation(response.id, formationId).subscribe();
+            },
+            (error: HttpErrorResponse) => {
+                console.log(error.message);
+            }
+        )
+    }
+
     ngOnDestroy(): void {
         if (this.subscription1) {
             this.subscription1.unsubscribe();
@@ -77,6 +126,10 @@ export class AddTrainingComponent implements OnInit, OnDestroy {
         if (this.subscription2) {
             this.subscription2.unsubscribe();
         }
+    }
+
+    getDetails(courseId: number) {
+        this.router.navigate(['/course'], {queryParams: {id: courseId}});
     }
 
 }
