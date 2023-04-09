@@ -28,6 +28,9 @@ import {MatStepperModule} from "@angular/material/stepper";
 import {MatButtonModule} from "@angular/material/button";
 import {MatCardModule} from "@angular/material/card";
 import {SignupCandidatComponent} from './sign-up/signup-candidat/signup-candidat.component';
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {NzSliderModule} from "ng-zorro-antd/slider";
+import {NgxPaginationModule} from "ngx-pagination";
 
 
 @NgModule({
@@ -71,6 +74,9 @@ import {SignupCandidatComponent} from './sign-up/signup-candidat/signup-candidat
         MatStepperModule,
         MatButtonModule,
         MatCardModule,
+        NgbModule,
+        NzSliderModule,
+        NgxPaginationModule,
     ],
 })
 export class HomeModule {

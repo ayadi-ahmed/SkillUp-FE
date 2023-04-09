@@ -23,6 +23,7 @@ import { FavorisComponent } from './favoris/favoris.component';
 import { SettingsComponent } from './settings/settings.component';
 import { StatsComponent } from './stats/stats.component';
 import { HeaderComponent } from './header/header.component';
+import { CategorieComponent } from './categorie/categorie.component';
 
 @NgModule({
     declarations: [
@@ -41,6 +42,7 @@ import { HeaderComponent } from './header/header.component';
         SettingsComponent,
         StatsComponent,
         HeaderComponent,
+        CategorieComponent,
     ],
     exports: [
         DashboardComponent

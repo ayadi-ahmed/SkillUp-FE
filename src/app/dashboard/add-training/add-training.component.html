@@ -44,6 +44,23 @@
                                                 required</small>
                                         </div>
 
+                                        <div class="mb-3">
+                                            <label for="category" class="form-label">Training Category</label>
+                                            <select id="category" class="form-select"
+                                                    required
+                                                    [(ngModel)]="categorieId"
+                                                    #category="ngModel"
+                                                    [class.is-invalid]="category.invalid && category.touched">
+                                                <option selected value="">choose a category</option>
+                                                <option *ngFor="let categorie of categories"
+                                                        [value]="categorie.id">{{categorie.nom}}</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3" *ngIf="category.errors && category.touched">
+                                            <small class="text-danger" *ngIf="category.errors['required']">you have to
+                                                choose a
+                                                category</small>
+                                        </div>
 
                                         <div class="mb-3">
                                             <label for="trainingDescription" class="form-label">Description</label>
@@ -151,7 +168,8 @@
                                                    [class.is-invalid]="nbMaxCan.invalid && nbMaxCan.touched">
                                         </div>
                                         <div class="mb-3" *ngIf="nbMaxCan.errors && nbMaxCan.touched">
-                                            <small class="text-danger" *ngIf="nbMaxCan.errors['required']">maximum students
+                                            <small class="text-danger" *ngIf="nbMaxCan.errors['required']">maximum
+                                                students
                                                 is
                                                 required</small>
                                         </div>
@@ -173,20 +191,22 @@
                                                         <input type="date" class="form-control" id="date"
                                                                placeholder="Enter training title" name="date"
                                                                formControlName="date"
-                                                        required>
+                                                               required>
                                                     </div>
 
                                                     <div class="mb-3">
                                                         <label for="heureDebut" class="form-label">Start
                                                             time</label>
-                                                        <input type="time" class="form-control" id="heureDebut" name="heureDebut"
+                                                        <input type="time" class="form-control" id="heureDebut"
+                                                               name="heureDebut"
                                                                formControlName="heureDebut" required>
                                                     </div>
 
                                                     <div class="mb-3">
                                                         <label for="heureFin" class="form-label">End
                                                             time</label>
-                                                        <input type="time" class="form-control" id="heureFin" name="heureFin"
+                                                        <input type="time" class="form-control" id="heureFin"
+                                                               name="heureFin"
                                                                formControlName="heureFin" required>
                                                     </div>
 
@@ -194,14 +214,16 @@
 
                                             </div>
 
-                                            <button class="btn btn-primary" [disabled]="form.invalid" (click)="addSession()">Add session</button>
+                                            <button class="btn btn-primary" [disabled]="form.invalid"
+                                                    (click)="addSession()">Add session
+                                            </button>
 
                                         </form>
 
                                         <div class="d-grid m-2">
                                             <button type="button" class="btn btn-primary" (click)="addFormation()"
-                                                    [disabled]="center.errors || titre.errors || description.errors || img.errors || dateDebut.errors || dateFin.errors || prix.errors || nbMaxCan.errors || form.invalid">
-                                                    Save Training
+                                                    [disabled]="category.errors || center.errors || titre.errors || description.errors || img.errors || dateDebut.errors || dateFin.errors || prix.errors || nbMaxCan.errors || form.invalid">
+                                                Save Training
                                             </button>
                                         </div>
                                     </div>
@@ -222,29 +244,33 @@
                         <div class="card-body">
                             <div class="container">
                                 <div class="row">
-                                    <div class="course-item cat1 cat5 col-lg-3 col-md-6 col-sm-6"
-                                         *ngFor="let course of center.formations">
-                                        <div class=" course-style-5 bg-white">
-                                            <div class="course-header">
-                                                <div class="course-thumb">
-                                                    <img src="assets/images/course/img_05.jpg" alt="" class="img-fluid">
-                                                    <div class="course-price">{{course.prix}} TND</div>
+                                    <h1 *ngIf="center.formations.length == 0">0 Training</h1>
+                                    <div class="row" *ngIf="center.formations.length != 0">
+                                        <div class="course-item cat1 cat5 col-lg-3 col-md-6 col-sm-6"
+                                             *ngFor="let course of center.formations">
+                                            <div class=" course-style-5 bg-white">
+                                                <div class="course-header">
+                                                    <div class="course-thumb">
+                                                        <img src="assets/images/course/img_05.jpg" alt=""
+                                                             class="img-fluid">
+                                                        <div class="course-price">{{course.prix}} TND</div>
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="course-content">
-                                                <div class="course-meta meta-style-1">
+                                                <div class="course-content">
+                                                    <div class="course-meta meta-style-1">
                                             <span class="lessons"><i
                                                     class="far fa-play-circle me-2"></i>26 Lectures</span>
-                                                    <span class="label">Beginner</span>
-                                                </div>
-                                                <h4><a href="#">{{course.titre}}</a></h4>
+                                                        <span class="label">Beginner</span>
+                                                    </div>
+                                                    <h4><a href="#">{{course.titre}}</a></h4>
 
-                                                <div class="course-footer mt-20 d-flex align-items-center justify-content-between">
+                                                    <div class="course-footer mt-20 d-flex align-items-center justify-content-between">
                                             <span class="students"><i
                                                     class="far fa-user-alt me-2"></i>{{course.nbMaxCan}} Students</span>
-                                                    <a (click)="getDetails(course.id)" class="rounded-btn"><i
-                                                            class="fa fa-long-arrow-right"></i></a>
+                                                        <a (click)="getDetails(course.id)" class="rounded-btn"><i
+                                                                class="fa fa-long-arrow-right"></i></a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
