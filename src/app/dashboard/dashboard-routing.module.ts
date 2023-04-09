@@ -11,6 +11,7 @@ import {ProfileComponent} from "./Profile-Training-Center/profile/profile.compon
 import {AddCenterComponent} from "./Profile-Training-Center/add-center/add-center.component";
 import {FavorisComponent} from "./favoris/favoris.component";
 import {StatsComponent} from "./stats/stats.component";
+import {CategorieComponent} from "./categorie/categorie.component";
 
 const routes: Routes = [
   {path:'', component:DashboardComponent,
@@ -25,6 +26,7 @@ const routes: Routes = [
       {path:'profile', component:ProfileComponent},
       {path:'settings', component:ProfileComponent},
       {path:'stats', component:StatsComponent},
+      {path:'categories', component:CategorieComponent},
     ]},
 
   {path:'**',component:NotFoundComponent}

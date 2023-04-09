@@ -23,98 +23,119 @@
                     <div class="td-sidebar mt-5 mt-lg-0">
                         <div class="widget widget_search_course">
                             <h4 class="widget-title">Search</h4>
-                            <form class="search-form single-input-inner">
-                                <input type="text" placeholder="Search here">
-                                <button class="btn btn-main-2 btn-sm-2 rounded"type="submit" style="width: 100%;margin-top: 10px"><i class="fa fa-search"></i>
-                                    SEARCH</button>
+                            <form class="search-form single-input-inner" (ngSubmit)="searchByTitle()">
+                                <input name="title" [(ngModel)]="title" placeholder="Search here" required
+                                       id="rechercheParTitre" type="text" class="form-control"
+                                       [ngbTypeahead]="searchbytitle" [resultFormatter]="formatter"/>
+                                <button class="btn btn-main-2 btn-sm-2 rounded" type="submit"
+                                        style="width: 100%;margin-top: 10px;color: white; background-color: #015abb;"><i
+                                        class="fa fa-search"></i>
+                                    SEARCH
+                                </button>
                             </form>
                         </div>
                         <div class="widget widget_catagory">
                             <h4 class="widget-title">Catagory</h4>
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Select a category</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                            <select class="form-select"
+                                    required
+                                    (change)="getFormationByPrixBetweenAndCategory()"
+                                    [(ngModel)]="categorieId">
+                                <option selected value="">All a category</option>
+                                <option *ngFor="let categorie of categories"
+                                        [value]="categorie.id">{{categorie.nom}}</option>
                             </select>
                         </div>
                         <div class="widget widget_checkbox_list">
                             <h4 class="widget-title">Price</h4>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="">
+                                <input class="form-check-input" checked type="radio" name="prix"
+                                       (click)="randomPrices()"
+                                       [disabled]="formations.length == 0">
                                 <label class="form-check-label">
-                                    Free courses
+                                    Random
                                 </label>
                             </div>
 
                             <label class="single-checkbox"></label>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="">
+                                <input class="form-check-input" type="radio" name="prix"
+                                       (click)="increasingPrices()"
+                                       [disabled]="formations.length == 0">
                                 <label class="form-check-label">
-                                    Paid Courses
+                                    Increasing prices
                                 </label>
                             </div>
 
                             <label class="single-checkbox"></label>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="">
+                                <input class="form-check-input" type="radio" name="prix"
+                                       (click)="decreasingPrices()"
+                                       [disabled]="formations.length == 0">
                                 <label class="form-check-label">
-                                    Only Subscription
+                                    Decreasing prices
                                 </label>
                             </div>
                         </div>
 
                         <div class="widget widget_checkbox_list">
-                            <h4 class="widget-title">Level</h4>
+                            <h4 class="widget-title mb-120">Price between</h4>
+                            <div>
+                                <nz-slider nzRange [nzStep]="10" [nzTipFormatter]="formatPrice" [nzMax]="maxPrice"
+                                           [nzMin]="minPrice"
+                                           [(ngModel)]="value"
+                                           (ngModelChange)="getFormationByPrixBetweenAndCategory()">
+                                </nz-slider>
 
+                                <div class="slider-labels">
+                                    <span class="min-label">{{minPrice}}</span>
+                                    <span class="max-label">{{maxPrice}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="widget widget_checkbox_list">
+                            <h4 class="widget-title">Rating</h4>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="">
+                                <input class="form-check-input" checked type="radio" name="rating">
                                 <label class="form-check-label">
-                                    Beginner
+                                    Random
                                 </label>
                             </div>
 
                             <label class="single-checkbox"></label>
+
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="">
+                                <input class="form-check-input" type="radio" name="rating">
                                 <label class="form-check-label">
-                                    Intermediate
+                                    Increasing rating
                                 </label>
                             </div>
 
                             <label class="single-checkbox"></label>
+
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="">
+                                <input class="form-check-input" type="radio" name="rating">
                                 <label class="form-check-label">
-                                    Advanced
+                                    Decreasing rating
                                 </label>
                             </div>
                         </div>
 
-                        <div class="widget widget_tags mb-0">
-                            <h4 class="widget-title">Tags</h4>
-                            <div class="tagcloud">
-                                <a href="#">Art</a>
-                                <a href="#">Creative</a>
-                                <a href="#">Article</a>
-                                <a href="#">Designer</a>
-                                <a href="#">Portfolio</a>
-                                <a href="#">Project</a>
-                                <a href="#">Personal</a>
-                                <a href="#">Landing</a>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
 
                 <div class="col-lg-8 order-lg-12">
                     <div class="row">
+                        <h1 style="text-align: center; width: 100%" *ngIf="formations.length == 0">
+                            Nothing found, try searching again.
+                        </h1>
 
-                        <div class="col-md-6" *ngFor="let formation of formations">
+                        <div class="col-md-6"
+                             *ngFor="let formation of formations | paginate:{ itemsPerPage: itemsPerPage, currentPage: p }">
                             <div class="single-course-inner">
                                 <div class="thumb">
                                     <img src="assets/images/course/img_3.jpg" alt="img">
@@ -122,10 +143,12 @@
                                 <div class="details">
                                     <div class="details-inner">
                                         <div class="emt-user">
-                                            <span class="u-thumb"><img src="assets/images/course/course-2.jpg" alt="img"></span>
+                                            <span class="u-thumb"><img src="assets/images/course/course-2.jpg"
+                                                                       alt="img"></span>
                                             <span class="align-self-center">Nancy Reyes</span>
                                         </div>
-                                        <h6><a class="cursor-pointer" (click)="getDetails(formation.id)">{{formation.titre}}</a></h6>
+                                        <h6><a class="cursor-pointer"
+                                               (click)="getDetails(formation.id)">{{formation.titre}}</a></h6>
                                     </div>
                                     <div class="emt-course-meta">
                                         <div class="row">
@@ -146,22 +169,22 @@
                             </div>
                         </div>
 
+                        <div class="d-flex align-items-start">
+                            <pagination-controls
+                                    (pageChange)="p = $event"
+                                    nextLabel=""
+                                    previousLabel="">
+                            </pagination-controls>
+                            <select class="form-select" style="background-color: #eff3f8;max-width: max-content; max-height: max-content; margin-top: 5px; margin-left: 5px"
+                                    [(ngModel)]="itemsPerPage">
+                                <option selected value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="20">20</option>
+                            </select>
+                        </div>
                     </div>
-                    <nav class="td-page-navigation">
-                        <ul class="pagination">
-                            <li class="pagination-arrow"><a href="#"><i class="fa fa-angle-double-left"></i></a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a class="active" href="#">2</a></li>
-                            <li><a href="#">...</a></li>
-                            <li><a href="#">3</a></li>
-                            <li class="pagination-arrow"><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
-                        </ul>
-                    </nav>
                 </div>
-
-
             </div>
         </div>
     </div>
-
 </section>

@@ -9,6 +9,7 @@ import {Subscription} from "rxjs";
 import {FormArray, FormControl, FormGroup} from "@angular/forms";
 import {SeanceService} from "../../Services/seance.service";
 import {Seance} from "../../Entities/Seance";
+import {CategorieService} from "../../Services/categorie.service";
 
 @Component({
     selector: 'app-add-training',
@@ -28,6 +29,8 @@ export class AddTrainingComponent implements OnInit, OnDestroy {
         prix: null,
         nbMaxCan: null
     }
+    public categories: any[] = [];
+    public categorieId: any = "";
     public centers: any[] = [];
     public centerId: any = "";
     private subscription1: Subscription | undefined;
@@ -38,7 +41,8 @@ export class AddTrainingComponent implements OnInit, OnDestroy {
                 private router: Router,
                 private authentificationService: AuthentificationService,
                 private trainingCenterService: TrainingCenterService,
-                private seanceService: SeanceService) {
+                private seanceService: SeanceService,
+                private categorieService: CategorieService) {
     }
 
     ngOnInit(): void {
@@ -51,7 +55,8 @@ export class AddTrainingComponent implements OnInit, OnDestroy {
                 })
             ])
         });
-        this.getCentersByManagerId()
+        this.getCentersByManagerId();
+        this.getAllCategories();
     }
 
     get session(): FormArray {
@@ -80,6 +85,18 @@ export class AddTrainingComponent implements OnInit, OnDestroy {
             )
     }
 
+    getAllCategories() {
+        this.categorieService.getAllCategories()
+            .subscribe(
+                (response: any[]) => {
+                    this.categories = response;
+                },
+                (error: HttpErrorResponse) => {
+                    console.log(error.message);
+                }
+            )
+    }
+
     addFormation() {
         this.subscription2 = this.formationservice.addFormation(this.formation)
             .subscribe(
@@ -93,15 +110,7 @@ export class AddTrainingComponent implements OnInit, OnDestroy {
                         }
                         this.addSeance(seance, response.id);
                     }
-                    this.trainingCenterService.affectFormationToCenter(response.id, this.centerId)
-                        .subscribe(
-                            (response: any) => {
-                                window.location.reload();
-                            },
-                            (error: HttpErrorResponse) => {
-                                console.log(error.message);
-                            }
-                        )
+                    this.affectFormationToCenter(response.id);
                 },
                 (error: HttpErrorResponse) => {
                     console.log(error.message);
@@ -119,6 +128,30 @@ export class AddTrainingComponent implements OnInit, OnDestroy {
         )
     }
 
+    affectFormationToCenter(formationId: number) {
+        this.trainingCenterService.affectFormationToCenter(formationId, this.centerId)
+            .subscribe(
+                (response: any) => {
+                    this.affectFormationToCategory(formationId);
+                },
+                (error: HttpErrorResponse) => {
+                    console.log(error.message);
+                }
+            )
+    }
+
+    affectFormationToCategory(formationId: number) {
+        this.categorieService.affectFormationToCategory(formationId, this.categorieId)
+            .subscribe(
+                (response: any) => {
+                    window.location.reload();
+                },
+                (error: HttpErrorResponse) => {
+                    console.log(error.message);
+                }
+            )
+    }
+
     ngOnDestroy(): void {
         if (this.subscription1) {
             this.subscription1.unsubscribe();
@@ -131,5 +164,4 @@ export class AddTrainingComponent implements OnInit, OnDestroy {
     getDetails(courseId: number) {
         this.router.navigate(['/course'], {queryParams: {id: courseId}});
     }
-
 }
