@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 import {DashboardRoutingModule} from './dashboard-routing.module';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {CartComponent} from './cart/cart.component';
@@ -24,6 +24,17 @@ import { SettingsComponent } from './settings/settings.component';
 import { StatsComponent } from './stats/stats.component';
 import { HeaderComponent } from './header/header.component';
 import { CategorieComponent } from './categorie/categorie.component';
+import { TagComponent } from './tag/tag.component';
+import {MatStepperModule} from "@angular/material/stepper";
+import {NgbTypeaheadModule} from "@ng-bootstrap/ng-bootstrap";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatChipsModule} from "@angular/material/chips";
+import {MatIconModule} from "@angular/material/icon";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {NzButtonModule} from "ng-zorro-antd/button";
+import { DeleteTrainingComponent } from './delete-training/delete-training.component';
+import {MatDialogModule} from "@angular/material/dialog";
+
 
 @NgModule({
     declarations: [
@@ -43,6 +54,8 @@ import { CategorieComponent } from './categorie/categorie.component';
         StatsComponent,
         HeaderComponent,
         CategorieComponent,
+        TagComponent,
+        DeleteTrainingComponent,
     ],
     exports: [
         DashboardComponent
@@ -57,7 +70,16 @@ import { CategorieComponent } from './categorie/categorie.component';
         MatDividerModule,
         FormsModule,
         ReactiveFormsModule,
-        MatTooltipModule
+        MatTooltipModule,
+        MatStepperModule,
+        NgbTypeaheadModule,
+        MatFormFieldModule,
+        MatChipsModule,
+        MatIconModule,
+        MatAutocompleteModule,
+        NzButtonModule,
+        MatDialogModule,
+        NgOptimizedImage
     ]
 })
 export class DashboardModule {

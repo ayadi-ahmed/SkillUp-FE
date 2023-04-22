@@ -23,10 +23,10 @@
                     <div class="td-sidebar mt-5 mt-lg-0">
                         <div class="widget widget_search_course">
                             <h4 class="widget-title">Search</h4>
-                            <form class="search-form single-input-inner" (ngSubmit)="searchByTitle()">
-                                <input name="title" [(ngModel)]="title" placeholder="Search here" required
+                            <form class="search-form single-input-inner" (ngSubmit)="searchByTagOrTitle()">
+                                <input name="title" [(ngModel)]="tagOrTitle" placeholder="Search here" required
                                        id="rechercheParTitre" type="text" class="form-control"
-                                       [ngbTypeahead]="searchbytitle" [resultFormatter]="formatter"/>
+                                       [ngbTypeahead]="searchbyTagOrTitle" [resultFormatter]="formatter"/>
                                 <button class="btn btn-main-2 btn-sm-2 rounded" type="submit"
                                         style="width: 100%;margin-top: 10px;color: white; background-color: #015abb;"><i
                                         class="fa fa-search"></i>
@@ -138,7 +138,7 @@
                              *ngFor="let formation of formations | paginate:{ itemsPerPage: itemsPerPage, currentPage: p }">
                             <div class="single-course-inner">
                                 <div class="thumb">
-                                    <img src="assets/images/course/img_3.jpg" alt="img">
+                                    <img src="assets/training-photos/{{formation.img}}" alt="img">
                                 </div>
                                 <div class="details">
                                     <div class="details-inner">
@@ -169,7 +169,7 @@
                             </div>
                         </div>
 
-                        <div class="d-flex align-items-start">
+                        <div class="d-flex align-items-start" *ngIf="formations.length > 0">
                             <pagination-controls
                                     (pageChange)="p = $event"
                                     nextLabel=""
@@ -177,7 +177,7 @@
                             </pagination-controls>
                             <select class="form-select" style="background-color: #eff3f8;max-width: max-content; max-height: max-content; margin-top: 5px; margin-left: 5px"
                                     [(ngModel)]="itemsPerPage">
-                                <option selected value="5">5</option>
+                                <option selected value="6">6</option>
                                 <option value="10">10</option>
                                 <option value="20">20</option>
                             </select>

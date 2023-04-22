@@ -13,20 +13,32 @@ export class FormationService {
   public getAllFormations():Observable<any> {
     return this.http.get<any>(this.formationUrl+`/api/formation`);
   }
-  public addFormation(formation:any):Observable<any> {
+  public addFormation(formation: FormData):Observable<any> {
     return this.http.post(this.formationUrl+`/api/formation/add`,formation)
+  }
+  public deleteFormation(id: number): Observable<any> {
+    return this.http.delete<any>(this.formationUrl + `/api/formation/delete/${id}`);
   }
   public getFormationById(id: number): Observable<any> {
     return this.http.get<any>(this.formationUrl + `/api/formation/${id}`);
   }
-  public affectSeanceToFormation(seanceId: number, formationId: number): Observable<any> {
-    return this.http.get<any>(this.formationUrl + `/api/formation/seance/${seanceId}/formation/${formationId}`);
+  public getFormationByIdCentre(id: number): Observable<any[]> {
+    return this.http.get<any[]>(this.formationUrl + `/api/formation/center/${id}`);
+  }
+  public affectSeanceToFormation(seanceId: number, formationId: number) {
+    return this.http.get(this.formationUrl + `/api/formation/seance/${seanceId}/formation/${formationId}`);
   }
   public getFormationByTitle(title: string): Observable<any> {
     return this.http.get<any>(this.formationUrl + `/api/formation/titre/${title}`);
   }
   public getFormationByPrixBetween(prix1: number, prix2: number): Observable<any> {
     return this.http.get<any>(this.formationUrl + `/api/formation/prix/${prix1}/${prix2}`);
+  }
+  public getFormationByTag(tag: string): Observable<any> {
+    return this.http.get<any>(this.formationUrl + `/api/formation/tag/${tag}`);
+  }
+  public getFormationByTagOrTitle(param: string): Observable<any> {
+    return this.http.get<any>(this.formationUrl + `/api/formation/find/${param}`);
   }
   public getFormationsByPrixBetweenAndCategorie_Id(prix1: number, prix2: number, categoryId: number): Observable<any> {
     return this.http.get<any>(this.formationUrl + `/api/formation/prix/${prix1}/${prix2}/categorie/${categoryId}`);
