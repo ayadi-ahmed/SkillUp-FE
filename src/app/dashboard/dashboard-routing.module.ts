@@ -12,6 +12,7 @@ import {AddCenterComponent} from "./Profile-Training-Center/add-center/add-cente
 import {FavorisComponent} from "./favoris/favoris.component";
 import {StatsComponent} from "./stats/stats.component";
 import {CategorieComponent} from "./categorie/categorie.component";
+import {TagComponent} from "./tag/tag.component";
 
 const routes: Routes = [
   {path:'', component:DashboardComponent,
@@ -27,6 +28,7 @@ const routes: Routes = [
       {path:'settings', component:ProfileComponent},
       {path:'stats', component:StatsComponent},
       {path:'categories', component:CategorieComponent},
+      {path:'tag', component:TagComponent},
     ]},
 
   {path:'**',component:NotFoundComponent}
