@@ -2,9 +2,11 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormationService} from "../../Services/formation.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {course} from "../../Entities/courses";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {debounceTime, distinctUntilChanged, map, Observable, OperatorFunction} from "rxjs";
 import {CategorieService} from "../../Services/categorie.service";
+import {TagService} from "../../Services/tag.service";
+import {Tag} from "../../Entities/tag";
 
 @Component({
     selector: 'app-courses',
@@ -13,8 +15,8 @@ import {CategorieService} from "../../Services/categorie.service";
 })
 export class CoursesComponent implements OnInit, OnDestroy {
 
-    p:any;
-    itemsPerPage: number = 5;
+    p: any;
+    itemsPerPage: number = 6;
     categorieId: any = "";
     public categories: any[] = [];
     maxPrice: number = 0;
@@ -22,26 +24,33 @@ export class CoursesComponent implements OnInit, OnDestroy {
     value = [0, 0];
     priceSort: string = "randomPrices";
     formatter = (result: string) => result.toUpperCase();
-    searchbytitle: OperatorFunction<string, readonly string[]> = (text$: Observable<string>) =>
+    searchbyTagOrTitle: OperatorFunction<string, readonly string[]> = (text$: Observable<string>) =>
         text$.pipe(
             debounceTime(200),
             distinctUntilChanged(),
             map((term) =>
-                term === '' ? [] : this.courseTitles.filter((f) => f.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10),
+                term === '' ? [] : this.courseTagsTitle.filter((t) => t.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10),
             ),
         );
     public formations: course[] = [];
-    public courseTitles: string[] = [];
-    public title: string = "";
+    public courseTagsTitle: string[] = [];
+    public tagOrTitle: any = "";
 
     constructor(private formationService: FormationService,
                 private router: Router,
-                private categorieService: CategorieService) {
+                private categorieService: CategorieService,
+                private tagService: TagService,
+                private route: ActivatedRoute) {
     }
 
     ngOnInit(): void {
+        this.tagOrTitle = this.route.snapshot.queryParamMap.get('searchBy');
         this.getAllFormations();
+        if (this.tagOrTitle) {
+            this.searchByTagOrTitle();
+        }
         this.getAllCategies();
+        this.getAllTags();
     }
 
     ngOnDestroy(): void {
@@ -51,7 +60,11 @@ export class CoursesComponent implements OnInit, OnDestroy {
         this.formationService.getAllFormations().subscribe(
             (response: course[]) => {
                 this.formations = response;
-                this.courseTitles = this.formations.map(f => f.titre);
+                response.forEach(formation => {
+                    if (!this.courseTagsTitle.includes(formation.titre.toUpperCase())) {
+                        this.courseTagsTitle.push(formation.titre.toUpperCase());
+                    }
+                });
                 this.maxPrice = this.formations.map(course => course.prix!)
                     .reduce((acc, price) => Math.max(acc, price), 0);
                 this.minPrice = this.formations.map(course => course.prix!)
@@ -64,8 +77,8 @@ export class CoursesComponent implements OnInit, OnDestroy {
         )
     }
 
-    searchByTitle() {
-        this.formationService.getFormationByTitle(this.title).subscribe(
+    searchByTagOrTitle() {
+        this.formationService.getFormationByTagOrTitle(this.tagOrTitle).subscribe(
             (response: course[]) => {
                 this.formations = response;
                 this.value = [this.minPrice, this.maxPrice];
@@ -74,6 +87,22 @@ export class CoursesComponent implements OnInit, OnDestroy {
                 console.log(error.message);
             }
         )
+    }
+
+    getAllTags() {
+        this.tagService.getAllTags()
+            .subscribe(
+                (response: Tag[]) => {
+                    response.forEach(tag => {
+                        if (!this.courseTagsTitle.includes(tag.nom.toUpperCase())) {
+                            this.courseTagsTitle.push(tag.nom.toUpperCase());
+                        }
+                    });
+                },
+                (error: HttpErrorResponse) => {
+                    console.log(error.message);
+                }
+            )
     }
 
     randomPrices() {

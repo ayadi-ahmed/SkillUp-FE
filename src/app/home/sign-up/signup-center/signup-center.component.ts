@@ -68,7 +68,7 @@ export class SignupCenterComponent implements OnInit, OnDestroy {
                             (response: TrainingCenter) => {
                                 this.managerService
                                     .affectCenterToManager(response.id, this.manager.id)
-                                    .subscribe();
+                                    .subscribe(value => window.location.reload());
                             },
                             (error: HttpErrorResponse) => {
                                 console.log(error.message);

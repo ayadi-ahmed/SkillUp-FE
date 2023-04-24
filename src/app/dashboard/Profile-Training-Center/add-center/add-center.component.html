@@ -1,132 +1,227 @@
-<!--wrapper-->
 <div class="wrapper">
     <div class="page-wrapper">
         <div class="page-content">
-            <!--breadcrumb-->
-            <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-                <div class="breadcrumb-title pe-3">eCommerce</div>
-                <div class="ps-3">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb mb-0 p-0">
-                            <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
-                            </li>
-                            <li class="breadcrumb-item active" aria-current="page">Orders</li>
-                        </ol>
-                    </nav>
-                </div>
-                <div class="ms-auto">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-primary">Settings</button>
-                        <button type="button"
-                                class="btn btn-primary split-bg-primary dropdown-toggle dropdown-toggle-split"
-                                data-bs-toggle="dropdown"><span class="visually-hidden">Toggle Dropdown</span>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end"><a class="dropdown-item"
-                                                                                               href="javascript:;">Action</a>
-                            <a class="dropdown-item" href="javascript:;">Another action</a>
-                            <a class="dropdown-item" href="javascript:;">Something else here</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="javascript:;">Separated link</a>
+            <div>
+                <div class="card">
+                    <div class="card-body p-4">
+
+                        <div class="col-xl-6">
+                            <h4 class="form-label">Add New Training Center</h4>
+                        </div>
+                        <hr/>
+
+                        <div class="row m-3">
+                            <div class="col-xl-6">
+                                <p><label>Name&nbsp;<span class="required">*</span></label></p>
+                                <input type="text" class="form-control" name="name" minlength="3"
+                                       #name="ngModel"
+                                       [class.is-invalid]="name.invalid && name.touched" [(ngModel)]="center.nom"
+                                       required>
+
+                                <div *ngIf="name.errors && name.touched">
+                                    <small class="text-danger" *ngIf="name.errors['minlength']">at least 3
+                                        characters</small>
+                                    <small class="text-danger" *ngIf="name.errors['required']">name is
+                                        required</small>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-6">
+                                <p><label>Tax identification number&nbsp;<span class="required">*</span></label></p>
+                                <input type="text" class="form-control" name="taxIdentificationNumber"
+                                       #taxIdentificationNumber="ngModel"
+                                       [class.is-invalid]="taxIdentificationNumber.invalid && taxIdentificationNumber.touched"
+                                       [(ngModel)]="center.matriculeFiscal"
+                                       required>
+
+                                <div *ngIf="taxIdentificationNumber.errors && taxIdentificationNumber.touched">
+                                    <small class="text-danger" *ngIf="taxIdentificationNumber.errors['required']">tax
+                                        identification number is
+                                        required</small>
+                                </div>
+                            </div>
+
+
+                            <div class="col-xl-6">
+                                <p><label>Phone number&nbsp;<span class="required">*</span></label></p>
+                                <input type="tel" class="form-control" name="tel"
+                                       pattern="[- +()0-9]+"
+                                       minlength="8"
+                                       maxlength="8"
+                                       #centerTel="ngModel"
+                                       [class.is-invalid]="centerTel.invalid && centerTel.touched"
+                                       [(ngModel)]="center.tel"
+                                       required>
+
+                                <div *ngIf="centerTel.errors && centerTel.touched">
+                                    <small class="text-danger" *ngIf="centerTel.errors['required']">phone number is
+                                        required</small>
+                                    <small class="text-danger"
+                                           *ngIf="centerTel.errors['pattern'] || centerTel.errors['minlength'] || centerTel.errors['maxlength']">invalid
+                                        phone number</small>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-6">
+                                <p><label>Email&nbsp;<span class="required">*</span></label></p>
+                                <input type="email" class="form-control" name="email"
+                                       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" #centerEmail="ngModel"
+                                       [class.is-invalid]="centerEmail.invalid && centerEmail.touched"
+                                       [(ngModel)]="center.email"
+                                       required>
+
+                                <div *ngIf="centerEmail.errors && centerEmail.touched">
+                                    <small class="text-danger" *ngIf="centerEmail.errors['required']">email is
+                                        required</small>
+                                    <small class="text-danger" *ngIf="centerEmail.errors['pattern']">invalid
+                                        email</small>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-6">
+                                <p><label>Address&nbsp;<span class="required">*</span></label></p>
+                                <input type="text" class="form-control" name="address" minlength="3"
+                                       #centerAddress="ngModel"
+                                       [class.is-invalid]="centerAddress.invalid && centerAddress.touched"
+                                       [(ngModel)]="center.adresse"
+                                       required>
+
+                                <div *ngIf="centerAddress.errors && centerAddress.touched">
+                                    <small class="text-danger" *ngIf="centerAddress.errors['minlength']">at least 3
+                                        characters</small>
+                                    <small class="text-danger" *ngIf="centerAddress.errors['required']">address is
+                                        required</small>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-6">
+                                <p><label>Creation date&nbsp;<span class="required">*</span></label></p>
+                                <input type="date" class="form-control" name="dateOfBirth"
+                                       #creationDate="ngModel"
+                                       [class.is-invalid]="creationDate.invalid && creationDate.touched"
+                                       [(ngModel)]="center.dateCreation"
+                                       required>
+
+                                <div *ngIf="creationDate.errors && creationDate.touched">
+                                    <small class="text-danger" *ngIf="creationDate.errors['required']">creation date is
+                                        required</small>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-6">
+                                <p><label>Categorie&nbsp;<span class="required">*</span></label></p>
+                                <select id="center" class="form-control"
+                                        name="categorie"
+                                        #categorie="ngModel"
+                                        [class.is-invalid]="categorie.invalid && categorie.touched"
+                                        ngModel
+                                        required
+                                        [(ngModel)]="categoryId">
+                                    <option selected value="">choose a category</option>
+                                    <option *ngFor="let category of categories"
+                                            [value]="category.id">{{category.nom}}</option>
+                                </select>
+                                <div *ngIf="categorie.errors && categorie.touched">
+                                    <small class="text-danger" *ngIf="categorie.errors['required']">category is
+                                        required</small>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-6">
+                                <p><label>Logo&nbsp;<span class="required">*</span></label></p>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="customFile"
+                                           style="cursor: pointer"
+                                           name="logo"
+                                           #logo="ngModel"
+                                           ngModel
+                                           [class.is-invalid]="logo.invalid && logo.touched"
+                                           accept="image/*"
+                                           required
+                                           (change)="onFileSelected($event)">
+                                    <label class="custom-file-label" for="customFile" style="cursor: pointer">Choose
+                                        file</label>
+                                </div>
+                                <div *ngIf="logo.errors && logo.touched">
+                                    <small class="text-danger" *ngIf="logo.errors['required']">logo is
+                                        required</small>
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <p><label>Description&nbsp;<span class="required">*</span></label></p>
+                                <textarea class="form-control" name="description"
+                                          #description="ngModel"
+                                          [class.is-invalid]="description.invalid && description.touched"
+                                          [(ngModel)]="center.description"
+                                          required></textarea>
+
+                                <div *ngIf="description.errors && description.touched">
+                                    <small class="text-danger" *ngIf="description.errors['required']">description is
+                                        required</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; justify-content: right">
+                            <button style="background-color: #0075d4; color: white" class="btn"
+                                    (click)="addCenter()"
+                                    [disabled]="disableAddButton || name.errors || taxIdentificationNumber.errors || centerTel.errors || centerEmail.errors || centerAddress.errors || creationDate.errors || categorie.errors || logo.errors || description.errors">
+                                Save Training Center
+                            </button>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!--end breadcrumb-->
-
-            <div class="card">
-                <div class="card-body p-4">
-                    <h5 class="card-title">Add New Product</h5>
-                    <hr/>
-                    <div class="form-body mt-4">
-                        <div class="row">
-                            <div class="col-lg-8">
-                                <div class="border border-3 p-4 rounded">
-                                    <div class="mb-3">
-                                        <label for="inputProductTitle" class="form-label">Product Title</label>
-                                        <input type="email" class="form-control" id="inputProductTitle"
-                                               placeholder="Enter product title">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="inputProductDescription" class="form-label">Description</label>
-                                        <textarea class="form-control" id="inputProductDescription" rows="3"></textarea>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="inputProductDescription" class="form-label">Product Images</label>
-                                        <input id="image-uploadify" type="file"
-                                               accept=".xlsx,.xls,image/*,.doc,audio/*,.docx,video/*,.ppt,.pptx,.txt,.pdf"
-                                               multiple>
-                                    </div>
+                <div class="container">
+                    <div class="row" *ngFor="let center of centers">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="d-flex align-items-center">
+                                    <img src="assets/trainingCenter-photos/{{center.logo}}" style="width: 80px; height: 80px; border-radius: 50%; margin-right: 20px" alt=" ">
+                                    <h3>{{center.nom}}</h3>
                                 </div>
                             </div>
-                            <div class="col-lg-4">
-                                <div class="border border-3 p-4 rounded">
-                                    <div class="row g-3">
-                                        <div class="col-md-6">
-                                            <label for="inputPrice" class="form-label">Price</label>
-                                            <input type="email" class="form-control" id="inputPrice"
-                                                   placeholder="00.00">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="inputCompareatprice" class="form-label">Compare at Price</label>
-                                            <input type="password" class="form-control" id="inputCompareatprice"
-                                                   placeholder="00.00">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="inputCostPerPrice" class="form-label">Cost Per Price</label>
-                                            <input type="email" class="form-control" id="inputCostPerPrice"
-                                                   placeholder="00.00">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="inputStarPoints" class="form-label">Star Points</label>
-                                            <input type="password" class="form-control" id="inputStarPoints"
-                                                   placeholder="00.00">
-                                        </div>
-                                        <div class="col-12">
-                                            <label for="inputProductType" class="form-label">Product Type</label>
-                                            <select class="form-select" id="inputProductType">
-                                                <option></option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-12">
-                                            <label for="inputVendor" class="form-label">Vendor</label>
-                                            <select class="form-select" id="inputVendor">
-                                                <option></option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-12">
-                                            <label for="inputCollection" class="form-label">Collection</label>
-                                            <select class="form-select" id="inputCollection">
-                                                <option></option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-12">
-                                            <label for="inputProductTags" class="form-label">Product Tags</label>
-                                            <input type="text" class="form-control" id="inputProductTags"
-                                                   placeholder="Enter Product Tags">
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="d-grid">
-                                                <button type="button" class="btn btn-primary">Save Product</button>
+                            <div class="card-body">
+                                <div class="container">
+                                    <div class="row">
+                                        <h1 *ngIf="center.formations.length == 0">0 Training</h1>
+                                        <div class="row" *ngIf="center.formations.length != 0">
+                                            <div class="course-item cat1 cat5 col-lg-3 col-md-6 col-sm-6"
+                                                 *ngFor="let course of center.formations">
+                                                <div class=" course-style-5 bg-white">
+                                                    <div class="course-header">
+                                                        <div class="course-thumb">
+                                                            <img src="assets/training-photos/{{course.img}}" alt=""
+                                                                 class="img-fluid">
+                                                            <div class="course-price">{{course.prix}} TND</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="course-content">
+                                                        <div class="course-meta meta-style-1">
+                                            <span class="lessons"><i
+                                                    class="far fa-play-circle me-2"></i>26 Lectures</span>
+                                                            <span class="label">Beginner</span>
+                                                        </div>
+                                                        <h4><a href="#">{{course.titre}}</a></h4>
+
+                                                        <div class="course-footer mt-20 d-flex align-items-center justify-content-between">
+                                            <span class="students"><i
+                                                    class="far fa-user-alt me-2"></i>{{course.nbMaxCan}} Students</span>
+                                                            <a  class="rounded-btn"><i
+                                                                    class="fa fa-long-arrow-right"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div><!--end row-->
+                        </div>
                     </div>
                 </div>
             </div>
-
-
         </div>
     </div>
 </div>
+

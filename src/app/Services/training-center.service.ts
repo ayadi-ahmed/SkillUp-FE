@@ -35,4 +35,7 @@ export class TrainingCenterService {
   public affectFormationToCenter(formationId: number, centreId: number): Observable<any> {
     return this.http.get<any>(this.apiServerUrl + `/api/CentreFormation/${centreId}/formation/${formationId}`);
   }
+  public affectCenterToCategory(categoryId: number, centreId: number): Observable<any> {
+    return this.http.get<any>(this.apiServerUrl + `/api/CentreFormation/${centreId}/categorie/${categoryId}`);
+  }
 }

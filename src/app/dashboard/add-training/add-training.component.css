@@ -1,0 +1,14 @@
+::ng-deep .mat-step-header .mat-step-icon-selected {
+    background-color: #008bfe;
+}
+::ng-deep .mat-step-header .mat-step-icon-state-edit {
+    background-color: #0075d5;
+}
+.delete-button{
+    position: absolute;
+    top: -10px;
+    right: 0;
+    z-index: 9999;
+    padding: 0;
+    display: flex;
+}
