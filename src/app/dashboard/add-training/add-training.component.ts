@@ -27,6 +27,7 @@ export class AddTrainingComponent implements OnInit, OnDestroy {
         dateDebut: '',
         dateFin: '',
         prix: null,
+        offres:[],
         nbMaxCan: null
     }
     public categories: any[] = [];

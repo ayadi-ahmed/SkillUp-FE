@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {FormationService} from "../../Services/formation.service";
 import {course} from "../../Entities/courses";
 import {HttpErrorResponse} from "@angular/common/http";
@@ -13,29 +13,34 @@ export class SingleCourseComponent implements OnInit {
 
     private courseId = 0;
     public course: course = {
-        dateDebut: "",
-        dateFin: "",
-        description: "",
-        id: 0,
-        img: "",
-        nbMaxCan: null,
-        prix: null,
-        titre: ""
+      dateDebut: "",
+      dateFin: "",
+      description: "",
+      id: 0,
+      img: "",
+      nbMaxCan: null,
+      offres: [],
+      prix: null,
+      titre: ""
 
     }
-    constructor(private route: ActivatedRoute,
-                private formationService: FormationService) {
+
+  constructor(private route: ActivatedRoute,
+                private formationService: FormationService,
+              private router:Router) {
     }
 
     ngOnInit(): void {
         this.getCourseId();
         this.getCourseById();
+
     }
 
     getCourseId() {
-        this.route.queryParams
+        this.route.params
             .subscribe(params => {
-                this.courseId = params['id']
+                this.courseId = params['id'];
+                console.log(params['id']);
             });
     }
 
@@ -44,11 +49,21 @@ export class SingleCourseComponent implements OnInit {
             .subscribe(
                 (response: course) => {
                     this.course = response;
+                    console.log(response);
+
                 },
                 (error: HttpErrorResponse) => {
                     console.log(error.message);
                 }
             )
     }
+
+  getDetails(courseId: number) {
+    this.router.navigate([`/checkout/${courseId}`]);
+  }
+
+  getDetails1(courseId: number) {
+    this.router.navigate([`/interested/${courseId}`]);
+  }
 
 }

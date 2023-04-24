@@ -94,7 +94,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
     }
 
     getDetails(courseId: number) {
-        this.router.navigate(['/course'], {queryParams: {id: courseId}});
+      this.router.navigate([`/course/${courseId}`]);
     }
 
     getFormationByPrixBetweenAndCategory() {

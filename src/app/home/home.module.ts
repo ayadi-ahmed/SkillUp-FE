@@ -31,6 +31,9 @@ import {SignupCandidatComponent} from './sign-up/signup-candidat/signup-candidat
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {NzSliderModule} from "ng-zorro-antd/slider";
 import {NgxPaginationModule} from "ngx-pagination";
+import { CheckoutComponent } from './checkout/checkout.component';
+import { InterstedComponent } from './intersted/intersted.component';
+import { ThankYouComponent } from './thank-you/thank-you.component';
 
 
 @NgModule({
@@ -55,6 +58,9 @@ import {NgxPaginationModule} from "ngx-pagination";
         PricingComponent,
         SignupCenterComponent,
         SignupCandidatComponent,
+        CheckoutComponent,
+        InterstedComponent,
+        ThankYouComponent,
     ],
     exports: [
         PopularCoursesComponent,
