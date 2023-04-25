@@ -5,7 +5,7 @@ export interface course{
     img : string,
     dateDebut :string,
     dateFin :string,
-    prix :number | null,
+    prix :number ,
     nbMaxCan : number | null,
     offres : number[]
 }

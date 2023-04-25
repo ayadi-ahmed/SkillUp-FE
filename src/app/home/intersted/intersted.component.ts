@@ -4,6 +4,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {FormationService} from "../../Services/formation.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {course} from "../../Entities/courses";
+import {TransactionCandidatService} from "../../Services/transaction-candidat.service";
+import {CandidatService} from "../../Services/candidat.service";
 
 @Component({
   selector: 'app-intersted',
@@ -21,13 +23,14 @@ export class InterstedComponent implements OnInit {
     img: "",
     nbMaxCan: null,
     offres: [],
-    prix: null,
+    prix: 0,
     titre: ""
 
   }
-  constructor(private userAuthentificationService: AuthentificationService,
-              private router: Router, private route: ActivatedRoute,
-              private formationService: FormationService) {
+  constructor(private router: Router,
+              private route: ActivatedRoute,
+              private formationService: FormationService,
+) {
   }
 
   ngOnInit(): void {
@@ -39,29 +42,6 @@ export class InterstedComponent implements OnInit {
   public formData = {
     email: "",
     password: ""
-  }
-
-  public login() {
-    this.userAuthentificationService.login(this.formData.email, this.formData.password).subscribe(
-      (response: any) => {
-        if (response == null) {
-          alert("Vérifier vos coordonnées!")
-        } else {
-          this.userAuthentificationService.setUserId(response.id);
-          this.userAuthentificationService.setRoles(response.role);
-          if (response.role === 'CANDIDAT') {
-            this.router.navigate(['/']);
-          } else if (response.role == 'MANAGER') {
-            this.router.navigate(['/']);
-          } else if (response.role == 'ADMIN') {
-            this.router.navigate(['/']);
-          }
-        }
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
   }
 
   getCourseId() {

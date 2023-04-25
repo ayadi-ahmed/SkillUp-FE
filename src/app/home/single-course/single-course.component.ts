@@ -20,7 +20,7 @@ export class SingleCourseComponent implements OnInit {
       img: "",
       nbMaxCan: null,
       offres: [],
-      prix: null,
+      prix: 0,
       titre: ""
 
     }
