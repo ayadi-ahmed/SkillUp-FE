@@ -13,6 +13,7 @@ import {FavorisComponent} from "./favoris/favoris.component";
 import {StatsComponent} from "./stats/stats.component";
 import {CategorieComponent} from "./categorie/categorie.component";
 import {TagComponent} from "./tag/tag.component";
+import {TransactionsClientComponent} from "./transactions-client/transactions-client.component";
 
 const routes: Routes = [
   {path:'', component:DashboardComponent,
@@ -24,6 +25,7 @@ const routes: Routes = [
       {path:'add-training', component:AddTrainingComponent},
       {path:'add-center', component:AddCenterComponent},
       {path:'favoris', component:FavorisComponent},
+      {path:'transactions', component:TransactionsClientComponent},
       {path:'profile', component:ProfileComponent},
       {path:'settings', component:ProfileComponent},
       {path:'stats', component:StatsComponent},

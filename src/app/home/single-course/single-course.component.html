@@ -37,11 +37,10 @@
             <div class="col-xl-5">
                 <div class="course-thumb-wrap">
                     <div class="course-thumbnail mb-0">
-                        <img src="assets/images/course/img_02.jpg" alt="" class="img-fluid w-100">
+                        <img src="assets/images/course/1.jpeg" alt="" class="img-fluid w-100">
                     </div>
 
-                    <a class="popup-video video_icon" href="https://www.youtube.com/watch?v=cRXm1p-CNyk"><i
-                            class="fal fa-play"></i></a>
+                    <!--<a class="popup-video video_icon" href="https://www.youtube.com/watch?v=cRXm1p-CNyk"><i class="fal fa-play"></i></a>-->
                 </div>
             </div>
         </div>
@@ -71,14 +70,7 @@
                              aria-labelledby="nav-home-tab">
                             <div class="single-course-details ">
                                 <h4 class="course-title">Description</h4>
-                                <p>Knowing PHP has allowed me to make enough money to stay home and make courses like
-                                    this one for students all over the world. Being a PHP developer can allow anyone to
-                                    make really good money online and offline, developing dynamic applications.
-                                    Knowing PHP will allow you to build web applications, websites or Content Management
-                                    systems, like WordPress, Facebook, Twitter or even Google.
-                                    There is no limit to what you can do with this knowledge. PHP is one of the most
-                                    important web programming languages to learn, and knowing it, will give you SUPER
-                                    POWERS in the web</p>
+                                <p>{{course.description}}</p>
 
 
                                 <div class="course-widget course-info">
@@ -349,7 +341,7 @@
                     <div class="course-widget course-details-info">
                         <div class="price-header">
                             <h2 class="course-price">{{course.prix}} TND<span>$150</span></h2>
-                            <span class="course-price-badge onsale">39% off</span>
+                            <span class="course-price-badge onsale"> 39% off</span>
                         </div>
                         <ul class="course-sidebar-list">
                             <li>
@@ -362,13 +354,13 @@
                             <li>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <span><i class="fas fa-play-circle"></i>Lectures</span>
-                                    2
+                                    20
                                 </div>
                             </li>
                             <li>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <span><i class="far fa-user"></i>Students</span>
-                                    20
+                                  {{course.nbMaxCan}}
                                 </div>
                             <li>
                                 <div class="d-flex justify-content-between align-items-center">
@@ -392,10 +384,15 @@
                         </ul>
 
                         <div class="buy-btn">
-                            <button class="button button-enroll-course btn btn-main-2 rounded">
+                            <button class="button button-enroll-course btn btn-main-2 rounded" (click)="getDetails(course.id)">
                                 <i class="far fa-shopping-cart me-2"></i> Enroll Course
                             </button>
                         </div>
+                      <div class="buy-btn">
+                        <button class="button button-enroll-course btn btn-main-2 rounded" (click)="getDetails1(course.id)">
+                          <i class="far fa-info-circle me-2"></i> I'm Interested
+                        </button>
+                      </div>
 
                         <div class="course-meterial">
                             <h4 class="mb-3">Material Includes</h4>

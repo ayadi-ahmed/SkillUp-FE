@@ -34,7 +34,10 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {NzButtonModule} from "ng-zorro-antd/button";
 import { DeleteTrainingComponent } from './delete-training/delete-training.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import { TransactionsClientComponent } from './transactions-client/transactions-client.component';
+
 import { UpdateTrainingComponent } from './update-training/update-training.component';
+ 
 
 
 @NgModule({
@@ -57,6 +60,7 @@ import { UpdateTrainingComponent } from './update-training/update-training.compo
         CategorieComponent,
         TagComponent,
         DeleteTrainingComponent,
+        TransactionsClientComponent,
         UpdateTrainingComponent,
     ],
     exports: [

@@ -11,12 +11,18 @@ import {InstructorComponent} from './instructor/instructor.component';
 import {PricingComponent} from "./pricing/pricing.component";
 import {SignupCenterComponent} from "./sign-up/signup-center/signup-center.component";
 import {SignupCandidatComponent} from "./sign-up/signup-candidat/signup-candidat.component";
+import {CheckoutComponent} from "./checkout/checkout.component";
+import {InterstedComponent} from "./intersted/intersted.component";
+import {ThankYouComponent} from "./thank-you/thank-you.component";
 
 
 const routes: Routes = [
     {path: '', component: HomeComponent},
     {path: 'courses', component: CoursesComponent},
-    {path: 'course', component: SingleCourseComponent},
+    {path: 'course/:id', component: SingleCourseComponent},
+    {path: 'checkout/:id', component: CheckoutComponent},
+    {path: 'interested/:id', component: InterstedComponent},
+    {path: 'thank-you', component: ThankYouComponent},
     {path: 'login', component: LoginComponent},
     {path: 'signup', component: SignupComponent},
     {path: 'instructors', component: InstructorComponent},

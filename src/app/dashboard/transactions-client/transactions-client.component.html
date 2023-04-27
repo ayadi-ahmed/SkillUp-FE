@@ -1,0 +1,81 @@
+<div class="wrapper">
+  <div class="page-wrapper">
+    <div class="page-content">
+      <!--breadcrumb-->
+      <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+        <div class="breadcrumb-title pe-3">Components</div>
+        <div class="ps-3">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0 p-0">
+              <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+              </li>
+              <li class="breadcrumb-item active" aria-current="page">Cards</li>
+            </ol>
+          </nav>
+        </div>
+        <div class="ms-auto">
+          <div class="btn-group">
+            <button type="button" class="btn btn-primary">Settings</button>
+            <button type="button"
+                    class="btn btn-primary split-bg-primary dropdown-toggle dropdown-toggle-split"
+                    data-bs-toggle="dropdown"><span class="visually-hidden">Toggle Dropdown</span>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end"><a class="dropdown-item"
+                                                                                   href="javascript:;">Action</a>
+              <a class="dropdown-item" href="javascript:;">Another action</a>
+              <a class="dropdown-item" href="javascript:;">Something else here</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="javascript:;">Separated link</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--end breadcrumb-->
+
+
+      <h6 class="mb-0 text-uppercase">Card with list group</h6>
+      <hr/>
+      <div class="row row-cols-1 row-cols-md-1 row-cols-lg-1 row-cols-xl-1">
+
+        <div>
+          <table class="table">
+            <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nom de la formation</th>
+              <th scope="col">Prix</th>
+              <th scope="col">Status</th>
+            </tr>
+            </thead>
+            <tbody *ngFor="let trans of transactions">
+            <tr >
+              <th scope="row" >1</th>
+              <td></td>
+              <td>{{trans.valeur}}</td>
+              <td>ok</td>
+            </tr>
+ -
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+      <!--end row-->
+
+
+
+    </div>
+  </div>
+  <!--end page wrapper -->
+  <!--start overlay-->
+  <div class="overlay toggle-icon"></div>
+  <!--end overlay-->
+  <!--Start Back To Top Button--> <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
+  <!--End Back To Top Button-->
+  <footer class="page-footer">
+    <p class="mb-0">Copyright © 2021. All right reserved.</p>
+  </footer>
+</div>
+
+
+
