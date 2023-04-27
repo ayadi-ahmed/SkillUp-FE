@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import {AuthentificationService} from "./authentification.service";
 
 @Injectable({
   providedIn: 'root'
@@ -9,15 +10,25 @@ import { environment } from 'src/environments/environment';
 export class FormationService {
 
   private formationUrl= environment.apiBaseUrl;
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,
+              private authentificationService: AuthentificationService) { }
   public getAllFormations():Observable<any> {
     return this.http.get<any>(this.formationUrl+`/api/formation`);
   }
   public addFormation(formation: FormData):Observable<any> {
-    return this.http.post(this.formationUrl+`/api/formation/add`,formation)
+    return this.http.post(this.formationUrl+`/api/formation/add`,formation,{
+      headers:new HttpHeaders({ authorization : 'Bearer '+ this.authentificationService.getToken()})
+    })
+  }
+  public removeTagFromFormation(idf: number, idt: number): Observable<any> {
+    return this.http.get<any>(this.formationUrl + `/api/formation/${idf}/tag/${idt}`,{
+      headers:new HttpHeaders({ authorization : 'Bearer '+ this.authentificationService.getToken()})
+    });
   }
   public deleteFormation(id: number): Observable<any> {
-    return this.http.delete<any>(this.formationUrl + `/api/formation/delete/${id}`);
+    return this.http.delete<any>(this.formationUrl + `/api/formation/delete/${id}`,{
+      headers:new HttpHeaders({ authorization : 'Bearer '+ this.authentificationService.getToken()})
+    });
   }
   public getFormationById(id: number): Observable<any> {
     return this.http.get<any>(this.formationUrl + `/api/formation/${id}`);
@@ -26,7 +37,9 @@ export class FormationService {
     return this.http.get<any[]>(this.formationUrl + `/api/formation/center/${id}`);
   }
   public affectSeanceToFormation(seanceId: number, formationId: number) {
-    return this.http.get(this.formationUrl + `/api/formation/seance/${seanceId}/formation/${formationId}`);
+    return this.http.get(this.formationUrl + `/api/formation/seance/${seanceId}/formation/${formationId}`,{
+      headers:new HttpHeaders({ authorization : 'Bearer '+ this.authentificationService.getToken()})
+    });
   }
   public getFormationByTitle(title: string): Observable<any> {
     return this.http.get<any>(this.formationUrl + `/api/formation/titre/${title}`);
@@ -45,5 +58,10 @@ export class FormationService {
   }
   public getFormationByCategoryId(id: number): Observable<any> {
     return this.http.get<any>(this.formationUrl + `/api/formation/categorie/${id}`);
+  }
+  public updateFormation(formation: any): Observable<any> {
+    return this.http.put<any>(this.formationUrl + `/api/formation/update`,formation,{
+      headers:new HttpHeaders({ authorization : 'Bearer '+ this.authentificationService.getToken()})
+    });
   }
 }

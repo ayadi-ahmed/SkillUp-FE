@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import {environment} from "../../environments/environment";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {AuthentificationService} from "./authentification.service";
 
 @Injectable({
   providedIn: 'root'
@@ -10,16 +11,21 @@ export class CategorieService {
 
   private apiServerUrl = environment.apiBaseUrl;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private authentificationService: AuthentificationService) {
   }
 
   public addCategory(categorie: any): Observable<any>{
-    return this.http.post(this.apiServerUrl + `/api/categorie/add`, categorie);
+    return this.http.post(this.apiServerUrl + `/api/categorie/add`, categorie,{
+      headers:new HttpHeaders({ authorization : 'Bearer '+ this.authentificationService.getToken()})
+    });
   }
   public getAllCategories(): Observable<any> {
     return this.http.get<any>(this.apiServerUrl + `/api/categorie`);
   }
   public affectFormationToCategory(formationId: number, categorieId: number): Observable<any> {
-    return this.http.get<any>(this.apiServerUrl + `/api/categorie/formation/${formationId}/categorie/${categorieId}`);
+    return this.http.get<any>(this.apiServerUrl + `/api/categorie/formation/${formationId}/categorie/${categorieId}`,{
+      headers:new HttpHeaders({ authorization : 'Bearer '+ this.authentificationService.getToken()})
+    });
   }
 }

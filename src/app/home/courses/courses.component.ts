@@ -80,6 +80,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
     searchByTagOrTitle() {
         this.formationService.getFormationByTagOrTitle(this.tagOrTitle).subscribe(
             (response: course[]) => {
+                this.formations = [];
                 this.formations = response;
                 this.value = [this.minPrice, this.maxPrice];
             },

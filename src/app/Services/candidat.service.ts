@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
 import {environment} from "../../environments/environment";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Candidat} from "../Entities/candidat";
+import {AuthentificationService} from "./authentification.service";
 
 @Injectable({
     providedIn: 'root'
@@ -11,22 +12,31 @@ export class CandidatService {
 
     private apiServerUrl = environment.apiBaseUrl;
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient,
+                private authentificationService:AuthentificationService) {
     }
 
     public getAllCandidats(): Observable<any> {
         return this.http.get<any>(this.apiServerUrl + `/api/client`);
     }
     public getCandidatById(id: number): Observable<any> {
-        return this.http.get<any>(this.apiServerUrl + `/api/client/${id}`);
+        return this.http.get<any>(this.apiServerUrl + `/api/client/${id}`,{
+            headers:new HttpHeaders({ authorization : 'Bearer '+ this.authentificationService.getToken()})
+        });
     }
     public addCandidat(candidat: any): Observable<any> {
-        return this.http.post<any>(this.apiServerUrl + `/api/client/add`,candidat);
+        return this.http.post<any>(this.apiServerUrl + `/api/client/add`,candidat,{
+            headers:new HttpHeaders({ authorization : 'Bearer '+ this.authentificationService.getToken()})
+        });
     }
     public updateCandidat(candidat: Candidat): Observable<any> {
-        return this.http.put<any>(this.apiServerUrl + `/api/client/update`,candidat);
+        return this.http.put<any>(this.apiServerUrl + `/api/client/update`,candidat,{
+            headers:new HttpHeaders({ authorization : 'Bearer '+ this.authentificationService.getToken()})
+        });
     }
     public deleteCandidat(id: number): Observable<any> {
-        return this.http.delete<any>(this.apiServerUrl + `/api/client/delete/${id}`);
+        return this.http.delete<any>(this.apiServerUrl + `/api/client/delete/${id}`,{
+            headers:new HttpHeaders({ authorization : 'Bearer '+ this.authentificationService.getToken()})
+        });
     }
 }
