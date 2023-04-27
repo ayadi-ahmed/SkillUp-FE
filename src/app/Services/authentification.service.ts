@@ -13,8 +13,8 @@ export class AuthentificationService {
     constructor(private http: HttpClient) {
     }
 
-    public login(email: string, password: string): Observable<any> {
-        return this.http.get<any>(this.apiServerUrl + `/api/user/login/${email}/${password}`);
+    public login(request: any): Observable<any> {
+        return this.http.post<any>(this.apiServerUrl + `/api/user/authenticate`, request);
     }
 
     public getUserId() {
@@ -31,6 +31,14 @@ export class AuthentificationService {
 
     public getRole(): string {
         return JSON.parse(localStorage.getItem('role')!);
+    }
+
+    public setToken(token: string) {
+        localStorage.setItem('token', JSON.stringify(token));
+    }
+
+    public getToken(): string {
+        return JSON.parse(localStorage.getItem('token')!);
     }
 
     public clear() {

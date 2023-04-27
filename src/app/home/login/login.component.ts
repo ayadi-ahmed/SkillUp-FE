@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthentificationService} from "../../Services/authentification.service";
 import {Router} from "@angular/router";
+import {HttpErrorResponse} from "@angular/common/http";
+import jwt_decode from "jwt-decode";
 
 @Component({
     selector: 'app-login',
@@ -22,24 +24,23 @@ export class LoginComponent implements OnInit {
     }
 
     public login() {
-        this.userAuthentificationService.login(this.formData.email, this.formData.password).subscribe(
+        this.userAuthentificationService.login(this.formData).subscribe(
             (response: any) => {
-                if (response == null) {
-                    alert("Vérifier vos coordonnées!")
-                } else {
-                    this.userAuthentificationService.setUserId(response.id);
-                    this.userAuthentificationService.setRoles(response.role);
-                    if (response.role === 'CANDIDAT') {
-                        this.router.navigate(['/']);
-                    } else if (response.role == 'MANAGER') {
-                        this.router.navigate(['/']);
-                    } else if (response.role == 'ADMIN') {
-                        this.router.navigate(['/']);
-                    }
+                console.log(response.token)
+                var decoded = jwt_decode(response.token) as any;
+                this.userAuthentificationService.setUserId(decoded.id);
+                this.userAuthentificationService.setRoles(decoded.role);
+                this.userAuthentificationService.setToken(response.token);
+                if (decoded.role === 'CANDIDAT') {
+                    this.router.navigate(['/']);
+                } else if (decoded.role == 'MANAGER') {
+                    this.router.navigate(['/']);
+                } else if (decoded.role == 'ADMIN') {
+                    this.router.navigate(['/']);
                 }
             },
-            (error) => {
-                console.log(error);
+            (error: HttpErrorResponse) => {
+                alert("Vérifier vos coordonnées!")
             }
         );
     }

@@ -36,6 +36,9 @@ import { DeleteTrainingComponent } from './delete-training/delete-training.compo
 import {MatDialogModule} from "@angular/material/dialog";
 import { TransactionsClientComponent } from './transactions-client/transactions-client.component';
 
+import { UpdateTrainingComponent } from './update-training/update-training.component';
+ 
+
 
 @NgModule({
     declarations: [
@@ -58,6 +61,7 @@ import { TransactionsClientComponent } from './transactions-client/transactions-
         TagComponent,
         DeleteTrainingComponent,
         TransactionsClientComponent,
+        UpdateTrainingComponent,
     ],
     exports: [
         DashboardComponent

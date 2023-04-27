@@ -17,6 +17,7 @@ import {COMMA, ENTER} from "@angular/cdk/keycodes";
 import {MatAutocompleteSelectedEvent} from "@angular/material/autocomplete";
 import {MatDialog} from "@angular/material/dialog";
 import {DeleteTrainingComponent} from "../delete-training/delete-training.component";
+import {UpdateTrainingComponent} from "../update-training/update-training.component";
 
 @Component({
     selector: 'app-add-training',
@@ -38,8 +39,8 @@ export class AddTrainingComponent implements OnInit, OnDestroy {
         nbMaxCan: null
     }
     public image: any = {
-        file : new File([],""),
-        url : ""
+        file: new File([], ""),
+        url: ""
     }
 
     public categories: any[] = [];
@@ -184,7 +185,7 @@ export class AddTrainingComponent implements OnInit, OnDestroy {
                 });
     }
 
-    prepareFormData(formation: any, image: any): FormData{
+    prepareFormData(formation: any, image: any): FormData {
         const formData = new FormData();
         formData.append(
             'formation',
@@ -198,10 +199,10 @@ export class AddTrainingComponent implements OnInit, OnDestroy {
         return formData;
     }
 
-    onFileSelected(event: any){
-        if (event.target.files){
+    onFileSelected(event: any) {
+        if (event.target.files) {
             const file = event.target.files[0];
-            this.image={
+            this.image = {
                 file: file,
                 url: null
             };
@@ -268,7 +269,7 @@ export class AddTrainingComponent implements OnInit, OnDestroy {
             )
     }
 
-    getTagByName(name: string, trainingId: number){
+    getTagByName(name: string, trainingId: number) {
         this.tagService.getTagByName(name)
             .subscribe(
                 (response: Tag) => {
@@ -280,7 +281,7 @@ export class AddTrainingComponent implements OnInit, OnDestroy {
             )
     }
 
-    affectTagToTraining(trainingId: number, tagId: number){
+    affectTagToTraining(trainingId: number, tagId: number) {
         this.tagService.affectFormationToTag(trainingId, tagId)
             .subscribe(
                 (response: any) => {
@@ -292,11 +293,21 @@ export class AddTrainingComponent implements OnInit, OnDestroy {
             )
     }
 
-    deleteTraining(trainingId: number){
+    deleteTraining(trainingId: number) {
         this.dialog.open(DeleteTrainingComponent, {
-            data:{
+            data: {
                 id: trainingId
             },
         })
+    }
+
+    openDialogUpdateTraining(training: course) {
+        this.dialog.open(UpdateTrainingComponent, {
+            data: {
+                course: training,
+            },
+            width: '100%',
+            height : '90vh'
+        });
     }
 }
