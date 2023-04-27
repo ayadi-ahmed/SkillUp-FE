@@ -1,0 +1,199 @@
+<mat-dialog-actions style="position: relative">
+    <i mat-dialog-close matTooltip="Close" class='bx bx-x-circle' style="font-size: 40px;position: absolute;top: -20px; right: 0px; color: #008bfe; cursor: pointer"></i>
+</mat-dialog-actions>
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="mb-3">
+            <label for="trainingTitle" class="form-label">Training
+                Title</label>
+            <input type="text" class="form-control" id="trainingTitle"
+                   placeholder="Enter training title" name="titre"
+                   required
+                   minlength="2"
+                   [(ngModel)]="data.course.titre"
+                   #titre="ngModel"
+                   [class.is-invalid]="titre.invalid && titre.touched">
+        </div>
+        <div class="mb-3" *ngIf="titre.errors && titre.touched">
+            <small class="text-danger" *ngIf="titre.errors['minlength']">at
+                least 2
+                characters</small>
+            <small class="text-danger" *ngIf="titre.errors['required']">title
+                is
+                required</small>
+        </div>
+
+        <div class="mb-3">
+            <label for="category" class="form-label">Training
+                Category</label>
+            <select id="category" class="form-select"
+                    required
+                    [(ngModel)]="categorieId"
+                    #category="ngModel"
+                    [class.is-invalid]="category.invalid && category.touched">
+                <option selected value="">{{data.course.categorie.nom}}</option>
+                <option *ngFor="let categorie of categories"
+                        [value]="categorie.id">{{categorie.nom}}</option>
+            </select>
+        </div>
+        <div class="mb-3" *ngIf="category.errors && category.touched">
+            <small class="text-danger" *ngIf="category.errors['required']">you
+                have to
+                choose a
+                category</small>
+        </div>
+
+
+        <div class="border border-3 rounded mt-1"
+             *ngIf="data.course.tags.length>0" style="position:relative;">
+            <i style="font-size: 40px;color: #008bfe; position: absolute; right: 0; top: -10px"
+               class='bx bxs-plus-circle' (click)="addTags()"
+               *ngIf="inputTags == false"></i>
+            <mat-chip-list #chipList *ngIf="inputTags == true">
+                <input class="form-control"
+                       placeholder="Add tags"
+                       #tagInput
+                       [formControl]="tagCtrl"
+                       [matAutocomplete]="auto"
+                       [matChipInputFor]="chipList"
+                       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                       (matChipInputTokenEnd)="add($event)">
+            </mat-chip-list>
+            <mat-chip class="m-1" *ngFor="let tag of tagsAdded"
+                      (removed)="remove(tag)">
+                {{tag}}
+                <button matChipRemove>
+                    <mat-icon>cancel</mat-icon>
+                </button>
+            </mat-chip>
+        </div>
+        <mat-autocomplete #auto="matAutocomplete"
+                          (optionSelected)="selected($event)">
+            <mat-option *ngFor="let tag of filteredTags | async" [value]="tag"
+                        [disabled]="tagsAdded.indexOf(tag)>=0">
+                {{tag}}
+            </mat-option>
+        </mat-autocomplete>
+
+
+    </div>
+
+
+    <div class="col-lg-4 text-center">
+        <div class="mb-3">
+            <label class="lab">
+                <img *ngIf="!imageUrl"
+                     style="width: 300px; height: 300px; border: 3px solid rgba(182,182,182,0.44); border-radius: 10px"
+                     src="assets/training-photos/{{data.course.img}}">
+                <img style="width: 300px; height: 300px; border: 3px solid rgba(182,182,182,0.44); border-radius: 10px"
+                     [src]="imageUrl" *ngIf="imageUrl">
+                <span class="material-symbols-outlined" style="color: #008bfe;position: absolute;right: 0"
+                      matTooltip="Change image"><i class='bx bxs-edit'></i></span>
+                <input class="inputTag" type="file" required name="image" accept="image/*"
+                       (change)="onFileSelected($event)">
+            </label>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="mb-3">
+            <label for="trainingDescription"
+                   class="form-label">Description</label>
+            <textarea class="form-control" id="trainingDescription" rows="11"
+                      name="description" [(ngModel)]="data.course.description"
+                      minlength="10"
+                      required
+                      #description="ngModel"
+                      [class.is-invalid]="description.invalid && description.touched">
+                                                    </textarea>
+        </div>
+        <div class="mb-3" *ngIf="description.errors && description.touched">
+            <small class="text-danger"
+                   *ngIf="description.errors['minlength']">at
+                least
+                10
+                characters</small>
+            <small class="text-danger"
+                   *ngIf="description.errors['required']">description
+                is
+                required</small>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="mb-3">
+            <label for="trainingDateDebut" class="form-label">start Date</label>
+            <input type="date" class="form-control" id="trainingDateDebut"
+                   name="dateDebut"
+                   [(ngModel)]="data.course.dateDebut"
+                   required
+                   #dateDebut="ngModel"
+                   [class.is-invalid]="dateDebut.invalid && dateDebut.touched">
+        </div>
+        <div class="mb-3" *ngIf="dateDebut.errors && dateDebut.touched">
+            <small class="text-danger" *ngIf="dateDebut.errors['required']">start
+                date
+                is
+                required</small>
+        </div>
+
+
+        <div class="mb-3">
+            <label for="trainingDateFin" class="form-label">End Date</label>
+            <input type="date" class="form-control" id="trainingDateFin"
+                   name="dateFin"
+                   [(ngModel)]="data.course.dateFin"
+                   required
+                   #dateFin="ngModel"
+                   [class.is-invalid]="dateFin.invalid && dateFin.touched">
+        </div>
+        <div class="mb-3" *ngIf="dateFin.errors && dateFin.touched">
+            <small class="text-danger" *ngIf="dateFin.errors['required']">end
+                date
+                is
+                required</small>
+        </div>
+
+
+        <div class="mb-3">
+            <label for="trainingPrice" class="form-label">Price</label>
+            <input type="number" class="form-control" id="trainingPrice"
+                   placeholder="00.00"
+                   name="prix"
+                   [(ngModel)]="data.course.prix"
+                   required
+                   #prix="ngModel"
+                   [class.is-invalid]="prix.invalid && prix.touched">
+        </div>
+        <div class="mb-3" *ngIf="prix.errors && prix.touched">
+            <small class="text-danger" *ngIf="prix.errors['required']">price
+                is
+                required</small>
+        </div>
+
+
+        <div class="mb-3">
+            <label for="trainingNbMax" class="form-label">Maximum
+                Students</label>
+            <input type="number" class="form-control" id="trainingNbMax"
+                   name="nbMaxCan"
+                   [(ngModel)]="data.course.nbMaxCan"
+                   required
+                   #nbMaxCan="ngModel"
+                   [class.is-invalid]="nbMaxCan.invalid && nbMaxCan.touched">
+        </div>
+        <div class="mb-3" *ngIf="nbMaxCan.errors && nbMaxCan.touched">
+            <small class="text-danger" *ngIf="nbMaxCan.errors['required']">maximum
+                students
+                is
+                required</small>
+        </div>
+
+    </div>
+</div>
+<mat-dialog-actions style="position: relative" align="end">
+    <button [disabled]="disableButton" style="background-color: #008bfe; color: white" class="btn" (click)="saveChanges()">Save</button>
+</mat-dialog-actions>

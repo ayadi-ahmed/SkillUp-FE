@@ -268,7 +268,7 @@
                                        ngModel
                                        [class.is-invalid]="logo.invalid && logo.touched"
                                        accept="image/*"
-                                       required>
+                                       required (change)="onFileSelected($event)">
                                 <label class="custom-file-label" for="customFile" style="cursor: pointer">Choose
                                     file</label>
                             </div>

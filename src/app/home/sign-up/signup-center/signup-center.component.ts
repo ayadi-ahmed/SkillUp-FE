@@ -15,6 +15,11 @@ import {Subscription} from "rxjs";
 })
 export class SignupCenterComponent implements OnInit, OnDestroy {
 
+    public image: any = {
+        file: new File([], ""),
+        url: ""
+    }
+
     private subscription: Subscription | undefined;
     public manager: Manager = {
         id: 0,
@@ -57,17 +62,15 @@ export class SignupCenterComponent implements OnInit, OnDestroy {
     }
 
     addCenter() {
-        this.subscription = this.managerService
-            .addManager(this.manager)
+        const formationFormData = this.prepareFormData(this.center, this.image)
+        this.subscription = this.managerService.addManager(this.manager)
             .subscribe(
                 (response: Manager) => {
                     this.manager.id = response.id;
-                    this.trainingCenterService
-                        .addTrainingCenter(this.center)
+                    this.trainingCenterService.addTrainingCenter(formationFormData)
                         .subscribe(
                             (response: TrainingCenter) => {
-                                this.managerService
-                                    .affectCenterToManager(response.id, this.manager.id)
+                                this.managerService.affectCenterToManager(response.id, this.manager.id)
                                     .subscribe(value => window.location.reload());
                             },
                             (error: HttpErrorResponse) => {
@@ -79,5 +82,29 @@ export class SignupCenterComponent implements OnInit, OnDestroy {
                     console.log(error.message);
                 }
             )
+    }
+
+    prepareFormData(centre: any, image: any): FormData {
+        const formData = new FormData();
+        formData.append(
+            'centre',
+            new Blob([JSON.stringify(centre)], {type: 'application/json'})
+        );
+        formData.append(
+            'image',
+            image.file,
+            image.file.name
+        );
+        return formData;
+    }
+
+    onFileSelected(event: any) {
+        if (event.target.files) {
+            const file = event.target.files[0];
+            this.image = {
+                file: file,
+                url: null
+            };
+        }
     }
 }
