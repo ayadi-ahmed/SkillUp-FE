@@ -6,6 +6,7 @@ import {course} from "../../Entities/courses";
 import {TransactionCandidatService} from "../../Services/transaction-candidat.service";
 import {TransactionClient} from "../../Entities/transaction-client";
 import {AuthentificationService} from "../../Services/authentification.service";
+import {log} from "ng-zorro-antd/core/logger";
 
 @Component({
   selector: 'app-checkout',
@@ -13,7 +14,7 @@ import {AuthentificationService} from "../../Services/authentification.service";
   styleUrls: ['./checkout.component.css']
 })
 export class CheckoutComponent implements OnInit {
-  private courseId = 0;
+  public courseId = 0;
   public course: course = {
     dateDebut: "",
     dateFin: "",
@@ -26,7 +27,8 @@ export class CheckoutComponent implements OnInit {
     titre: ""
   };
   public transaction : TransactionClient = {
-    date: "", heure: "", id: 0, valeur: this.course.prix
+    client: 0, formation: 0,
+    date: "", heure: "", id: 0, valeur: 0
 
   }
 
@@ -66,17 +68,28 @@ export class CheckoutComponent implements OnInit {
   }
 
   redirect() {
-    this.trancationService.addTransaction(this.transaction).subscribe(res=>{
-      this.trancationService.affectTransacationToClient(this.authService.getUserId(),res.id).subscribe(res1=>{
-        this.router.navigate(['/thank-you']);
-      },
-        (error: HttpErrorResponse) => {
-          console.log(error.message);
-        })
+     this.formationService.getFormationById(this.courseId).subscribe((res:course)=>{
+       this.transaction.valeur = res.prix
+       this.transaction.formation=res.id;
+       console.log("redirect, formID "+res.id);
 
-    },(error: HttpErrorResponse) => {
-      console.log(error.message);
-    })
+
+       this.trancationService.addTransaction(this.transaction).subscribe(res1=>{
+         this.trancationService.affectTransacationToClient(this.authService.getUserId(),res1.id).subscribe(res2=>{
+
+             this.router.navigate(['/thank-you']);
+           },
+           (error: HttpErrorResponse) => {
+             console.log(error.message);
+           })
+
+       },(error: HttpErrorResponse) => {
+         console.log(error.message);
+       })
+     },(error: HttpErrorResponse) => {
+       console.log(error.message)
+     });
+
 
   }
 }

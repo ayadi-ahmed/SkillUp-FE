@@ -16,7 +16,7 @@ export class TransactionCandidatService {
   }
 
   public getTransactionsByClientId(candidatId :number):Observable<any>{
-    return this.http.get<any>(`/api/client/${candidatId}`);
+    return this.http.get<any>(this.apiServerUrl +`/api/transaction/client/transactions/${candidatId}`);
   }
 
   public addTransaction(transactionClient: TransactionClient ):Observable<any>{
