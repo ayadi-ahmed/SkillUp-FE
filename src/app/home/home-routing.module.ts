@@ -14,6 +14,7 @@ import {SignupCandidatComponent} from "./sign-up/signup-candidat/signup-candidat
 import {CheckoutComponent} from "./checkout/checkout.component";
 import {InterstedComponent} from "./intersted/intersted.component";
 import {ThankYouComponent} from "./thank-you/thank-you.component";
+import {CheckoutAbonnementComponent} from "./checkout-abonnement/checkout-abonnement.component";
 
 
 const routes: Routes = [
@@ -30,6 +31,7 @@ const routes: Routes = [
     {path: 'pricing', component: PricingComponent},
     {path: 'signup-center', component: SignupCenterComponent},
     {path: 'signup-candidat', component: SignupCandidatComponent},
+    {path: 'checkout-abonnement', component: CheckoutAbonnementComponent},
     {path: '**', component: NotFoundComponent}
 ];
 

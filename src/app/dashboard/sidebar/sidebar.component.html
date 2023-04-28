@@ -12,7 +12,7 @@
   <!--navigation-->
   <ul class="metismenu" id="menu">
     <li>
-      <a href="/dashboard/stats" class="has-arrow">
+      <a routerLink="/dashboard/stats" class="has-arrow">
         <div class="parent-icon"><i class='bx bx-home-circle'></i>
         </div>
         <div class="menu-title">Dashboard</div>
@@ -39,19 +39,25 @@
         <div class="menu-title">Mes Formations</div>
       </a>
 
-      <a href="/dashboard/favoris" >
+      <a routerLink="/dashboard/favoris" >
         <div class="parent-icon"><i class="bx bx-bookmark-heart"></i>
         </div>
         <div class="menu-title">Favoris</div>
       </a>
 
-      <a href="/dashboard/transactions" >
-        <div class="parent-icon"><i class="bx bx-bookmark-heart"></i>
+      <a routerLink="/dashboard/transactions" *ngIf="role == 'CLIENT'">
+        <div class="parent-icon"><i class='bx bx-transfer-alt' ></i>
         </div>
         <div class="menu-title">Transactions</div>
       </a>
 
-      <a href="/dashboard/settings">
+      <a routerLink="/dashboard/transactions-center" *ngIf="role == 'MANAGER'">
+        <div class="parent-icon"><i class='bx bx-transfer-alt' ></i>
+        </div>
+        <div class="menu-title">Transactions</div>
+      </a>
+
+      <a routerLink="/dashboard/settings">
         <div class="parent-icon"><i class="bx bx-cog"></i>
         </div>
         <div class="menu-title">Settings</div>

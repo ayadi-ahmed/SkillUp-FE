@@ -3,7 +3,6 @@ import {CommonModule, NgOptimizedImage} from '@angular/common';
 import {DashboardRoutingModule} from './dashboard-routing.module';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {CartComponent} from './cart/cart.component';
-import {CheckoutComponent} from './checkout/checkout.component';
 import {BuyAbonnementComponent} from './buy-abonnement/buy-abonnement.component';
 import {MessagesComponent} from './messages/messages.component';
 import {AddTrainingComponent} from './add-training/add-training.component';
@@ -37,6 +36,7 @@ import {MatDialogModule} from "@angular/material/dialog";
 import { TransactionsClientComponent } from './transactions-client/transactions-client.component';
 
 import { UpdateTrainingComponent } from './update-training/update-training.component';
+import { TransactionCenterComponent } from './transaction-center/transaction-center.component';
  
 
 
@@ -44,7 +44,6 @@ import { UpdateTrainingComponent } from './update-training/update-training.compo
     declarations: [
         DashboardComponent,
         CartComponent,
-        CheckoutComponent,
         BuyAbonnementComponent,
         MessagesComponent,
         ProfileComponent,
@@ -62,6 +61,7 @@ import { UpdateTrainingComponent } from './update-training/update-training.compo
         DeleteTrainingComponent,
         TransactionsClientComponent,
         UpdateTrainingComponent,
+        TransactionCenterComponent,
     ],
     exports: [
         DashboardComponent

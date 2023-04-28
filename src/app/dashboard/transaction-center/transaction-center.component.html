@@ -1,0 +1,52 @@
+<div class="wrapper">
+    <div class="page-wrapper">
+        <div class="page-content">
+
+
+            <h6 class="mb-0 text-uppercase">Transactions</h6>
+            <hr/>
+            <div class="row row-cols-1 row-cols-md-1 row-cols-lg-1 row-cols-xl-1">
+
+                <div>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Time</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Training center</th>
+                            <th scope="col">Subscription type</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let transaction of transactions">
+                            <td>{{transaction.date | date:'dd-MM-yyyy'}}</td>
+                            <td>{{transaction.heure}}</td>
+                            <td>{{transaction.valeur}}</td>
+                            <td>{{transaction.centreFormation.nom}}</td>
+                            <td>{{transaction.abonnement.type}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <!--end row-->
+
+
+
+        </div>
+    </div>
+    <!--end page wrapper -->
+    <!--start overlay-->
+    <div class="overlay toggle-icon"></div>
+    <!--end overlay-->
+    <!--Start Back To Top Button--> <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
+    <!--End Back To Top Button-->
+    <footer class="page-footer">
+        <p class="mb-0">Copyright © 2021. All right reserved.</p>
+    </footer>
+</div>
+
+
+

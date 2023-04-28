@@ -23,27 +23,6 @@
                     <article id="post-8" class="post-8 page type-page status-publish hentry">
                         <div class="entry-content">
                             <div class="woocommerce">
-                                <!-- <div class="woocommerce-notices-wrapper"></div>
-                                 <div class="woocommerce-form-coupon-toggle">
-                                   <div class="woocommerce-info">
-                                     Have a coupon? <a href="#" class="showcoupon">Click here to enter your code</a>
-                                   </div>
-                                 </div>
-
-                                 <form class="checkout_coupon woocommerce-form-coupon" method="post" >
-
-                                   <p>If you have a coupon code, please apply it below.</p>
-
-                                   <p class="form-row form-row-first">
-                                     <input type="text" name="coupon_code" class="input-text" placeholder="Coupon code" id="coupon_code" value="">
-                                   </p>
-
-                                   <p class="form-row form-row-last">
-                                     <button type="submit" class="button" name="apply_coupon" value="Apply coupon">Apply coupon</button>
-                                   </p>
-
-                                   <div class="clear"></div>
-                                 </form>-->
                                 <div class="woocommerce-notices-wrapper"></div>
                                 <form name="checkout" method="post" class="checkout woocommerce-checkout row" action="#"
                                       enctype="multipart/form-data" novalidate="novalidate">
@@ -62,9 +41,10 @@
                                                             <span class="woocommerce-input-wrapper">
                                                                 <input type="text"
                                                                        class="input-text form-control input-lg"
-                                                                       name="billing_first_name" id="billing_first_name"
-                                                                       placeholder="" value="John"
-                                                                       autocomplete="given-name">
+                                                                       name="nom" id="billing_first_name"
+                                                                       placeholder=""
+                                                                       autocomplete="given-name"
+                                                                       [(ngModel)]="manager.nom">
                                                             </span>
                                                         </p>
                                                         <p class="form-row form-row-last form-group validate-required"
@@ -76,9 +56,10 @@
                                                             <span class="woocommerce-input-wrapper">
                                                                 <input type="text"
                                                                        class="input-text form-control input-lg"
-                                                                       name="billing_last_name" id="billing_last_name"
-                                                                       placeholder="" value="Doe"
-                                                                       autocomplete="family-name">
+                                                                       name="prenom" id="billing_last_name"
+                                                                       placeholder=""
+                                                                       autocomplete="family-name"
+                                                                       [(ngModel)]="manager.prenom">
                                                             </span>
                                                         </p>
                                                         <p class="form-row form-row-wide form-group"
@@ -86,9 +67,12 @@
                                                             <label for="billing_company" class="control-label">Phone
                                                                 number&nbsp;<span class="required"></span></label>
                                                             <span class="woocommerce-input-wrapper">
-                                <input type="number" class="input-text form-control input-lg" name="billing_company"
-                                       id="billing_company" placeholder="" value="" autocomplete="organization">
-                              </span>
+                                                                <input type="number"
+                                                                       class="input-text form-control input-lg"
+                                                                       name="tel"
+                                                                       id="billing_company" placeholder=""
+                                                                       [(ngModel)]="manager.tel">
+                                                            </span>
                                                         </p>
 
                                                         <p class="form-row form-row-wide form-group"
@@ -96,32 +80,48 @@
                                                             <label for="billing_company" class="control-label">Email&nbsp;<span
                                                                     class="required"></span></label>
                                                             <span class="woocommerce-input-wrapper">
-                                <input type="text" class="input-text form-control input-lg" name="billing_company"
-                                       id="billing_company1" placeholder="" value="" autocomplete="organization">
-                              </span>
+                                                                <input type="text"
+                                                                       class="input-text form-control input-lg"
+                                                                       name="email"
+                                                                       id="billing_company1"
+                                                                       placeholder=""
+                                                                       [(ngModel)]="manager.email">
+                                                            </span>
                                                         </p>
+
+                                                        <p class="form-row form-row-wide form-group"
+                                                           id="billing_companyy" data-priority="30">
+                                                            <label for="billing_companyy" class="control-label">Training
+                                                                center&nbsp;<span
+                                                                        class="required"></span></label>
+                                                            <span class="woocommerce-input-wrapper">
+                                                                <select type="text"
+                                                                        class="input-text form-control input-lg"
+                                                                        name="center"
+                                                                        id="billing_companyy"
+                                                                        placeholder="" required
+                                                                        [(ngModel)]="center"
+                                                                        #centre="ngModel"
+                                                                        [class.is-invalid]="centre.invalid && centre.touched">
+                                                                    <option selected value=""
+                                                                            disabled>choose a center</option>
+                                                                    <option [value]="center.id"
+                                                                            *ngFor="let center of centers">{{center.nom}}</option>
+                                                                </select>
+                                                            </span>
+                                                        </p>
+                                                        <div class="mb-3" *ngIf="centre.errors && centre.touched">
+                                                            <small class="text-danger"
+                                                                   *ngIf="centre.errors['required']">you
+                                                                have to
+                                                                choose a
+                                                                center</small>
+                                                        </div>
 
                                                     </div>
 
                                                 </div>
 
-                                            </div>
-
-                                            <div class="col-12">
-                                                <div class="woocommerce-shipping-fields">
-                                                </div>
-                                                <div class="woocommerce-additional-fields">
-                                                    <h3>Additional information</h3>
-                                                    <div class="woocommerce-additional-fields__field-wrapper">
-                                                        <p class="form-row notes" id="order_comments_field"
-                                                           data-priority=""><span
-                                                                class="woocommerce-input-wrapper"><textarea
-                                                                name="order_comments"
-                                                                class="input-text form-control input-lg"
-                                                                id="order_comments"
-                                                                placeholder="Notes about your order, e.g. special notes for delivery."
-                                                                rows="4" cols="5"></textarea></span></p></div>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -132,18 +132,19 @@
                                             <table class="shop_table woocommerce-checkout-review-order-table">
                                                 <thead>
                                                 <tr>
-                                                    <th class="product-name">Course</th>
+                                                    <th class="product-name">Subscription</th>
                                                     <th class="product-total">Total</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
                                                 <tr class="cart_item">
                                                     <td class="product-name">
-                                                        {{course.titre}}&nbsp;
+                                                        {{data.type}}&nbsp;
                                                     </td>
                                                     <td class="product-total">
                                                         <span class="woocommerce-Price-amount amount"><span
-                                                                class="woocommerce-Price-currencySymbol">TND&nbsp;</span>{{course.prix}}</span>
+                                                                class="woocommerce-Price-currencySymbol">TND&nbsp;</span>{{data.prix}}
+                                                            / <b>{{data.duree}}</b></span>
                                                     </td>
                                                 </tr>
 
@@ -153,14 +154,14 @@
                                                 <tr class="cart-subtotal">
                                                     <th>Offer</th>
                                                     <td><span class="woocommerce-Price-amount amount"><span
-                                                            class="woocommerce-Price-currencySymbol">TND</span>54.00</span>
+                                                            class="woocommerce-Price-currencySymbol">TND</span>{{data.prix}}</span>
                                                     </td>
                                                 </tr>
 
                                                 <tr class="order-total">
                                                     <th>Total</th>
                                                     <td><strong><span class="woocommerce-Price-amount amount"><span
-                                                            class="woocommerce-Price-currencySymbol">TND&nbsp;</span>{{course.prix}}</span></strong>
+                                                            class="woocommerce-Price-currencySymbol">TND&nbsp;</span>{{data.prix}}</span></strong>
                                                     </td>
                                                 </tr>
                                                 </tfoot>
@@ -172,12 +173,6 @@
                                                         <input id="payment_method_cod" type="radio" class="input-radio"
                                                                name="payment_method" value="cod" checked="checked"
                                                                data-order_button_text="" style="display: none;">
-
-                                                        <!--<label for="payment_method_cod">
-                                                          Cash on delivery 	</label>
-                                                        <div class="payment_box payment_method_cod">
-                                                          <p>Pay with cash upon delivery.</p>
-                                                        </div>-->
                                                     </li>
                                                 </ul>
                                                 <div class="form-row place-order">
@@ -202,10 +197,10 @@
                                                         </div>
                                                     </div>
 
-                                                    <button type="submit" class="button alt"
+                                                    <button type="submit" class="button alt" [disabled]="centre.errors" (click)="buy()"
                                                             name="woocommerce_checkout_place_order" id="place_order"
                                                             value="Place order" data-value="Place order"
-                                                            (click)="redirect()">Place order
+                                                    >Place order
                                                     </button>
                                                     <input type="hidden" id="woocommerce-process-checkout-nonce"
                                                            name="woocommerce-process-checkout-nonce" value="c75f934b1d"><input

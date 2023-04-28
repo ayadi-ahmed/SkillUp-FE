@@ -34,6 +34,7 @@ import {NgxPaginationModule} from "ngx-pagination";
 import { CheckoutComponent } from './checkout/checkout.component';
 import { InterstedComponent } from './intersted/intersted.component';
 import { ThankYouComponent } from './thank-you/thank-you.component';
+import { CheckoutAbonnementComponent } from './checkout-abonnement/checkout-abonnement.component';
 
 
 @NgModule({
@@ -61,6 +62,7 @@ import { ThankYouComponent } from './thank-you/thank-you.component';
         CheckoutComponent,
         InterstedComponent,
         ThankYouComponent,
+        CheckoutAbonnementComponent,
     ],
     exports: [
         PopularCoursesComponent,
