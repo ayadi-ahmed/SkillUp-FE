@@ -7,6 +7,7 @@ import {debounceTime, distinctUntilChanged, map, Observable, OperatorFunction} f
 import {CategorieService} from "../../Services/categorie.service";
 import {TagService} from "../../Services/tag.service";
 import {Tag} from "../../Entities/tag";
+import {Category} from "../../Entities/category";
 
 @Component({
     selector: 'app-courses',
@@ -35,6 +36,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
     public formations: course[] = [];
     public courseTagsTitle: string[] = [];
     public tagOrTitle: any = "";
+    public category: any = "";
 
     constructor(private formationService: FormationService,
                 private router: Router,
@@ -44,12 +46,18 @@ export class CoursesComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.tagOrTitle = this.route.snapshot.queryParamMap.get('searchBy');
-        this.getAllFormations();
-        if (this.tagOrTitle) {
-            this.searchByTagOrTitle();
-        }
-        this.getAllCategies();
+        this.route.queryParamMap.subscribe(queryParams => {
+            this.category = queryParams.get('category');
+            this.tagOrTitle = queryParams.get('searchBy');
+            this.getAllFormations();
+            if (this.tagOrTitle!="") {
+                this.searchByTagOrTitle();
+            } else if (this.category!="") {
+                this.getCategoryByName();
+                this.getAllFormationsByCategory();
+            }
+        });
+        this.getAllCategories();
         this.getAllTags();
     }
 
@@ -59,15 +67,17 @@ export class CoursesComponent implements OnInit, OnDestroy {
     getAllFormations() {
         this.formationService.getAllFormations().subscribe(
             (response: course[]) => {
-                this.formations = response;
+                if (this.category == '' && this.tagOrTitle == '' && this.categorieId == '') {
+                    this.formations = response;
+                }
                 response.forEach(formation => {
                     if (!this.courseTagsTitle.includes(formation.titre.toUpperCase())) {
                         this.courseTagsTitle.push(formation.titre.toUpperCase());
                     }
                 });
-                this.maxPrice = this.formations.map(course => course.prix!)
+                this.maxPrice = response.map(course => course.prix!)
                     .reduce((acc, price) => Math.max(acc, price), 0);
-                this.minPrice = this.formations.map(course => course.prix!)
+                this.minPrice = response.map(course => course.prix!)
                     .reduce((acc, price) => Math.min(acc, price), Infinity);
                 this.value = [this.minPrice, this.maxPrice];
             },
@@ -80,7 +90,6 @@ export class CoursesComponent implements OnInit, OnDestroy {
     searchByTagOrTitle() {
         this.formationService.getFormationByTagOrTitle(this.tagOrTitle).subscribe(
             (response: course[]) => {
-                this.formations = [];
                 this.formations = response;
                 this.value = [this.minPrice, this.maxPrice];
             },
@@ -124,10 +133,15 @@ export class CoursesComponent implements OnInit, OnDestroy {
     }
 
     getDetails(courseId: number) {
-      this.router.navigate([`/course/${courseId}`]);
+        this.router.navigate([`/course/${courseId}`]);
     }
 
     getFormationByPrixBetweenAndCategory() {
+        this.router.navigate([], {
+            relativeTo: this.route,
+            queryParams: {category: '', searchBy: ''},
+            queryParamsHandling: 'merge'
+        });
         if (this.categorieId != "") {
             this.getFormationsByPrixBetweenAndCategorie_Id(this.value[0], this.value[1], this.categorieId);
         } else {
@@ -169,15 +183,38 @@ export class CoursesComponent implements OnInit, OnDestroy {
         return `${value} TND`;
     }
 
-    getAllCategies() {
+    getAllCategories() {
         this.categorieService.getAllCategories()
             .subscribe(
-                (response: any[]) => {
-                    this.categories = response;
+                (response: any) => {
+                    this.categories = response.filter((category: any) => category.formations.length > 0);
                 },
                 (error: HttpErrorResponse) => {
                     console.log(error.message);
                 }
             )
+    }
+
+    getAllFormationsByCategory() {
+        this.formationService.getAllFormationsByCategoryName(this.category)
+            .subscribe(
+                (response: any) => {
+                    this.formations = response;
+                },
+                (error: HttpErrorResponse) => {
+                    console.log(error.message);
+                }
+            )
+    }
+
+    getCategoryByName() {
+        this.categorieService.getCategoryByName(this.category).subscribe(
+            (response: Category) => {
+                this.categorieId = response.id;
+            },
+            (error: HttpErrorResponse) => {
+                console.log(error.message);
+            }
+        )
     }
 }

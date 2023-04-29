@@ -11,7 +11,7 @@
                                     [(ngModel)]="centerId"
                                     #center="ngModel"
                                     [class.is-invalid]="center.invalid && center.touched">
-                                <option selected value="">choose a center</option>
+                                <option selected disabled value="">choose a center</option>
                                 <option *ngFor="let centre of centers" [value]="centre.id">{{centre.nom}}</option>
                             </select>
                         </div>

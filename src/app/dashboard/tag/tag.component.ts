@@ -23,7 +23,6 @@ export class TagComponent implements OnInit {
     }
 
     addNewTag() {
-        console.log(this.tag);
         this.tagService.addTag(this.tag)
             .subscribe(
                 (response: any) => {

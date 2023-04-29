@@ -22,14 +22,15 @@ export class CheckoutAbonnementComponent implements OnInit {
 
     public manager: Manager = {
         centreFormation: [],
-        dateNaissance: "",
-        email: "",
-        id: 0,
         mdp: "",
+        role: "",
+        id: 0,
+        email: "",
         nom: "",
         prenom: "",
-        role: "",
-        tel: null
+        tel: null,
+        dateNaissance: ""
+
     };
 
     public abonnement: Abonnement = {
@@ -75,8 +76,14 @@ export class CheckoutAbonnementComponent implements OnInit {
     public getManagerById() {
         this.managerService.getManagerById(this.authentificationService.getUserId())
             .subscribe(
-                (response: any) => {
-                    this.manager = response;
+                (response: Manager) => {
+                    this.manager.id = response.id;
+                    this.manager.nom = response.nom;
+                    this.manager.prenom = response.prenom;
+                    this.manager.tel = response.tel;
+                    this.manager.email = response.email;
+                    this.manager.dateNaissance = response.dateNaissance;
+                    this.manager.role = response.role;
                 },
                 (error: HttpErrorResponse) => {
                     console.log(error.message);
@@ -94,6 +101,7 @@ export class CheckoutAbonnementComponent implements OnInit {
     }
 
     buy() {
+
         if (this.data.duree == "month"){
             this.abonnement.dateFin = this.dateAfter30Days;
         }else if (this.data.duree == "year"){
@@ -101,20 +109,22 @@ export class CheckoutAbonnementComponent implements OnInit {
         }
         this.abonnement.dateDebut = this.date;
         this.abonnement.type = this.data.type;
-        console.log(this.abonnement);
-        this.abonnementService.addAbonnement(this.abonnement)
-            .subscribe(
-                (response: Abonnement) => {
-                    this.addTransaction(response.id);
-                },
-                (error: HttpErrorResponse) => {
-                    console.log(error.message);
-                }
-            );
+        console.log(this.manager);
+        this.managerService.updateManager(this.manager).subscribe(
+            value => this.abonnementService.addAbonnement(this.abonnement)
+                .subscribe(
+                    (response: Abonnement) => {
+                        this.addTransaction(response.id);
+                    },
+                    (error: HttpErrorResponse) => {
+                        console.log(error.message);
+                    }
+                )
+        );
     }
 
     addTransaction(abonnementId: number){
-        var transaction = {};
+        var transaction = {valeur: this.data.prix};
         this.transactionCentreService.addTransaction(transaction)
             .subscribe(
                 (response: any) => {

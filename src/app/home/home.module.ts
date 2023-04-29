@@ -35,6 +35,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { InterstedComponent } from './intersted/intersted.component';
 import { ThankYouComponent } from './thank-you/thank-you.component';
 import { CheckoutAbonnementComponent } from './checkout-abonnement/checkout-abonnement.component';
+import {MatTabsModule} from "@angular/material/tabs";
 
 
 @NgModule({
@@ -85,6 +86,7 @@ import { CheckoutAbonnementComponent } from './checkout-abonnement/checkout-abon
         NgbModule,
         NzSliderModule,
         NgxPaginationModule,
+        MatTabsModule,
     ],
 })
 export class HomeModule {

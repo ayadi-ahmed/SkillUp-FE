@@ -32,7 +32,6 @@ const routes: Routes = [
       {path:'categories', component:CategorieComponent},
       {path:'tag', component:TagComponent},
     ]},
-
   {path:'**',component:NotFoundComponent}
 
 ];

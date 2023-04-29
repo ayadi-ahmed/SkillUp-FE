@@ -44,7 +44,17 @@
                                                                        name="nom" id="billing_first_name"
                                                                        placeholder=""
                                                                        autocomplete="given-name"
+                                                                       minlength="3"
+                                                                       #firstName="ngModel"
+                                                                       [class.is-invalid]="firstName.invalid && firstName.touched"
+                                                                       required
                                                                        [(ngModel)]="manager.nom">
+                                                                <div *ngIf="firstName.errors && firstName.touched">
+                                                                    <small class="text-danger"
+                                                                           *ngIf="firstName.errors['minlength']">at least 3characters</small>
+                                                                    <small class="text-danger"
+                                                                           *ngIf="firstName.errors['required']">first name isrequired</small>
+                                                                </div>
                                                             </span>
                                                         </p>
                                                         <p class="form-row form-row-last form-group validate-required"
@@ -59,7 +69,16 @@
                                                                        name="prenom" id="billing_last_name"
                                                                        placeholder=""
                                                                        autocomplete="family-name"
+                                                                       #lastName="ngModel"
+                                                                       [class.is-invalid]="lastName.invalid && lastName.touched"
+                                                                       required
                                                                        [(ngModel)]="manager.prenom">
+                                                                 <div *ngIf="lastName.errors && lastName.touched">
+                                                                     <small class="text-danger"
+                                                                            *ngIf="lastName.errors['minlength']">at least 3characters</small>
+                                                                     <small class="text-danger"
+                                                                            *ngIf="lastName.errors['required']">last name isrequired</small>
+                                                                 </div>
                                                             </span>
                                                         </p>
                                                         <p class="form-row form-row-wide form-group"
@@ -67,11 +86,24 @@
                                                             <label for="billing_company" class="control-label">Phone
                                                                 number&nbsp;<span class="required"></span></label>
                                                             <span class="woocommerce-input-wrapper">
-                                                                <input type="number"
+                                                                <input type="tel"
                                                                        class="input-text form-control input-lg"
                                                                        name="tel"
                                                                        id="billing_company" placeholder=""
-                                                                       [(ngModel)]="manager.tel">
+                                                                       [(ngModel)]="manager.tel"
+                                                                       pattern="[- +()0-9]+"
+                                                                       minlength="8"
+                                                                       maxlength="8"
+                                                                       #tel="ngModel"
+                                                                       [class.is-invalid]="tel.invalid && tel.touched"
+                                                                       required>
+                                                                <div *ngIf="tel.errors && tel.touched">
+                                                                    <small class="text-danger"
+                                                                           *ngIf="tel.errors['required']">phone number isrequired</small>
+                                                                    <small class="text-danger"
+                                                                           *ngIf="tel.errors['pattern'] || tel.errors['minlength'] || tel.errors['maxlength']">invalid
+                                                                        phone number</small>
+                                                                </div>
                                                             </span>
                                                         </p>
 
@@ -85,6 +117,7 @@
                                                                        name="email"
                                                                        id="billing_company1"
                                                                        placeholder=""
+                                                                       disabled
                                                                        [(ngModel)]="manager.email">
                                                             </span>
                                                         </p>
@@ -197,7 +230,8 @@
                                                         </div>
                                                     </div>
 
-                                                    <button type="submit" class="button alt" [disabled]="centre.errors" (click)="buy()"
+                                                    <button type="submit" class="button alt" [disabled]="centre.errors || firstName.errors || lastName.errors || tel.errors"
+                                                            (click)="buy()"
                                                             name="woocommerce_checkout_place_order" id="place_order"
                                                             value="Place order" data-value="Place order"
                                                     >Place order

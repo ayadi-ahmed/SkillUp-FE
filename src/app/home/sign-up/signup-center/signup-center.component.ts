@@ -1,5 +1,4 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormBuilder, Validators} from "@angular/forms";
 import {Manager} from "../../../Entities/manager";
 import {TrainingCenter} from "../../../Entities/training-center";
 import {ManagerService} from "../../../Services/manager.service";
@@ -47,6 +46,7 @@ export class SignupCenterComponent implements OnInit, OnDestroy {
         rib: 0,
         tel: null
     }
+    public disableButton = false;
 
     constructor(private managerService: ManagerService,
                 private trainingCenterService: TrainingCenterService,
@@ -55,6 +55,7 @@ export class SignupCenterComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
     }
+
     ngOnDestroy() {
         if (this.subscription) {
             this.subscription.unsubscribe();
@@ -62,6 +63,7 @@ export class SignupCenterComponent implements OnInit, OnDestroy {
     }
 
     addCenter() {
+        this.disableButton = true;
         const formationFormData = this.prepareFormData(this.center, this.image)
         this.subscription = this.managerService.addManager(this.manager)
             .subscribe(
@@ -71,7 +73,7 @@ export class SignupCenterComponent implements OnInit, OnDestroy {
                         .subscribe(
                             (response: TrainingCenter) => {
                                 this.managerService.affectCenterToManager(response.id, this.manager.id)
-                                    .subscribe(value => window.location.reload());
+                                    .subscribe();
                             },
                             (error: HttpErrorResponse) => {
                                 console.log(error.message);

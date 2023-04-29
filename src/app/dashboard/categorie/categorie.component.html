@@ -11,7 +11,7 @@
                             <div class="form-body mt-4">
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <div class="border border-3 p-4 rounded">
+                                        <form (ngSubmit)="add()" class="border border-3 p-4 rounded">
                                             <div class="mb-3">
                                                 <label for="categoryName" class="form-label">Category Name</label>
                                                 <input type="text" class="form-control" id="categoryName"
@@ -29,13 +29,12 @@
                                                     required</small>
                                             </div>
                                             <div class="d-grid m-2">
-                                                <button type="button" class="btn btn-primary"
-                                                        [disabled]="nom.errors"
-                                                        (click)="addNewCategory()">
+                                                <button type="submit" class="btn btn-primary"
+                                                        [disabled]="nom.errors">
                                                     Save Category
                                                 </button>
                                             </div>
-                                        </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
