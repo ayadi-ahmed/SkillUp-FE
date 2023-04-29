@@ -39,19 +39,9 @@
                 <div class="header-category-menu d-none d-xl-block">
                     <ul>
                         <li class="has-submenu">
-                            <a href="#"><i class="fa fa-th me-2"></i>Categories</a>
+                            <a><i class="fa fa-th me-2"></i>Categories</a>
                             <ul class="submenu">
-                                <li>
-                                    <a href="#">Design</a>
-                                    <ul class="submenu">
-                                        <li><a href="#">Design Tools</a></li>
-                                        <li><a href="#">Photoshop mastering</a></li>
-                                        <li><a href="#">Adobe Xd Deisgn</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#">Developemnt</a></li>
-                                <li><a href="#">Marketing</a></li>
-                                <li><a href="#">Freelancing</a></li>
+                                <li *ngFor="let category of categories"><a (click)="search(category.nom)">{{category.nom | uppercase}}</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -65,7 +55,7 @@
                         <li><a href="about.html">About</a></li>
 
                         <li>
-                            <a routerLink="/courses">Courses</a>
+                            <a routerLink="/courses"  [queryParams]="{ category: '', searchBy: '' }">Courses</a>
                         </li>
 
                         <li>

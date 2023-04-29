@@ -11,6 +11,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 export class CategorieComponent implements OnInit {
 
     public categorie: Category = {
+        formations: [],
         id: 0,
         nom: ""
     }
@@ -26,6 +27,22 @@ export class CategorieComponent implements OnInit {
             .subscribe(
                 (response: any) => {
                     window.location.reload();
+                },
+                (error: HttpErrorResponse) => {
+                    console.log(error.message);
+                }
+            )
+    }
+
+    add() {
+        this.categorieService.getCategoryByName(this.categorie.nom)
+            .subscribe(
+                (response) => {
+                    if (response != null) {
+                        alert('Tag already exists');
+                    } else {
+                        this.addNewCategory();
+                    }
                 },
                 (error: HttpErrorResponse) => {
                     console.log(error.message);

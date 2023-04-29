@@ -64,4 +64,15 @@ export class FormationService {
       headers:new HttpHeaders({ authorization : 'Bearer '+ this.authentificationService.getToken()})
     });
   }
+
+  public getAllFormationsByCategoryName(name: string): Observable<any>{
+    return this.http.get<any>(this.formationUrl + `/api/formation/category/${name}`)
+  }
+  public findFirst10ByOrderByIdDesc(): Observable<any>{
+    return this.http.get<any>(this.formationUrl + `/api/formation/last/added`)
+  }
+
+  public findFirst10ByCategorie_NomOrderByIdDesc(name: string): Observable<any>{
+    return this.http.get<any>(this.formationUrl + `/api/formation/category/name/${name}`)
+  }
 }

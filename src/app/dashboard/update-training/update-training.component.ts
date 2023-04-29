@@ -10,6 +10,7 @@ import {TagService} from "../../Services/tag.service";
 import {MatAutocompleteSelectedEvent} from "@angular/material/autocomplete";
 import {map, Observable, startWith} from "rxjs";
 import {FormationService} from "../../Services/formation.service";
+import {Category} from "../../Entities/category";
 
 @Component({
     selector: 'app-update-training',
@@ -28,7 +29,11 @@ export class UpdateTrainingComponent implements OnInit {
         );
     }
 
-    public categories: any[] = [];
+    public categorieFormation: Category = {
+        formations: [], id: 0, nom: ""
+
+    };
+    public categories: Category[] = [];
     public categorieId: any = "";
     public image: any = {
         file: new File([], ""),
@@ -48,6 +53,7 @@ export class UpdateTrainingComponent implements OnInit {
         this.getAllCategories();
         this.getAllTags();
         this.tagsAdded = this.data.course.tags.map((t: { nom: any; }) => t.nom);
+        this.getCategorieByFormationId();
     }
 
 
@@ -198,5 +204,12 @@ export class UpdateTrainingComponent implements OnInit {
                     console.log(error.message);
                 }
             )
+    }
+
+
+    getCategorieByFormationId(){
+        this.categorieService.getCategorieByFormations_Id(this.data.course.id).subscribe(
+            value => this.categorieFormation = value
+        )
     }
 }

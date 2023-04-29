@@ -32,9 +32,9 @@
                     [(ngModel)]="categorieId"
                     #category="ngModel"
                     [class.is-invalid]="category.invalid && category.touched">
-                <option selected value="">{{data.course.categorie.nom}}</option>
                 <option *ngFor="let categorie of categories"
-                        [value]="categorie.id">{{categorie.nom}}</option>
+                        [selected]="categorie.nom == categorieFormation.nom"
+                        [value]="categorie.id">{{categorie.nom | uppercase}}</option>
             </select>
         </div>
         <div class="mb-3" *ngIf="category.errors && category.touched">
@@ -45,28 +45,30 @@
         </div>
 
 
-        <div class="border border-3 rounded mt-1"
-             *ngIf="data.course.tags.length>0" style="position:relative;">
-            <i style="font-size: 40px;color: #008bfe; position: absolute; right: 0; top: -10px"
+        <div class="mt-1 d-flex" style="width: 100%">
+            <div class="border border-3 rounded"
+                 *ngIf="data.course.tags.length>0" style="position:relative; width: 100%">
+                <mat-chip-list #chipList *ngIf="inputTags == true">
+                    <input class="form-control"
+                           placeholder="Add tags"
+                           #tagInput
+                           [formControl]="tagCtrl"
+                           [matAutocomplete]="auto"
+                           [matChipInputFor]="chipList"
+                           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                           (matChipInputTokenEnd)="add($event)">
+                </mat-chip-list>
+                <mat-chip class="m-1" *ngFor="let tag of tagsAdded"
+                          (removed)="remove(tag)">
+                    {{tag}}
+                    <button matChipRemove>
+                        <mat-icon>cancel</mat-icon>
+                    </button>
+                </mat-chip>
+            </div>
+            <i style="font-size: 40px;color: #008bfe;"
                class='bx bxs-plus-circle' (click)="addTags()"
                *ngIf="inputTags == false"></i>
-            <mat-chip-list #chipList *ngIf="inputTags == true">
-                <input class="form-control"
-                       placeholder="Add tags"
-                       #tagInput
-                       [formControl]="tagCtrl"
-                       [matAutocomplete]="auto"
-                       [matChipInputFor]="chipList"
-                       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                       (matChipInputTokenEnd)="add($event)">
-            </mat-chip-list>
-            <mat-chip class="m-1" *ngFor="let tag of tagsAdded"
-                      (removed)="remove(tag)">
-                {{tag}}
-                <button matChipRemove>
-                    <mat-icon>cancel</mat-icon>
-                </button>
-            </mat-chip>
         </div>
         <mat-autocomplete #auto="matAutocomplete"
                           (optionSelected)="selected($event)">

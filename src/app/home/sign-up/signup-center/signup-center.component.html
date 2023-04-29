@@ -281,9 +281,9 @@
                         <div class="col">
                             <p><label>Description&nbsp;<span class="required">*</span></label></p>
                             <textarea class="form-control" name="description"
-                                   #description="ngModel"
-                                   [class.is-invalid]="description.invalid && description.touched"
-                                   [(ngModel)]="center.description"
+                                      #description="ngModel"
+                                      [class.is-invalid]="description.invalid && description.touched"
+                                      [(ngModel)]="center.description"
                                       required></textarea>
 
                             <div *ngIf="description.errors && description.touched">
@@ -300,7 +300,7 @@
                         <button class="btn btn-primary" style="background-color: #015abc" type="submit"
                                 (click)="addCenter()"
                                 matStepperNext
-                                [disabled]="logo.errors || categorie.errors || creationDate.errors || description.errors || centerAddress.errors || centerTel.errors || centerEmail.errors || name.errors || firstName.errors || lastName.errors || tel.errors || dateOfBirth.errors || email.errors || password.errors || password2.errors"
+                                [disabled]="disableButton || logo.errors || categorie.errors || creationDate.errors || description.errors || centerAddress.errors || centerTel.errors || centerEmail.errors || name.errors || firstName.errors || lastName.errors || tel.errors || dateOfBirth.errors || email.errors || password.errors || password2.errors"
                         >Done
                         </button>
                     </div>

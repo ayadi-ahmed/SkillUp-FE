@@ -26,7 +26,6 @@ export class LoginComponent implements OnInit {
     public login() {
         this.userAuthentificationService.login(this.formData).subscribe(
             (response: any) => {
-                console.log(response.token)
                 var decoded = jwt_decode(response.token) as any;
                 this.userAuthentificationService.setUserId(decoded.id);
                 this.userAuthentificationService.setRoles(decoded.role);

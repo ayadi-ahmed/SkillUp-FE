@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {CartComponent} from "./cart/cart.component";
-import {CheckoutComponent} from "./checkout/checkout.component";
 import {BuyAbonnementComponent} from "./buy-abonnement/buy-abonnement.component";
 import {NotFoundComponent} from "../home/not-found/not-found.component";
 import {MessagesComponent} from "./messages/messages.component";
@@ -14,25 +13,25 @@ import {StatsComponent} from "./stats/stats.component";
 import {CategorieComponent} from "./categorie/categorie.component";
 import {TagComponent} from "./tag/tag.component";
 import {TransactionsClientComponent} from "./transactions-client/transactions-client.component";
+import {TransactionCenterComponent} from "./transaction-center/transaction-center.component";
 
 const routes: Routes = [
   {path:'', component:DashboardComponent,
     children: [
       {path:'cart', component:CartComponent},
-      {path:'checkout', component:CheckoutComponent},
       {path:'buy-abonnement', component:BuyAbonnementComponent},
       {path:'messages', component:MessagesComponent},
       {path:'add-training', component:AddTrainingComponent},
       {path:'add-center', component:AddCenterComponent},
       {path:'favoris', component:FavorisComponent},
       {path:'transactions', component:TransactionsClientComponent},
+      {path:'transactions-center', component:TransactionCenterComponent},
       {path:'profile', component:ProfileComponent},
       {path:'settings', component:ProfileComponent},
       {path:'stats', component:StatsComponent},
       {path:'categories', component:CategorieComponent},
       {path:'tag', component:TagComponent},
     ]},
-
   {path:'**',component:NotFoundComponent}
 
 ];
