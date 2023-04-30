@@ -11,3 +11,4 @@ export interface Manager{
     tel: number  | null
     centreFormation: TrainingCenter[]
 }
+
