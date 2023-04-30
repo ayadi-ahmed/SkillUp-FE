@@ -39,7 +39,7 @@ export class CheckoutComponent implements OnInit {
     mdp: "",
     nom: "",
     prenom: "",
-    role: "",
+    role: "CANDIDAT",
     tel: 0
   };
   public transaction : TransactionClient = {

@@ -23,7 +23,7 @@ export class CheckoutAbonnementComponent implements OnInit {
     public manager: Manager = {
         centreFormation: [],
         mdp: "",
-        role: "",
+        role: "MANAGER",
         id: 0,
         email: "",
         nom: "",

@@ -3,7 +3,6 @@ import {environment} from "../../environments/environment";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {TransactionClient} from "../Entities/transaction-client";
-import {Candidat} from "../Entities/candidat";
 import {AuthentificationService} from "./authentification.service";
 
 @Injectable({

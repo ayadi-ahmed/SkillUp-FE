@@ -24,7 +24,7 @@ export class ProfileComponent implements OnInit {
     mdp: "",
     nom: "",
     prenom: "",
-    role: "",
+    role: "CANDIDAT",
     tel: 0
   };
 
@@ -36,7 +36,7 @@ export class ProfileComponent implements OnInit {
     mdp: "",
     nom: "",
     prenom: "",
-    role: "",
+    role: "MANAGER",
     tel: 0
 
   }
