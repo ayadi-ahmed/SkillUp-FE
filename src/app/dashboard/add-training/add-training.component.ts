@@ -18,6 +18,7 @@ import {MatAutocompleteSelectedEvent} from "@angular/material/autocomplete";
 import {MatDialog} from "@angular/material/dialog";
 import {DeleteTrainingComponent} from "../delete-training/delete-training.component";
 import {UpdateTrainingComponent} from "../update-training/update-training.component";
+import {AbonnementService} from "../../Services/abonnement.service";
 
 @Component({
     selector: 'app-add-training',
@@ -35,7 +36,7 @@ export class AddTrainingComponent implements OnInit, OnDestroy {
         dateDebut: '',
         dateFin: '',
         prix: null,
-        offres:[],
+        offres: [],
         nbMaxCan: null
     }
     public image: any = {
@@ -68,7 +69,8 @@ export class AddTrainingComponent implements OnInit, OnDestroy {
                 private seanceService: SeanceService,
                 private categorieService: CategorieService,
                 private tagService: TagService,
-                public dialog: MatDialog) {
+                public dialog: MatDialog,
+                private abonnementService: AbonnementService) {
         this.filteredTags = this.tagCtrl.valueChanges.pipe(
             startWith(null),
             map((tag: string | null) => (tag ? this._filter(tag) : this.tags.slice())),
@@ -139,8 +141,14 @@ export class AddTrainingComponent implements OnInit, OnDestroy {
     getCentersByManagerId() {
         this.subscription1 = this.trainingCenterService.getAllByManagerId(this.authentificationService.getUserId())
             .subscribe(
-                (response: any) => {
-                    this.centers = response;
+                (response: any[]) => {
+                    this.centers = response.filter(center => center.etatDemandeInscription === 'ACCEPTER');
+                    for (let center of this.centers) {
+                        center.abonnement = {
+                            valide: false,
+                        }
+                        this.verifierAbonnement(center);
+                    }
                 },
                 (error: HttpErrorResponse) => {
                     console.log(error.message);
@@ -307,7 +315,34 @@ export class AddTrainingComponent implements OnInit, OnDestroy {
                 course: training,
             },
             width: '100%',
-            height : '90vh'
+            height: '90vh'
         });
+    }
+
+    verifierAbonnement(center: any) {
+        this.abonnementService.findFirstByCentreFormation_IdOrderByIdDesc(center.id)
+            .subscribe(
+                (response: any) => {
+                    const date = new Date();
+                    const year = date.getFullYear();
+                    const month = String(date.getMonth() + 1).padStart(2, "0");
+                    const day = String(date.getDate()).padStart(2, "0");
+                    const currentDate = `${year}-${month}-${day}`;
+                    if (currentDate > response.dateFin) {
+                        center.abonnement = {
+                            valide: false,
+                            end: response.dateFin
+                        };
+                    } else {
+                        center.abonnement = {
+                            valide: true,
+                            end: response.dateFin
+                        };
+                    }
+                },
+                (error: HttpErrorResponse) => {
+                    console.log(error.message);
+                }
+            );
     }
 }

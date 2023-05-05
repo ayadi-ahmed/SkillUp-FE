@@ -6944,7 +6944,7 @@ tbody.collapse.show {
     display: inline-block;
     width: 100%;
     height: calc(2.25rem + 2px);
-    margin-bottom: 0
+    margin-bottom: 0;
 }
 
 .custom-file-input {

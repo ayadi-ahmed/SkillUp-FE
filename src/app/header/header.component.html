@@ -90,8 +90,23 @@
                 </div>
 
                 <div class="header-btn d-none d-xl-block" *ngIf="isLoggedIn()">
-                    <img routerLink="/dashboard/stats" src="assets/images/avatars/avatar-2.png" class="user-img cursor-pointer" alt="user avatar">
-                    <a class="btn btn-main-2 btn-sm-2 rounded" (click)="disconnect()">Log out</a>
+                    <div *ngIf="role != 'ADMIN'" class="d-flex align-items-center">
+                        <img *ngIf="user.img == null" src="assets/imgProfile.jpg"
+                             routerLink="/dashboard/stats"
+                             class="user-img cursor-pointer" alt=" ">
+
+                        <img *ngIf="user.img != null" src="assets/user-photos/{{user.img}}"
+                             routerLink="/dashboard/stats"
+                             class="user-img cursor-pointer" alt=" ">
+                        <a class="btn btn-main-2 btn-sm-2 rounded" (click)="disconnect()">Log out</a>
+                    </div>
+
+                    <div *ngIf="role == 'ADMIN'" class="d-flex align-items-center">
+                        <img src="assets/imgProfile.jpg"
+                             routerLink="/dashboard/stats"
+                             class="user-img cursor-pointer" alt=" ">
+                        <a class="btn btn-main-2 btn-sm-2 rounded" (click)="disconnect()">Log out</a>
+                    </div>
                 </div>
 
             </div>

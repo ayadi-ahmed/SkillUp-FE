@@ -4,6 +4,8 @@ import {Router} from "@angular/router";
 import {HttpErrorResponse} from "@angular/common/http";
 import {CategorieService} from "../Services/categorie.service";
 import {Category} from "../Entities/category";
+import {CandidatService} from "../Services/candidat.service";
+import {ManagerService} from "../Services/manager.service";
 
 @Component({
   selector: 'app-header',
@@ -12,15 +14,36 @@ import {Category} from "../Entities/category";
 })
 export class HeaderComponent implements OnInit {
 
+  public user: any;
   public categories: Category[] = [];
+  public role: string = "";
   constructor(private authentificationService: AuthentificationService,
               private router: Router,
-              private categorieService: CategorieService) { }
+              private categorieService: CategorieService,
+              private candidatService: CandidatService,
+              private managerService: ManagerService) { }
 
   ngOnInit(): void {
+    this.role = this.authentificationService.getRole();
     this.getAllCategories();
+    this.getUserConnected();
   }
 
+  getUserConnected(){
+    if (this.authentificationService.getRole() == 'CANDIDAT'){
+      this.getCandidatById();
+    }else if (this.authentificationService.getRole() == 'MANAGER'){
+      this.getManagerById();
+    }
+  }
+  getManagerById(){
+    this.managerService.getManagerById(this.authentificationService.getUserId())
+        .subscribe(value => this.user = value)
+  }
+  getCandidatById(){
+    this.candidatService.getCandidatById(this.authentificationService.getUserId())
+        .subscribe(value => this.user = value)
+  }
   isLoggedIn(){
     return this.authentificationService.isLoggedIn();
   }

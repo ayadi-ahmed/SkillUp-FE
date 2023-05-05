@@ -36,6 +36,9 @@ import { InterstedComponent } from './intersted/intersted.component';
 import { ThankYouComponent } from './thank-you/thank-you.component';
 import { CheckoutAbonnementComponent } from './checkout-abonnement/checkout-abonnement.component';
 import {MatTabsModule} from "@angular/material/tabs";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {MatChipsModule} from "@angular/material/chips";
+import {MatOptionModule} from "@angular/material/core";
 
 
 @NgModule({
@@ -87,6 +90,9 @@ import {MatTabsModule} from "@angular/material/tabs";
         NzSliderModule,
         NgxPaginationModule,
         MatTabsModule,
+        MatAutocompleteModule,
+        MatChipsModule,
+        MatOptionModule,
     ],
 })
 export class HomeModule {

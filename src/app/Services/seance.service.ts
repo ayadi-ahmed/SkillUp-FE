@@ -17,10 +17,14 @@ export class SeanceService {
   }
 
   public getAllSeances(): Observable<any> {
-    return this.http.get<any>(this.apiServerUrl + `/api/seance`);
+    return this.http.get<any>(this.apiServerUrl + `/api/seance`,{
+      headers:new HttpHeaders({ authorization : 'Bearer '+ this.authentificationService.getToken()})
+    });
   }
   public getSeanceById(id: number): Observable<any> {
-    return this.http.get<any>(this.apiServerUrl + `/api/seance/${id}`);
+    return this.http.get<any>(this.apiServerUrl + `/api/seance/${id}`,{
+      headers:new HttpHeaders({ authorization : 'Bearer '+ this.authentificationService.getToken()})
+    });
   }
   public addSeance(seance: any): Observable<any> {
     return this.http.post<any>(this.apiServerUrl + `/api/seance/add`,seance,{
