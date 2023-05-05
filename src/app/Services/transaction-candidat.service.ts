@@ -23,7 +23,7 @@ export class TransactionCandidatService {
   }
 
   public addTransaction(transactionClient: TransactionClient ):Observable<any>{
-    return this.http.post<any>(this.apiServerUrl + `/api/transaction/client/add`,transactionClient,{
+    return this.http.post<any>(this.apiServerUrl + '/api/transaction/client/add',transactionClient,{
       headers:new HttpHeaders({ authorization : 'Bearer '+ this.authentificationService.getToken()})
     });
 }

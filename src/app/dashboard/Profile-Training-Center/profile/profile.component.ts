@@ -20,7 +20,7 @@ export class ProfileComponent implements OnInit {
     dateNaissance: "",
     email: "",
     fonction: "",
-    id: 0,
+    id: this.userId,
     mdp: "",
     nom: "",
     prenom: "",
@@ -72,7 +72,9 @@ export class ProfileComponent implements OnInit {
   }
 
 
-  updateUser(m: Candidat) {
+  updateUser(candidat1: Candidat) {
+    console.log(this.candidat);
+    this.candidat.nom=candidat1.nom;
     this.candidatService.updateCandidat(this.candidat).subscribe((res2:Candidat)=>{
       console.log(res2);
     }),

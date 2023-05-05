@@ -43,7 +43,8 @@ export class CheckoutComponent implements OnInit {
     tel: 0
   };
   public transaction : TransactionClient = {
-    client:this.candidat, formation: this.course ,
+    client: this.candidat, formation: this.course,
+
     date: "", heure: "", id: 0, valeur: 0
 
   };
@@ -82,11 +83,9 @@ export class CheckoutComponent implements OnInit {
   getCourseByIdAndCandidatById(){
     this.formationService.getFormationById(this.courseId).subscribe((response: course) => {
           this.course = response;
-          console.log(response);
 
           this.candidatService.getCandidatById(this.userId).subscribe((res:Candidat)=>{
             this.candidat=res;
-            console.log(this.candidat);
           },
             (error: HttpErrorResponse) => {
               console.log(error.message);
@@ -107,6 +106,8 @@ export class CheckoutComponent implements OnInit {
      this.formationService.getFormationById(this.courseId).subscribe((res:course)=>{
        this.transaction.valeur = res.prix;
        console.log("formation working"+res);
+       this.transaction.client.id=this.userId;
+       this.transaction.formation.id= this.courseId;
 
        this.trancationService.addTransaction(this.transaction).subscribe((res1:TransactionClient)=>{
          console.log("add trasnact working "+res1);
