@@ -123,10 +123,25 @@
             <div class="user-box dropdown">
                 <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#"
                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="assets/images/avatars/avatar-2.png" class="user-img" alt="user avatar">
-                    <div class="user-info ps-3">
-                        <p class="user-name mb-0">Pauline Seitz</p>
-                        <p class="designattion mb-0">Web Designer</p>
+                    <div *ngIf="role != 'ADMIN'" class="d-flex align-items-center">
+                        <img *ngIf="user.img == null" src="assets/imgProfile.jpg"
+                             routerLink="/dashboard/stats"
+                             class="user-img cursor-pointer" alt=" ">
+
+                        <img *ngIf="user.img != null" src="assets/user-photos/{{user.img}}"
+                             routerLink="/dashboard/stats"
+                             class="user-img cursor-pointer" alt=" ">
+                        <div class="user-info ps-3">
+                            <p class="user-name mb-0">{{user.prenom | uppercase}} {{user.nom | uppercase}}</p>
+                        </div>
+                    </div>
+                    <div *ngIf="role == 'ADMIN'" class="d-flex align-items-center">
+                        <img src="assets/imgProfile.jpg"
+                             routerLink="/dashboard/stats"
+                             class="user-img cursor-pointer" alt=" ">
+                        <div class="user-info ps-3">
+                            <p class="user-name mb-0">Admin</p>
+                        </div>
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">

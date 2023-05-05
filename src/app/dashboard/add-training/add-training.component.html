@@ -12,7 +12,9 @@
                                     #center="ngModel"
                                     [class.is-invalid]="center.invalid && center.touched">
                                 <option selected disabled value="">choose a center</option>
-                                <option *ngFor="let centre of centers" [value]="centre.id">{{centre.nom}}</option>
+                                <ng-container *ngFor="let center of centers">
+                                    <option [value]="center.id" *ngIf="center.abonnement.valide">{{center.nom | uppercase}}</option>
+                                </ng-container>
                             </select>
                         </div>
                         <div class="col-xl-6" *ngIf="center.errors && center.touched">
@@ -294,6 +296,7 @@
                                                         </button>
                                                     </div>
                                                 </form>
+
                                             </div>
                                         </div>
 
@@ -317,7 +320,7 @@
             </div>
 
 
-            <div class="container">
+            <div class="container" *ngIf="centers.length>0">
                 <div class="row" *ngFor="let center of centers">
                     <div class="card">
                         <div class="card-header">

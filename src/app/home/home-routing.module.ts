@@ -15,23 +15,26 @@ import {CheckoutComponent} from "./checkout/checkout.component";
 import {InterstedComponent} from "./intersted/intersted.component";
 import {ThankYouComponent} from "./thank-you/thank-you.component";
 import {CheckoutAbonnementComponent} from "./checkout-abonnement/checkout-abonnement.component";
+import {CandidatGuardService} from "../Authorizations/candidat-guard.service";
+import {AuthenticatedGuardService} from "../Authorizations/authenticated-guard.service";
+import {ManagerGuardService} from "../Authorizations/manager-guard.service";
 
 
 const routes: Routes = [
     {path: '', component: HomeComponent},
     {path: 'courses', component: CoursesComponent},
     {path: 'course/:id', component: SingleCourseComponent},
-    {path: 'checkout/:id', component: CheckoutComponent},
-    {path: 'interested/:id', component: InterstedComponent},
-    {path: 'thank-you', component: ThankYouComponent},
-    {path: 'login', component: LoginComponent},
-    {path: 'signup', component: SignupComponent},
+    {path: 'checkout/:id', component: CheckoutComponent, canActivate: [CandidatGuardService]},
+    {path: 'interested/:id', component: InterstedComponent, canActivate: [CandidatGuardService]},
+    {path: 'thank-you', component: ThankYouComponent, canActivate: [AuthenticatedGuardService]},
+    {path: 'login', component: LoginComponent, canActivate: [AuthenticatedGuardService]},
+    {path: 'signup', component: SignupComponent, canActivate: [AuthenticatedGuardService]},
     {path: 'instructors', component: InstructorComponent},
     {path: 'contact', component: ContactComponent},
     {path: 'pricing', component: PricingComponent},
-    {path: 'signup-center', component: SignupCenterComponent},
-    {path: 'signup-candidat', component: SignupCandidatComponent},
-    {path: 'checkout-abonnement', component: CheckoutAbonnementComponent},
+    {path: 'signup-center', component: SignupCenterComponent, canActivate: [AuthenticatedGuardService]},
+    {path: 'signup-candidat', component: SignupCandidatComponent, canActivate: [AuthenticatedGuardService]},
+    {path: 'checkout-abonnement', component: CheckoutAbonnementComponent, canActivate: [ManagerGuardService]},
     {path: '**', component: NotFoundComponent}
 ];
 

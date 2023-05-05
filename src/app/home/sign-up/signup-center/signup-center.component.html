@@ -87,13 +87,32 @@
                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" #email="ngModel"
                                    [class.is-invalid]="email.invalid && email.touched"
                                    [(ngModel)]="manager.email"
-                                   required>
+                                   required
+                                   (ngModelChange)="getUserByEmail()">
 
                             <div *ngIf="email.errors && email.touched">
                                 <small class="text-danger" *ngIf="email.errors['required']">email is
                                     required</small>
                                 <small class="text-danger" *ngIf="email.errors['pattern']">invalid
                                     email</small>
+                            </div>
+                            <div *ngIf="email.touched || emailExists">
+                                <small class="text-danger" *ngIf="emailExists">
+                                    email already used</small>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-6">
+                            <p><label>Profile image&nbsp;<span class="required">*</span></label></p>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="profileImage"
+                                       style="cursor: pointer"
+                                       name="profileImage"
+                                       ngModel
+                                       accept="image/*"
+                                       (change)="onFileSelectedManager($event)">
+                                <label class="custom-file-label" for="customFile" style="cursor: pointer">Choose
+                                    file</label>
                             </div>
                         </div>
 
@@ -240,22 +259,33 @@
 
                         <div class="col-xl-6">
                             <p><label>Categorie&nbsp;<span class="required">*</span></label></p>
-                            <select id="cars" class="form-control"
-                                    name="categorie"
-                                    #categorie="ngModel"
-                                    [class.is-invalid]="categorie.invalid && categorie.touched"
-                                    ngModel
-                                    required>
-                                <option selected value="">choose a categorie</option>
-                                <option value="saab">categorie 1</option>
-                                <option value="opel">categorie 2</option>
-                                <option value="audi">categorie 3</option>
-                            </select>
-
-                            <div *ngIf="categorie.errors && categorie.touched">
-                                <small class="text-danger" *ngIf="categorie.errors['required']">categorie is
-                                    required</small>
+                            <mat-chip-list #chipList>
+                                <input class="form-control"
+                                       placeholder="Add Categories"
+                                       #categoryInput
+                                       [formControl]="categoryCtrl"
+                                       [matAutocomplete]="auto"
+                                       [matChipInputFor]="chipList"
+                                       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                       (matChipInputTokenEnd)="add($event)">
+                            </mat-chip-list>
+                            <div class="border border-3 p-4 rounded mt-1"
+                                 *ngIf="categoriesAdded.length>0">
+                                <mat-chip class="m-1" *ngFor="let category of categoriesAdded"
+                                          (removed)="remove(category)">
+                                    {{category}}
+                                    <button matChipRemove>
+                                        <mat-icon>cancel</mat-icon>
+                                    </button>
+                                </mat-chip>
                             </div>
+                            <mat-autocomplete #auto="matAutocomplete"
+                                              (optionSelected)="selected($event)">
+                                <mat-option *ngFor="let category of filteredcategories | async" [value]="category"
+                                            [disabled]="categoriesAdded.indexOf(category)>=0">
+                                    {{category}}
+                                </mat-option>
+                            </mat-autocomplete>
                         </div>
 
                         <div class="col-xl-6">
@@ -300,7 +330,7 @@
                         <button class="btn btn-primary" style="background-color: #015abc" type="submit"
                                 (click)="addCenter()"
                                 matStepperNext
-                                [disabled]="disableButton || logo.errors || categorie.errors || creationDate.errors || description.errors || centerAddress.errors || centerTel.errors || centerEmail.errors || name.errors || firstName.errors || lastName.errors || tel.errors || dateOfBirth.errors || email.errors || password.errors || password2.errors"
+                                [disabled]="disableButton || logo.errors || creationDate.errors || description.errors || centerAddress.errors || centerTel.errors || centerEmail.errors || name.errors || firstName.errors || lastName.errors || tel.errors || dateOfBirth.errors || email.errors || password.errors || password2.errors"
                         >Done
                         </button>
                     </div>

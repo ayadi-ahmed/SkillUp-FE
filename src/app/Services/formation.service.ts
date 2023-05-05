@@ -75,4 +75,8 @@ export class FormationService {
   public findFirst10ByCategorie_NomOrderByIdDesc(name: string): Observable<any>{
     return this.http.get<any>(this.formationUrl + `/api/formation/category/name/${name}`)
   }
+
+  public getAllCoursesForValidateAbonnement():Observable<any> {
+    return this.http.get<any>(this.formationUrl+`/api/formation/all/valide`);
+  }
 }

@@ -43,4 +43,10 @@ export class ManagerService {
   public affectCenterToManager(centerId: number, managerId: number): Observable<any> {
     return this.http.get<any>(this.apiServerUrl + `/api/manager/${managerId}/center/${centerId}`);
   }
+
+  public getManagersByAccountNonLocked(value: boolean): Observable<any> {
+    return this.http.get<any>(this.apiServerUrl + `/api/manager/etat/${value}`,{
+      headers:new HttpHeaders({ authorization : 'Bearer '+ this.authentificationService.getToken()})
+    });
+  }
 }

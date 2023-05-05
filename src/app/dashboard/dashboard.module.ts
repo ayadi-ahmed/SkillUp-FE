@@ -16,14 +16,14 @@ import {MatDividerModule} from "@angular/material/divider";
 import {InstructorsComponent} from './Profile-Training-Center/instructors/instructors.component';
 import {CenterCoursesComponent} from './Profile-Training-Center/center-courses/center-courses.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
-import { AddCenterComponent } from './Profile-Training-Center/add-center/add-center.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
-import { FavorisComponent } from './favoris/favoris.component';
-import { SettingsComponent } from './settings/settings.component';
-import { StatsComponent } from './stats/stats.component';
-import { HeaderComponent } from './header/header.component';
-import { CategorieComponent } from './categorie/categorie.component';
-import { TagComponent } from './tag/tag.component';
+import {AddCenterComponent} from './Profile-Training-Center/add-center/add-center.component';
+import {SidebarComponent} from './sidebar/sidebar.component';
+import {FavorisComponent} from './favoris/favoris.component';
+import {SettingsComponent} from './settings/settings.component';
+import {StatsComponent} from './stats/stats.component';
+import {HeaderComponent} from './header/header.component';
+import {CategorieComponent} from './categorie/categorie.component';
+import {TagComponent} from './tag/tag.component';
 import {MatStepperModule} from "@angular/material/stepper";
 import {NgbTypeaheadModule} from "@ng-bootstrap/ng-bootstrap";
 import {MatFormFieldModule} from "@angular/material/form-field";
@@ -31,13 +31,19 @@ import {MatChipsModule} from "@angular/material/chips";
 import {MatIconModule} from "@angular/material/icon";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {NzButtonModule} from "ng-zorro-antd/button";
-import { DeleteTrainingComponent } from './delete-training/delete-training.component';
+import {DeleteTrainingComponent} from './delete-training/delete-training.component';
 import {MatDialogModule} from "@angular/material/dialog";
-import { TransactionsClientComponent } from './transactions-client/transactions-client.component';
-
-import { UpdateTrainingComponent } from './update-training/update-training.component';
-import { TransactionCenterComponent } from './transaction-center/transaction-center.component';
- 
+import {TransactionsClientComponent} from './transactions-client/transactions-client.component';
+import {UpdateTrainingComponent} from './update-training/update-training.component';
+import {TransactionCenterComponent} from './transaction-center/transaction-center.component';
+import {UsersComponent} from './users/users.component';
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatTableModule} from "@angular/material/table";
+import {CandidatesComponent} from './candidates/candidates.component';
+import {DemmandesInscriptionComponent} from './demmandes-inscription/demmandes-inscription.component';
+import {MatMenuModule} from "@angular/material/menu";
+import {AbonnementTransactionsComponent} from './abonnement-transactions/abonnement-transactions.component';
+import { UpdateCenterComponent } from './Profile-Training-Center/update-center/update-center.component';
 
 
 @NgModule({
@@ -62,6 +68,11 @@ import { TransactionCenterComponent } from './transaction-center/transaction-cen
         TransactionsClientComponent,
         UpdateTrainingComponent,
         TransactionCenterComponent,
+        UsersComponent,
+        CandidatesComponent,
+        DemmandesInscriptionComponent,
+        AbonnementTransactionsComponent,
+        UpdateCenterComponent,
     ],
     exports: [
         DashboardComponent
@@ -85,7 +96,10 @@ import { TransactionCenterComponent } from './transaction-center/transaction-cen
         MatAutocompleteModule,
         NzButtonModule,
         MatDialogModule,
-        NgOptimizedImage
+        NgOptimizedImage,
+        MatPaginatorModule,
+        MatTableModule,
+        MatMenuModule,
     ]
 })
 export class DashboardModule {
