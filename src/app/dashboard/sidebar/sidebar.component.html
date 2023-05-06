@@ -49,7 +49,7 @@
       <div class="menu-title">Favoris</div>
     </a>-->
 
-    <a routerLink="/dashboard/transactions" *ngIf="role == 'CLIENT'"
+    <a routerLink="/dashboard/transactions" *ngIf="role == 'CANDIDAT'"
        [ngStyle]="{'background-color': router.url == '/dashboard/transactions' ? 'rgba(44,146,250,0.13)' : 'transparent'}">
       <div class="parent-icon"><i class='bx bx-transfer-alt' ></i>
       </div>
