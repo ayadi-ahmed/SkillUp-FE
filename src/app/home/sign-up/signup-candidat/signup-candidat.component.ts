@@ -22,8 +22,8 @@ export class SignupCandidatComponent implements OnInit, OnDestroy {
         mdp: "",
         nom: "",
         prenom: "",
-        role: null,
-        tel: null
+        role: "",
+        tel: 0
     }
 
     constructor(private candidatService: CandidatService,
