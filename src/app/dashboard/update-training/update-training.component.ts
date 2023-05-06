@@ -2,7 +2,7 @@ import {Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {HttpErrorResponse} from "@angular/common/http";
 import {CategorieService} from "../../Services/categorie.service";
-import {FormControl} from "@angular/forms";
+import {FormArray, FormControl, FormGroup} from "@angular/forms";
 import {COMMA, ENTER} from "@angular/cdk/keycodes";
 import {MatChipInputEvent} from "@angular/material/chips";
 import {Tag} from "../../Entities/tag";
@@ -11,6 +11,8 @@ import {MatAutocompleteSelectedEvent} from "@angular/material/autocomplete";
 import {map, Observable, startWith} from "rxjs";
 import {FormationService} from "../../Services/formation.service";
 import {Category} from "../../Entities/category";
+import {SeanceService} from "../../Services/seance.service";
+import {Seance} from "../../Entities/Seance";
 
 @Component({
     selector: 'app-update-training',
@@ -18,11 +20,13 @@ import {Category} from "../../Entities/category";
     styleUrls: ['./update-training.component.css']
 })
 export class UpdateTrainingComponent implements OnInit {
+    form!: FormGroup;
 
     constructor(@Inject(MAT_DIALOG_DATA) public data: any,
                 private categorieService: CategorieService,
                 private tagService: TagService,
-                private formationService: FormationService) {
+                private formationService: FormationService,
+                private seanceService: SeanceService) {
         this.filteredTags = this.tagCtrl.valueChanges.pipe(
             startWith(null),
             map((tag: string | null) => (tag ? this._filter(tag) : this.tags.slice())),
@@ -54,6 +58,47 @@ export class UpdateTrainingComponent implements OnInit {
         this.getAllTags();
         this.tagsAdded = this.data.course.tags.map((t: { nom: any; }) => t.nom);
         this.getCategorieByFormationId();
+
+        this.form = new FormGroup({
+            session: new FormArray([
+                new FormGroup({
+                    id: new FormControl(this.data.course.seances[0].id),
+                    date: new FormControl(this.data.course.seances[0].date),
+                    heureDebut: new FormControl(this.data.course.seances[0].heureDebut),
+                    heureFin: new FormControl(this.data.course.seances[0].heureFin)
+                })
+            ])
+        });
+        for (let session of this.data.course.seances.slice(1)) {
+            this.session.push(
+                new FormGroup({
+                    id: new FormControl(session.id),
+                    date: new FormControl(session.date),
+                    heureDebut: new FormControl(session.heureDebut),
+                    heureFin: new FormControl(session.heureFin)
+                })
+            );
+        }
+    }
+
+
+    get session(): FormArray {
+        return this.form.get('session') as FormArray;
+    }
+
+    addSession() {
+        this.session.push(
+            new FormGroup({
+                id: new FormControl(0),
+                date: new FormControl(''),
+                heureDebut: new FormControl(''),
+                heureFin: new FormControl('')
+            })
+        );
+    }
+
+    removeSession(index: number) {
+        this.session.removeAt(index);
     }
 
 
@@ -150,6 +195,18 @@ export class UpdateTrainingComponent implements OnInit {
                         this.formationService.removeTagFromFormation(this.data.course.id, tag.id).subscribe();
                     }
                 }
+                for (let session of this.form.value.session){
+                    if (this.data.course.seances.some((seance: { id: any; }) => seance.id === session.id)){
+                        this.updateSeance(session);
+                    }else {
+                        this.addSeance(session);
+                    }
+                }
+                for (let session of this.data.course.seances){
+                    if (!this.form.value.session.some((seance: { id: any; }) => seance.id === session.id)){
+                        this.deleteSeance(session.id);
+                    }
+                }
                 window.location.reload();
             },
             (error: HttpErrorResponse) => {
@@ -211,5 +268,28 @@ export class UpdateTrainingComponent implements OnInit {
         this.categorieService.getCategorieByFormations_Id(this.data.course.id).subscribe(
             value => this.categorieFormation = value
         )
+    }
+
+    addSeance(seance: Seance){
+        this.seanceService.addSeance(seance).subscribe(
+            (response: Seance) => {
+                this.affectSeanceToFormation(response.id, this.data.course.id);
+            },
+            (error:HttpErrorResponse) => {
+                console.log(error.message);
+            }
+        )
+    }
+
+    updateSeance(seance: Seance){
+        this.seanceService.updateSeance(seance).subscribe();
+    }
+
+    deleteSeance(id: number){
+        this.seanceService.deleteSeance(id).subscribe();
+    }
+
+    affectSeanceToFormation(idSeance: number, idFormation: number){
+        this.formationService.affectSeanceToFormation(idSeance, idFormation).subscribe();
     }
 }

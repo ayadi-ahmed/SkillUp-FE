@@ -1,0 +1,112 @@
+<div class="wrapper">
+    <!--start page wrapper -->
+    <div class="page-wrapper">
+        <div class="page-content">
+            <div class="card radius-10">
+                <div class="card-body">
+                    <div class="mat-elevation-z8">
+                        <table mat-table [dataSource]="dataSource">
+
+                            <ng-container matColumnDef="berth date">
+                                <th mat-header-cell *matHeaderCellDef></th>
+                                <td mat-cell *matCellDef="let element">
+                                    <img src="assets/trainingCenter-photos/{{element.logo}}"
+                                         style="width: 50px; height: 50px; border-radius: 50%; margin-right: 20px"
+                                         alt=" ">
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="matriculeFiscal">
+                                <th mat-header-cell *matHeaderCellDef> Matricule fiscal</th>
+                                <td mat-cell *matCellDef="let element"> {{element.matriculeFiscal}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="name">
+                                <th mat-header-cell *matHeaderCellDef> Name</th>
+                                <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="email">
+                                <th mat-header-cell *matHeaderCellDef> Email</th>
+                                <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="tel">
+                                <th mat-header-cell *matHeaderCellDef> Tel</th>
+                                <td mat-cell *matCellDef="let element"> {{element.tel}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="action">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div class="d-flex align-items-center justify-content-around">
+                                        Filter by:
+                                        <select class="form-control"
+                                                style="max-width: max-content"
+                                                [(ngModel)]="etatDemande"
+                                                (change)="filter()">
+                                            <option [selected]="etatDemande == ''" value="">Default</option>
+                                            <option [selected]="etatDemande == 'EN_ATTENTE'" value="EN_ATTENTE">
+                                                Waiting
+                                            </option>
+                                            <option [selected]="etatDemande == 'REFUSER'" value="REFUSER">Refused
+                                            </option>
+                                            <option [selected]="etatDemande == 'ACCEPTER'" value="ACCEPTER">Accepted
+                                            </option>
+                                        </select>
+                                    </div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+
+                                    <span [matMenuTriggerFor]="menu"
+                                          *ngIf="element.etatDemandeInscription == 'EN_ATTENTE'"
+                                          class="d-flex align-items-center cursor-pointer">
+                                        <i style="color: #ffa600; font-size: 20px" class='bx bx-loader-circle'></i>
+                                        waiting
+                                    </span>
+                                    <span [matMenuTriggerFor]="menu"
+                                          *ngIf="element.etatDemandeInscription == 'REFUSER'"
+                                          class="d-flex align-items-center cursor-pointer">
+                                        <i style="color: red; font-size: 20px" class='bx bx-block'></i>
+                                        refused
+                                    </span>
+                                    <span [matMenuTriggerFor]="menu"
+                                          *ngIf="element.etatDemandeInscription == 'ACCEPTER'"
+                                          class="d-flex align-items-center cursor-pointer">
+                                        <i style="color: green; font-size: 20px" class='bx bxs-check-circle'></i>
+                                        accepted
+                                    </span>
+                                    <mat-menu #menu="matMenu">
+                                        <button mat-menu-item (click)="changeEtat(element.id, 'EN_ATTENTE')">
+                                            <i style="color: #ffa600; font-size: 20px"
+                                               class='bx bx-loader-circle'></i>
+                                            <span> waiting</span>
+                                        </button>
+                                        <button mat-menu-item (click)="changeEtat(element.id, 'REFUSER')">
+                                            <i style="color: red; font-size: 20px"
+                                               class='bx bx-block'></i>
+                                            <span> refused</span>
+                                        </button>
+                                        <button mat-menu-item (click)="changeEtat(element.id, 'ACCEPTER')">
+                                            <i style="color: green; font-size: 20px"
+                                               class='bx bxs-check-circle'></i>
+                                            <span> accepted</span>
+                                        </button>
+                                    </mat-menu>
+                                </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+
+                        <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                                       showFirstLastButtons
+                                       aria-label="Select page of periodic elements">
+                        </mat-paginator>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

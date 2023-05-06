@@ -65,7 +65,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
     }
 
     getAllFormations() {
-        this.formationService.getAllFormations().subscribe(
+        this.formationService.getAllCoursesForValidateAbonnement().subscribe(
             (response: course[]) => {
                 if (this.category == '' && this.tagOrTitle == '' && this.categorieId == '') {
                     this.formations = response;

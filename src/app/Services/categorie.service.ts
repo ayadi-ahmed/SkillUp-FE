@@ -30,9 +30,7 @@ export class CategorieService {
   }
 
   public getCategoryByName(name: string): Observable<any> {
-    return this.http.get<any>(this.apiServerUrl + `/api/categorie/nom/${name}`,{
-      headers:new HttpHeaders({ authorization : 'Bearer '+ this.authentificationService.getToken()})
-    });
+    return this.http.get<any>(this.apiServerUrl + `/api/categorie/nom/${name}`);
   }
 
   public getCategorieByFormations_Id(id: number): Observable<any> {

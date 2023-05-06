@@ -14,23 +14,36 @@ import {CategorieComponent} from "./categorie/categorie.component";
 import {TagComponent} from "./tag/tag.component";
 import {TransactionsClientComponent} from "./transactions-client/transactions-client.component";
 import {TransactionCenterComponent} from "./transaction-center/transaction-center.component";
+import {UsersComponent} from "./users/users.component";
+import {CandidatesComponent} from "./candidates/candidates.component";
+import {DemmandesInscriptionComponent} from "./demmandes-inscription/demmandes-inscription.component";
+import {AbonnementTransactionsComponent} from "./abonnement-transactions/abonnement-transactions.component";
+import {AdminGuardService} from "../Authorizations/admin-guard.service";
+import {CandidatGuardService} from "../Authorizations/candidat-guard.service";
+import {ManagerGuardService} from "../Authorizations/manager-guard.service";
+import {AuthenticatedGuardService} from "../Authorizations/authenticated-guard.service";
+import {ProfileGuardService} from "../Authorizations/profile-guard.service";
 
 const routes: Routes = [
   {path:'', component:DashboardComponent,
     children: [
-      {path:'cart', component:CartComponent},
-      {path:'buy-abonnement', component:BuyAbonnementComponent},
-      {path:'messages', component:MessagesComponent},
-      {path:'add-training', component:AddTrainingComponent},
-      {path:'add-center', component:AddCenterComponent},
-      {path:'favoris', component:FavorisComponent},
-      {path:'transactions', component:TransactionsClientComponent},
-      {path:'transactions-center', component:TransactionCenterComponent},
-      {path:'profile', component:ProfileComponent},
-      {path:'settings', component:ProfileComponent},
+      {path:'users', component:UsersComponent, canActivate: [AdminGuardService]},
+      {path:'candidates', component:CandidatesComponent, canActivate: [AdminGuardService]},
+      {path:'demandes', component:DemmandesInscriptionComponent, canActivate: [AdminGuardService]},
+      {path:'abonnements', component:AbonnementTransactionsComponent, canActivate: [AdminGuardService]},
+      //{path:'cart', component:CartComponent},
+      //{path:'buy-abonnement', component:BuyAbonnementComponent},
+      //{path:'messages', component:MessagesComponent},
+      {path:'add-training', component:AddTrainingComponent, canActivate: [ManagerGuardService]},
+      {path:'add-center', component:AddCenterComponent, canActivate: [ManagerGuardService]},
+      //{path:'favoris', component:FavorisComponent},
+      {path:'transactions', component:TransactionsClientComponent, canActivate: [CandidatGuardService]},
+      {path:'transactions-center', component:TransactionCenterComponent, canActivate: [ManagerGuardService]},
+      {path:'profile', component:ProfileComponent, canActivate: [ProfileGuardService]},
+      //{path:'settings', component:ProfileComponent},
       {path:'stats', component:StatsComponent},
-      {path:'categories', component:CategorieComponent},
-      {path:'tag', component:TagComponent},
+      {path:'categories', component:CategorieComponent, canActivate: [AdminGuardService]},
+      {path:'tag', component:TagComponent, canActivate: [AdminGuardService]},
     ]},
   {path:'**',component:NotFoundComponent}
 

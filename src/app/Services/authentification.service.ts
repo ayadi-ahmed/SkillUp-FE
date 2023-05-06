@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 
 @Injectable({
@@ -15,6 +15,16 @@ export class AuthentificationService {
 
     public login(request: any): Observable<any> {
         return this.http.post<any>(this.apiServerUrl + `/api/user/authenticate`, request);
+    }
+
+    public lockAccount(id: number): Observable<any> {
+        return this.http.get<any>(this.apiServerUrl + `/api/user/${id}`,{
+            headers:new HttpHeaders({ authorization : 'Bearer '+ this.getToken()})
+        });
+    }
+
+    public getUserByEmail(email: string): Observable<any> {
+        return this.http.get<any>(this.apiServerUrl + `/api/user/email/${email}`);
     }
 
     public getUserId() {

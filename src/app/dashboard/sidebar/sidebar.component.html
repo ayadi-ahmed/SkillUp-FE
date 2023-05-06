@@ -11,84 +11,120 @@
   </div>
   <!--navigation-->
   <ul class="metismenu" id="menu">
-    <li>
-      <a routerLink="/dashboard/stats" class="has-arrow">
-        <div class="parent-icon"><i class='bx bx-home-circle'></i>
-        </div>
-        <div class="menu-title">Dashboard</div>
-      </a>
-      <a routerLink="/dashboard/profile">
-        <div class="parent-icon"><i class="bx bx-user-circle"></i>
-        </div>
-        <div class="menu-title">Profile</div>
-      </a>
-      <a routerLink="/dashboard/messages" >
-        <div class="parent-icon"><i class="bx bx-message-alt-detail"></i>
-        </div>
-        <div class="menu-title">Message</div>
-      </a>
+    <a routerLink="/dashboard/stats">
+      <div class="parent-icon"><i class='bx bx-line-chart'></i>
+      </div>
+      <div class="menu-title">Dashboard</div>
+    </a>
+    <a routerLink="/dashboard/profile" *ngIf="role != 'ADMIN'"
+       [ngStyle]="{'background-color': router.url == '/dashboard/profile' ? 'rgba(44,146,250,0.13)' : 'transparent'}">
+      <div class="parent-icon"><i class="bx bx-user-circle"></i>
+      </div>
+      <div class="menu-title">Profile</div>
+    </a>
+   <!-- <a routerLink="/dashboard/messages"
+       [ngStyle]="{'background-color': router.url == '/dashboard/messages' ? 'rgba(44,146,250,0.13)' : 'transparent'}">
+      <div class="parent-icon"><i class="bx bx-message-alt-detail"></i>
+      </div>
+      <div class="menu-title">Message</div>
+    </a>-->
 
-      <a routerLink="/dashboard/add-center" *ngIf="role == 'MANAGER'">
-        <div class="parent-icon"><i class="bx bx-building-house"></i>
-        </div>
-        <div class="menu-title">Mes Centres</div>
-      </a>
-      <a routerLink="/dashboard/add-training" >
-        <div class="parent-icon"><i class="bx bx-add-to-queue"></i>
-        </div>
-        <div class="menu-title">Mes Formations</div>
-      </a>
+    <a routerLink="/dashboard/add-center" *ngIf="role == 'MANAGER'"
+       [ngStyle]="{'background-color': router.url == '/dashboard/add-center' ? 'rgba(44,146,250,0.13)' : 'transparent'}">
+      <div class="parent-icon"><i class="bx bx-building-house"></i>
+      </div>
+      <div class="menu-title">Mes Centres</div>
+    </a>
+    <a routerLink="/dashboard/add-training" *ngIf="role == 'MANAGER'"
+       [ngStyle]="{'background-color': router.url == '/dashboard/add-training' ? 'rgba(44,146,250,0.13)' : 'transparent'}">
+      <div class="parent-icon"><i class="bx bx-add-to-queue"></i>
+      </div>
+      <div class="menu-title">Mes Formations</div>
+    </a>
 
-      <a routerLink="/dashboard/favoris" >
-        <div class="parent-icon"><i class="bx bx-bookmark-heart"></i>
-        </div>
-        <div class="menu-title">Favoris</div>
-      </a>
+   <!-- <a routerLink="/dashboard/favoris" *ngIf="role == 'CLIENT'"
+       [ngStyle]="{'background-color': router.url == '/dashboard/favoris' ? 'rgba(44,146,250,0.13)' : 'transparent'}">
+      <div class="parent-icon"><i class="bx bx-bookmark-heart"></i>
+      </div>
+      <div class="menu-title">Favoris</div>
+    </a>-->
 
-      <a routerLink="/dashboard/transactions" *ngIf="role == 'CLIENT'">
-        <div class="parent-icon"><i class='bx bx-transfer-alt' ></i>
-        </div>
-        <div class="menu-title">Transactions</div>
-      </a>
+    <a routerLink="/dashboard/transactions" *ngIf="role == 'CANDIDAT'"
+       [ngStyle]="{'background-color': router.url == '/dashboard/transactions' ? 'rgba(44,146,250,0.13)' : 'transparent'}">
+      <div class="parent-icon"><i class='bx bx-transfer-alt' ></i>
+      </div>
+      <div class="menu-title">Transactions</div>
+    </a>
 
-      <a routerLink="/dashboard/transactions-center" *ngIf="role == 'MANAGER'">
-        <div class="parent-icon"><i class='bx bx-transfer-alt' ></i>
-        </div>
-        <div class="menu-title">Transactions</div>
-      </a>
+    <a routerLink="/dashboard/transactions-center" *ngIf="role == 'MANAGER'"
+       [ngStyle]="{'background-color': router.url == '/dashboard/transactions-center' ? 'rgba(44,146,250,0.13)' : 'transparent'}">
+      <div class="parent-icon"><i class='bx bx-transfer-alt' ></i>
+      </div>
+      <div class="menu-title">Transactions</div>
+    </a>
 
-      <a routerLink="/dashboard/settings">
-        <div class="parent-icon"><i class="bx bx-cog"></i>
-        </div>
-        <div class="menu-title">Settings</div>
-      </a>
+    <!--<a routerLink="/dashboard/settings" *ngIf="role != 'ADMIN'"
+       [ngStyle]="{'background-color': router.url == '/dashboard/settings' ? 'rgba(44,146,250,0.13)' : 'transparent'}">
+      <div class="parent-icon"><i class="bx bx-cog"></i>
+      </div>
+      <div class="menu-title">Settings</div>
+    </a>-->
 
-      <a routerLink="/dashboard/categories">
-        <div class="parent-icon"><i class='bx bx-category'></i>
-        </div>
-        <div class="menu-title">Categories</div>
-      </a>
+    <a routerLink="/dashboard/abonnements" *ngIf="role == 'ADMIN'"
+       [ngStyle]="{'background-color': router.url == '/dashboard/abonnements' ? 'rgba(44,146,250,0.13)' : 'transparent'}">
+      <div class="parent-icon"><i class='bx bx-list-ul'></i>
+      </div>
+      <div class="menu-title">Subscriptions</div>
+    </a>
 
-      <a class="cursor-pointer" routerLink="/dashboard/tag">
-        <div class="parent-icon">
-          <i class='bx bx-hash'></i>
-        </div>
-        <div class="menu-title">Tags</div>
-      </a>
+    <a routerLink="/dashboard/users" *ngIf="role == 'ADMIN'"
+       [ngStyle]="{'background-color': router.url == '/dashboard/users' ? 'rgba(44,146,250,0.13)' : 'transparent'}">
+      <div class="parent-icon"><i class='bx bx-buildings'></i>
+      </div>
+      <div class="menu-title">Managers</div>
+    </a>
 
-      <a routerLink="/">
-        <div class="parent-icon"><i class='bx bx-home' ></i>
-        </div>
-        <div class="menu-title">Home</div>
-      </a>
+    <a routerLink="/dashboard/candidates" *ngIf="role == 'ADMIN'"
+       [ngStyle]="{'background-color': router.url == '/dashboard/candidates' ? 'rgba(44,146,250,0.13)' : 'transparent'}">
+      <div class="parent-icon"><i class='bx bxs-user-detail' ></i>
+      </div>
+      <div class="menu-title">Candidates</div>
+    </a>
 
-      <a class="cursor-pointer" (click)="disconnect()">
-        <div class="parent-icon"><i class="bx bx-log-out"></i>
-        </div>
-        <div class="menu-title">Log out</div>
-      </a>
-    </li>
+    <a routerLink="/dashboard/demandes" *ngIf="role == 'ADMIN'"
+       [ngStyle]="{'background-color': router.url == '/dashboard/demandes' ? 'rgba(44,146,250,0.13)' : 'transparent'}"
+    >
+      <div class="parent-icon"><i class='bx bx-user-plus'></i>
+      </div>
+      <div class="menu-title">Registration requests</div>
+    </a>
 
+    <a routerLink="/dashboard/categories" *ngIf="role == 'ADMIN'"
+       [ngStyle]="{'background-color': router.url == '/dashboard/categories' ? 'rgba(44,146,250,0.13)' : 'transparent'}">
+      <div class="parent-icon"><i class='bx bx-category'></i>
+      </div>
+      <div class="menu-title">Categories</div>
+    </a>
+
+    <a class="cursor-pointer" routerLink="/dashboard/tag" *ngIf="role == 'ADMIN'"
+       [ngStyle]="{'background-color': router.url == '/dashboard/tag' ? 'rgba(44,146,250,0.13)' : 'transparent'}">
+      <div class="parent-icon">
+        <i class='bx bx-hash'></i>
+      </div>
+      <div class="menu-title">Tags</div>
+    </a>
+
+    <a routerLink="/">
+      <div class="parent-icon"><i class='bx bx-home' ></i>
+      </div>
+      <div class="menu-title">Home</div>
+    </a>
+
+    <a class="cursor-pointer" (click)="disconnect()">
+      <div class="parent-icon"><i class="bx bx-log-out"></i>
+      </div>
+      <div class="menu-title">Log out</div>
+    </a>
   </ul>
   <!--end navigation-->
 </div>

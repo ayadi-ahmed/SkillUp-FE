@@ -32,10 +32,19 @@ export class LoginComponent implements OnInit {
                 this.userAuthentificationService.setToken(response.token);
                 if (decoded.role === 'CANDIDAT') {
                     this.router.navigate(['/']);
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 1);
                 } else if (decoded.role == 'MANAGER') {
                     this.router.navigate(['/']);
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 1);
                 } else if (decoded.role == 'ADMIN') {
-                    this.router.navigate(['/']);
+                    this.router.navigate(['/dashboard/stats']);
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 1);
                 }
             },
             (error: HttpErrorResponse) => {

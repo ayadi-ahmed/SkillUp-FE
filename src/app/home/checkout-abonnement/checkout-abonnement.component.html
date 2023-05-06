@@ -138,8 +138,9 @@
                                                                         [class.is-invalid]="centre.invalid && centre.touched">
                                                                     <option selected value=""
                                                                             disabled>choose a center</option>
-                                                                    <option [value]="center.id"
-                                                                            *ngFor="let center of centers">{{center.nom}}</option>
+                                                                    <ng-container *ngFor="let center of centers">
+                                                                        <option [value]="center.id" *ngIf="!center.abonnement.valide">{{center.nom | uppercase}}</option>
+                                                                    </ng-container>
                                                                 </select>
                                                             </span>
                                                         </p>
@@ -230,7 +231,8 @@
                                                         </div>
                                                     </div>
 
-                                                    <button type="submit" class="button alt" [disabled]="centre.errors || firstName.errors || lastName.errors || tel.errors"
+                                                    <button type="submit" class="button alt"
+                                                            [disabled]="disableButton || centre.errors || firstName.errors || lastName.errors || tel.errors"
                                                             (click)="buy()"
                                                             name="woocommerce_checkout_place_order" id="place_order"
                                                             value="Place order" data-value="Place order"

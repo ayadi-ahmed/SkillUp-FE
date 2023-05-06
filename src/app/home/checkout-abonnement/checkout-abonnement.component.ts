@@ -49,7 +49,7 @@ export class CheckoutAbonnementComponent implements OnInit {
     dateAfter30Days: any;
     dateAfterOneYear = new Date(this.today.getFullYear() + 1, this.today.getMonth(), this.today.getDate());
     dateAfter1Year: any;
-
+    disableButton = false;
 
 
     constructor(private dataService: DataService,
@@ -95,13 +95,19 @@ export class CheckoutAbonnementComponent implements OnInit {
         this.trainingCenterService.getAllByManagerId(this.authentificationService.getUserId())
             .subscribe(
                 (response: any[]) => {
-                    this.centers = response;
+                    this.centers = response.filter(center => center.etatDemandeInscription === 'ACCEPTER');
+                    for (let center of this.centers) {
+                        center.abonnement = {
+                            valide: false,
+                        }
+                        this.verifierAbonnement(center);
+                    }
                 }
             )
     }
 
     buy() {
-
+        this.disableButton = true;
         if (this.data.duree == "month"){
             this.abonnement.dateFin = this.dateAfter30Days;
         }else if (this.data.duree == "year"){
@@ -109,7 +115,6 @@ export class CheckoutAbonnementComponent implements OnInit {
         }
         this.abonnement.dateDebut = this.date;
         this.abonnement.type = this.data.type;
-        console.log(this.manager);
         this.managerService.updateManager(this.manager).subscribe(
             value => this.abonnementService.addAbonnement(this.abonnement)
                 .subscribe(
@@ -149,12 +154,47 @@ export class CheckoutAbonnementComponent implements OnInit {
         this.transactionCentreService.addTransactionToAbonnement(abonnementId, transactionId)
             .subscribe(
                 (response: any) => {
-                    window.location.reload();
+                    this.affectAbonnementToCenter(this.center, abonnementId);
                 },
                 (error: HttpErrorResponse) => {
                     console.log(error.message);
                 }
             )
+    }
+
+    affectAbonnementToCenter(idCenter: number, idAbonnement: number){
+        this.trainingCenterService.addAbonnementToCentreFormation(idCenter, idAbonnement)
+            .subscribe(
+                value => window.location.reload()
+            )
+    }
+
+
+    verifierAbonnement(center: any) {
+        this.abonnementService.findFirstByCentreFormation_IdOrderByIdDesc(center.id)
+            .subscribe(
+                (response: any) => {
+                    const date = new Date();
+                    const year = date.getFullYear();
+                    const month = String(date.getMonth() + 1).padStart(2, "0");
+                    const day = String(date.getDate()).padStart(2, "0");
+                    const currentDate = `${year}-${month}-${day}`;
+                    if (currentDate > response.dateFin) {
+                        center.abonnement = {
+                            valide: false,
+                            end: response.dateFin
+                        };
+                    } else {
+                        center.abonnement = {
+                            valide: true,
+                            end: response.dateFin
+                        };
+                    }
+                },
+                (error: HttpErrorResponse) => {
+                    console.log(error.message);
+                }
+            );
     }
 
 }
