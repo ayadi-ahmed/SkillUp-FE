@@ -44,6 +44,9 @@ import {DemmandesInscriptionComponent} from './demmandes-inscription/demmandes-i
 import {MatMenuModule} from "@angular/material/menu";
 import {AbonnementTransactionsComponent} from './abonnement-transactions/abonnement-transactions.component';
 import { UpdateCenterComponent } from './Profile-Training-Center/update-center/update-center.component';
+import { AreaChartsComponent } from './stats/area-charts/area-charts.component';
+import { NgApexchartsModule } from "ng-apexcharts";
+import { PieChartsComponent } from './stats/pie-charts/pie-charts.component';
 
 
 @NgModule({
@@ -73,6 +76,8 @@ import { UpdateCenterComponent } from './Profile-Training-Center/update-center/u
         DemmandesInscriptionComponent,
         AbonnementTransactionsComponent,
         UpdateCenterComponent,
+        AreaChartsComponent,
+        PieChartsComponent,
     ],
     exports: [
         DashboardComponent
@@ -100,6 +105,7 @@ import { UpdateCenterComponent } from './Profile-Training-Center/update-center/u
         MatPaginatorModule,
         MatTableModule,
         MatMenuModule,
+        NgApexchartsModule,
     ]
 })
 export class DashboardModule {
