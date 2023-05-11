@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {FormationService} from "../../Services/formation.service";
 import {course} from "../../Entities/courses";
 import {HttpErrorResponse} from "@angular/common/http";
+import {Manager} from "../../Entities/manager";
 
 @Component({
     selector: 'app-single-course',
@@ -22,7 +23,6 @@ export class SingleCourseComponent implements OnInit {
       offres: [],
       prix: 0,
       titre: ""
-
     }
 
   constructor(private route: ActivatedRoute,

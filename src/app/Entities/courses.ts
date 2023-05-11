@@ -1,3 +1,5 @@
+import {Manager} from "./manager";
+
 export interface course{
     id: number,
     description : string,

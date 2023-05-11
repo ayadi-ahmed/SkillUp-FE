@@ -17,6 +17,7 @@ import {Manager} from "../../Entities/manager";
   styleUrls: ['./checkout.component.css']
 })
 export class CheckoutComponent implements OnInit {
+
   public courseId = 0;
   public course: course = {
     dateDebut: "",

@@ -138,14 +138,13 @@
                              *ngFor="let formation of formations | paginate:{ itemsPerPage: itemsPerPage, currentPage: p }">
                             <div class="single-course-inner">
                                 <div class="thumb">
-                                    <img src="assets/training-photos/{{formation.img}}" alt="img">
+                                    <img src="assets/images/course/1.jpeg" alt="img">
                                 </div>
                                 <div class="details">
                                     <div class="details-inner">
                                         <div class="emt-user">
-                                            <span class="u-thumb"><img src="assets/images/course/course-2.jpg"
-                                                                       alt="img"></span>
-                                            <span class="align-self-center">Nancy Reyes</span>
+                                            <span>Starts: </span>
+                                            <span class="align-self-center">{{formation.dateDebut}}</span>
                                         </div>
                                         <h6><a class="cursor-pointer"
                                                (click)="getDetails(formation.id)">{{formation.titre}}</a></h6>
