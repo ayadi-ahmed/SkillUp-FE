@@ -1,0 +1,9 @@
+.inputTag{
+    display: none;
+}
+.lab{
+    cursor: pointer;
+    position: relative;
+    height: max-content;
+    width: max-content;
+}

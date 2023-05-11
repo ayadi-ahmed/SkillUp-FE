@@ -6,6 +6,8 @@ import {CandidatService} from "../../../Services/candidat.service";
 import {Manager} from "../../../Entities/manager";
 import {ManagerService} from "../../../Services/manager.service";
 import {HttpErrorResponse} from "@angular/common/http";
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {UpdateCenterComponent} from "../update-center/update-center.component";
 
 @Component({
     selector: 'app-profile',
@@ -25,7 +27,8 @@ export class ProfileComponent implements OnInit {
         nom: "",
         prenom: "",
         role: "CANDIDAT",
-        tel: 0
+        tel: 0,
+        img: ""
     };
 
     manager: Manager = {
@@ -37,14 +40,23 @@ export class ProfileComponent implements OnInit {
         nom: "",
         prenom: "",
         role: "MANAGER",
-        tel: 0
+        tel: 0,
+        img: ""
 
     }
+    public image: any = {
+        file: new File([], ""),
+        url: ""
+    }
+    imageUrl: string = "";
+    public emailExists: boolean = false;
+
 
     constructor(public router: Router,
                 private authService: AuthentificationService,
                 private candidatService: CandidatService,
-                private managerService: ManagerService) {
+                private managerService: ManagerService,
+                private _snackBar: MatSnackBar) {
     }
 
     ngOnInit(): void {
@@ -65,25 +77,117 @@ export class ProfileComponent implements OnInit {
                 this.candidat.prenom = res.prenom;
                 this.candidat.email = res.email;
                 this.candidat.tel = res.tel;
+                this.candidat.adresse = res.adresse;
+                this.candidat.dateNaissance = res.dateNaissance;
+                this.candidat.fonction = res.fonction;
+                this.candidat.img = res.img;
+                this.candidat.role = res.role;
             });
         } else if (this.userRole == "MANAGER") {
-            this.managerService.getManagerById(clientId).subscribe((res1: Manager) => {
-                this.manager = res1;
+            this.managerService.getManagerById(clientId).subscribe((res: Manager) => {
+                this.manager.id = res.id;
+                this.manager.nom = res.nom;
+                this.manager.prenom = res.prenom;
+                this.manager.email = res.email;
+                this.manager.tel = res.tel;
+                this.manager.email = res.email;
+                this.manager.img = res.img;
+                this.candidat.role = res.role;
             })
-            //TODO elseif admin
         }
 
     }
 
 
-    updateUser(candidat1: Candidat) {
-        this.candidat.nom = candidat1.nom;
-        this.candidatService.updateCandidat(this.candidat).subscribe(
-            (res2: Candidat) => {
+    updateUser() {
+        if (this.userRole == 'CANDIDAT') {
+            const userFormData = this.prepareFormData(this.candidat, this.image)
+            this.candidatService.updateCandidat(userFormData).subscribe(
+                (res: Candidat) => {
+                    this.openSnackBar();
+                },
+                (error: HttpErrorResponse) => {
+                    console.log(error.message);
+                });
+        } else if (this.userRole == 'MANAGER') {
+            const userFormData = this.prepareFormData(this.manager, this.image)
+            this.managerService.updateManager(userFormData).subscribe(
+                (res: Manager) => {
+                    this.openSnackBar();
+                },
+                (error: HttpErrorResponse) => {
+                    console.log(error.message);
+                });
+        }
+    }
 
-            },
-            (error: HttpErrorResponse) => {
-                console.log(error.message);
-            });
+
+    onFileSelected(event: any) {
+        if (event.target.files) {
+            const file = event.target.files[0];
+            this.image = {
+                file: file,
+                url: null
+            };
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => {
+                this.imageUrl = reader.result as string;
+            };
+        }
+    }
+
+    prepareFormData(user: any, image: any): FormData {
+        const formData = new FormData();
+        formData.append(
+            'user',
+            new Blob([JSON.stringify(user)], {type: 'application/json'})
+        );
+        formData.append(
+            'image',
+            image.file,
+            image.file.name
+        );
+        return formData;
+    }
+
+
+    getUserByEmail() {
+        if (this.userRole == 'MANAGER') {
+            this.authService.getUserByEmail(this.manager.email)
+                .subscribe(
+                    (response: any) => {
+                        if (response != null && response.email != this.authService.getUserEmail()) {
+                            this.emailExists = true;
+                        } else {
+                            this.emailExists = false;
+                        }
+                    }, (error: HttpErrorResponse) => {
+                        console.log(error.message);
+                    }
+                )
+        } else if (this.userRole == 'CANDIDAT') {
+            this.authService.getUserByEmail(this.candidat.email)
+                .subscribe(
+                    (response: any) => {
+                        if (response != null && response.email != this.authService.getUserEmail()) {
+                            this.emailExists = true;
+                        } else {
+                            this.emailExists = false;
+                        }
+                    }, (error: HttpErrorResponse) => {
+                        console.log(error.message);
+                    }
+                )
+        }
+    }
+
+
+    durationInSeconds = 5;
+
+    openSnackBar() {
+        this._snackBar.openFromComponent(UpdateCenterComponent, {
+            duration: this.durationInSeconds * 1000,
+        });
     }
 }

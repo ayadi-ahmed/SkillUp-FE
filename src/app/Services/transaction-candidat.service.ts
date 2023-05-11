@@ -40,4 +40,8 @@ export class TransactionCandidatService {
     });
   }
 
+  public getTransactionClientsByFormation_Id(cid: number): Observable<any> {
+    return this.http.get<any>(this.apiServerUrl + `/api/transaction/client/course/${cid}`);
+  }
+
 }

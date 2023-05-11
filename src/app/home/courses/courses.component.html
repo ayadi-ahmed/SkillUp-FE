@@ -143,9 +143,10 @@
                                 <div class="details">
                                     <div class="details-inner">
                                         <div class="emt-user">
-                                            <span class="u-thumb"><img src="assets/images/course/course-2.jpg"
-                                                                       alt="img"></span>
-                                            <span class="align-self-center">Nancy Reyes</span>
+                                            <span class="u-thumb">
+                                                <img src="assets/trainingCenter-photos/{{centers.get(formation.id).logo}}" alt="img">
+                                            </span>
+                                            <span class="align-self-center">{{centers.get(formation.id).nom}}</span>
                                         </div>
                                         <h6><a class="cursor-pointer"
                                                (click)="getDetails(formation.id)">{{formation.titre}}</a></h6>
