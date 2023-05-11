@@ -62,9 +62,20 @@
                                                             <span class="woocommerce-input-wrapper">
                                                                 <input type="text"
                                                                        class="input-text form-control input-lg"
-                                                                       name="billing_first_name" id="billing_first_name"
-                                                                       placeholder="" value="John"
-                                                                       autocomplete="given-name">
+                                                                       name="nom" id="billing_first_name"
+                                                                       placeholder=""
+                                                                       autocomplete="given-name"
+                                                                       minlength="3"
+                                                                       #firstName="ngModel"
+                                                                       [class.is-invalid]="firstName.invalid && firstName.touched"
+                                                                       required
+                                                                       [(ngModel)]="candidat.nom">
+                                                                <div *ngIf="firstName.errors && firstName.touched">
+                                                                    <small class="text-danger"
+                                                                           *ngIf="firstName.errors['minlength']">at least 3characters</small>
+                                                                    <small class="text-danger"
+                                                                           *ngIf="firstName.errors['required']">first name isrequired</small>
+                                                                </div>
                                                             </span>
                                                         </p>
                                                         <p class="form-row form-row-last form-group validate-required"
@@ -76,9 +87,19 @@
                                                             <span class="woocommerce-input-wrapper">
                                                                 <input type="text"
                                                                        class="input-text form-control input-lg"
-                                                                       name="billing_last_name" id="billing_last_name"
-                                                                       placeholder="" [(ngModel)]="candidat.nom"
-                                                                       autocomplete="family-name">
+                                                                       name="prenom" id="billing_last_name"
+                                                                       placeholder=""
+                                                                       autocomplete="family-name"
+                                                                       #lastName="ngModel"
+                                                                       [class.is-invalid]="lastName.invalid && lastName.touched"
+                                                                       required
+                                                                       [(ngModel)]="candidat.prenom">
+                                                                 <div *ngIf="lastName.errors && lastName.touched">
+                                                                     <small class="text-danger"
+                                                                            *ngIf="lastName.errors['minlength']">at least 3characters</small>
+                                                                     <small class="text-danger"
+                                                                            *ngIf="lastName.errors['required']">last name isrequired</small>
+                                                                 </div>
                                                             </span>
                                                         </p>
                                                         <p class="form-row form-row-wide form-group"
@@ -86,9 +107,25 @@
                                                             <label for="billing_company" class="control-label">Phone
                                                                 number&nbsp;<span class="required"></span></label>
                                                             <span class="woocommerce-input-wrapper">
-                                <input type="number" class="input-text form-control input-lg" name="billing_company"
-                                       id="billing_company" placeholder="" [(ngModel)]="candidat.tel" autocomplete="organization">
-                              </span>
+                                                                <input type="tel"
+                                                                       class="input-text form-control input-lg"
+                                                                       name="tel"
+                                                                       id="billing_company" placeholder=""
+                                                                       [(ngModel)]="candidat.tel"
+                                                                       pattern="[- +()0-9]+"
+                                                                       minlength="8"
+                                                                       maxlength="8"
+                                                                       #tel="ngModel"
+                                                                       [class.is-invalid]="tel.invalid && tel.touched"
+                                                                       required>
+                                                                <div *ngIf="tel.errors && tel.touched">
+                                                                    <small class="text-danger"
+                                                                           *ngIf="tel.errors['required']">phone number isrequired</small>
+                                                                    <small class="text-danger"
+                                                                           *ngIf="tel.errors['pattern'] || tel.errors['minlength'] || tel.errors['maxlength']">invalid
+                                                                        phone number</small>
+                                                                </div>
+                                                            </span>
                                                         </p>
 
                                                         <p class="form-row form-row-wide form-group"
@@ -96,9 +133,14 @@
                                                             <label for="billing_company" class="control-label">Email&nbsp;<span
                                                                     class="required"></span></label>
                                                             <span class="woocommerce-input-wrapper">
-                                <input type="text" class="input-text form-control input-lg" name="billing_company"
-                                       id="billing_company1" placeholder="" value="" autocomplete="organization">
-                              </span>
+                                                                <input type="text"
+                                                                       class="input-text form-control input-lg"
+                                                                       name="email"
+                                                                       id="billing_company1"
+                                                                       placeholder=""
+                                                                       disabled
+                                                                       [(ngModel)]="candidat.email">
+                                                            </span>
                                                         </p>
 
                                                     </div>
@@ -107,22 +149,6 @@
 
                                             </div>
 
-                                            <div class="col-12">
-                                                <div class="woocommerce-shipping-fields">
-                                                </div>
-                                                <div class="woocommerce-additional-fields">
-                                                    <h3>Additional information</h3>
-                                                    <div class="woocommerce-additional-fields__field-wrapper">
-                                                        <p class="form-row notes" id="order_comments_field"
-                                                           data-priority=""><span
-                                                                class="woocommerce-input-wrapper"><textarea
-                                                                name="order_comments"
-                                                                class="input-text form-control input-lg"
-                                                                id="order_comments"
-                                                                placeholder="Notes about your order, e.g. special notes for delivery."
-                                                                rows="4" cols="5"></textarea></span></p></div>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
 
@@ -150,13 +176,6 @@
                                                 </tbody>
                                                 <tfoot>
 
-                                                <tr class="cart-subtotal">
-                                                    <th>Offer</th>
-                                                    <td><span class="woocommerce-Price-amount amount"><span
-                                                            class="woocommerce-Price-currencySymbol">TND</span>54.00</span>
-                                                    </td>
-                                                </tr>
-
                                                 <tr class="order-total">
                                                     <th>Total</th>
                                                     <td><strong><span class="woocommerce-Price-amount amount"><span
@@ -181,17 +200,6 @@
                                                     </li>
                                                 </ul>
                                                 <div class="form-row place-order">
-                                                    <noscript>
-                                                        Since your browser does not support JavaScript, or it is
-                                                        disabled, please ensure you click the <em>Update Totals</em>
-                                                        button before placing your order. You may be charged more than
-                                                        the amount stated above if you fail to do so. <br/>
-                                                        <button type="submit" class="button alt"
-                                                                name="woocommerce_checkout_update_totals"
-                                                                value="Update totals">Update totals
-                                                        </button>
-                                                    </noscript>
-
                                                     <div class="woocommerce-terms-and-conditions-wrapper">
                                                         <div class="woocommerce-privacy-policy-text"><p>Your personal
                                                             data will be used to process your order, support your
@@ -204,9 +212,12 @@
 
                                                     <button type="submit" class="button alt"
                                                             name="woocommerce_checkout_place_order" id="place_order"
-                                                            value="Place order" data-value="Place order"
+                                                            value="Place order" data-value="Place order" [disabled]="subscribed"
                                                             (click)="redirect()">Place order
                                                     </button>
+                                                    <div class="mb-3" *ngIf="subscribed == true">
+                                                        <small class="text-danger">You are already subscribed to this course!</small>
+                                                    </div>
                                                     <input type="hidden" id="woocommerce-process-checkout-nonce"
                                                            name="woocommerce-process-checkout-nonce" value="c75f934b1d"><input
                                                         type="hidden" name="_wp_http_referer"

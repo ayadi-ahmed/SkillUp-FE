@@ -41,7 +41,7 @@ const routes: Routes = [
       {path:'transactions-center', component:TransactionCenterComponent, canActivate: [ManagerGuardService]},
       {path:'profile', component:ProfileComponent, canActivate: [ProfileGuardService]},
       //{path:'settings', component:ProfileComponent},
-      {path:'stats', component:StatsComponent},
+      {path:'stats', component:StatsComponent, canActivate: [AdminGuardService]},
       {path:'categories', component:CategorieComponent, canActivate: [AdminGuardService]},
       {path:'tag', component:TagComponent, canActivate: [AdminGuardService]},
     ]},

@@ -38,4 +38,10 @@ export class CategorieService {
       headers:new HttpHeaders({ authorization : 'Bearer '+ this.authentificationService.getToken()})
     });
   }
+
+  public getPercentageOfCoursesInEachCategory(): Observable<any> {
+    return this.http.get<any>(this.apiServerUrl + `/api/categorie/percentage/courses`,{
+      headers:new HttpHeaders({ authorization : 'Bearer '+ this.authentificationService.getToken()})
+    });
+  }
 }

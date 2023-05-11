@@ -32,4 +32,10 @@ export class AbonnementService {
             headers:new HttpHeaders({ authorization : 'Bearer '+ this.authentificationService.getToken()})
         });
     }
+
+    public findSubscriptionsByMonthForCurrentYear(): Observable<any> {
+        return this.http.get<any>(this.apiServerUrl + `/api/abonnement/current/year`, {
+            headers: new HttpHeaders({authorization: 'Bearer ' + this.authentificationService.getToken()})
+        });
+    }
 }

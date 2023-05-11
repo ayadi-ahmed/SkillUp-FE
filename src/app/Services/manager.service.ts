@@ -26,11 +26,23 @@ export class ManagerService {
       headers:new HttpHeaders({ authorization : 'Bearer '+ this.authentificationService.getToken()})
     });
   }
+
+  public findFirst10OrderByIdDesc(): Observable<any> {
+    return this.http.get<any>(this.apiServerUrl + `/api/manager/new`,{
+      headers:new HttpHeaders({ authorization : 'Bearer '+ this.authentificationService.getToken()})
+    });
+  }
   public addManager(manager: any): Observable<any> {
     return this.http.post<any>(this.apiServerUrl + `/api/manager/add`,manager);
   }
-  public updateManager(manager: Manager): Observable<any> {
+  public updateManager(manager: any): Observable<any> {
     return this.http.put<any>(this.apiServerUrl + `/api/manager/update`,manager,{
+      headers:new HttpHeaders({ authorization : 'Bearer '+ this.authentificationService.getToken()})
+    });
+  }
+
+  public updateManagerCheckout(manager: Manager): Observable<any> {
+    return this.http.put<any>(this.apiServerUrl + `/api/manager/update/checkout`,manager,{
       headers:new HttpHeaders({ authorization : 'Bearer '+ this.authentificationService.getToken()})
     });
   }

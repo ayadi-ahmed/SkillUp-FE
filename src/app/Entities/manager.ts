@@ -10,5 +10,6 @@ export interface Manager{
     dateNaissance: string
     tel: number  | null
     centreFormation: TrainingCenter[]
+    img: string
 }
 

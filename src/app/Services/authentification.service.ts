@@ -35,6 +35,14 @@ export class AuthentificationService {
         localStorage.setItem('userId', JSON.stringify(userId));
     }
 
+    public getUserEmail() {
+        return JSON.parse(localStorage.getItem('userEmail')!);
+    }
+
+    public setUserEmail(userEmail: number) {
+        localStorage.setItem('userEmail', JSON.stringify(userEmail));
+    }
+
     public setRoles(role: string) {
         localStorage.setItem('role', JSON.stringify(role));
     }

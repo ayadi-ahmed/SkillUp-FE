@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
                 var decoded = jwt_decode(response.token) as any;
                 this.userAuthentificationService.setUserId(decoded.id);
                 this.userAuthentificationService.setRoles(decoded.role);
+                this.userAuthentificationService.setUserEmail(decoded.sub);
                 this.userAuthentificationService.setToken(response.token);
                 if (decoded.role === 'CANDIDAT') {
                     this.router.navigate(['/']);

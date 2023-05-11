@@ -12,7 +12,7 @@ import {Category} from "../../../Entities/category";
 })
 export class PopularCoursesComponent implements OnInit {
 
-  public formations: course[] = [];
+  public formations: any[] = [];
   public categories: Category[] =[];
   constructor(private formationService: FormationService,
               private categorieService: CategorieService) { }

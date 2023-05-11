@@ -1,29 +1,49 @@
-import { Component, OnInit } from '@angular/core';
-import {FormationService} from "../../Services/formation.service";
-import {ManagerService} from "../../Services/manager.service";
-import {TransactionCentreService} from "../../Services/transaction-centre.service";
+
 import {CandidatService} from "../../Services/candidat.service";
+import {Component, OnInit} from '@angular/core';
+import {ManagerService} from "../../Services/manager.service";
+import {Manager} from "../../Entities/manager";
+import {FormationService} from "../../Services/formation.service";
+import {course} from "../../Entities/courses";
+import {CategorieService} from "../../Services/categorie.service";
+import {TransactionCentreService} from "../../Services/transaction-centre.service";
+
 
 @Component({
-  selector: 'app-stats',
-  templateUrl: './stats.component.html',
-  styleUrls: ['./stats.component.css']
+    selector: 'app-stats',
+    templateUrl: './stats.component.html',
+    styleUrls: ['./stats.component.css'],
+
 })
 export class StatsComponent implements OnInit {
 
+    managers: Manager[] = [];
+    courses: course[] = [];
+    categoriesPercentage: any[] = [];
+    daySales = 0;
+    weekSales = 0;
+    monthSales = 0;
   coursesCount:number=0;
   managersCount:number=0;
   sumTransactionsCentres:number=0;
   clientsCount:number=0;
   constructor(private formationService:FormationService, private managerService:ManagerService,
               private transactionCentreService:TransactionCentreService,
-              private candidatService:CandidatService) { }
+              private candidatService:CandidatService,
+               private categorieService: CategorieService
+                ) { }
 
   ngOnInit(): void {
     this.getCoursesCount();
     this.getManagersCount();
     this.getTransactionsCentresSum();
     this.getClientsCount();
+    this.findFirst10OrderByIdDesc();
+    this.getLastCourses();
+    this.getPercentageOfCoursesInEachCategory();
+    this.getTotalForDay();
+    this.getTotalForWeek();
+    this.getTotalForMonth();
   }
   getCoursesCount(){
     return this.formationService.getCoursesCount().subscribe((res=>{
@@ -50,4 +70,40 @@ export class StatsComponent implements OnInit {
   }
 
 
+    findFirst10OrderByIdDesc() {
+        this.managerService.findFirst10OrderByIdDesc().subscribe(
+            value => this.managers = value
+        )
+    }
+
+
+    getLastCourses() {
+        this.formationService.findFirst10ByOrderByIdDesc().subscribe(
+            value => this.courses = value
+        )
+    }
+
+    getPercentageOfCoursesInEachCategory() {
+        this.categorieService.getPercentageOfCoursesInEachCategory().subscribe(
+            value => this.categoriesPercentage = value
+        )
+    }
+
+    getTotalForDay() {
+        this.transactionCentreService.getTotalForDay().subscribe(
+            value => this.daySales = value
+        )
+    }
+
+    getTotalForWeek() {
+        this.transactionCentreService.getTotalForWeek().subscribe(
+            value => this.weekSales = value
+        )
+    }
+
+    getTotalForMonth() {
+        this.transactionCentreService.getTotalForMonth().subscribe(
+            value => this.monthSales = value
+        )
+    }
 }

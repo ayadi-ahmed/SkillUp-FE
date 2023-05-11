@@ -29,7 +29,8 @@ export class CheckoutAbonnementComponent implements OnInit {
         nom: "",
         prenom: "",
         tel: null,
-        dateNaissance: ""
+        dateNaissance: "",
+        img: ""
 
     };
 
@@ -84,6 +85,7 @@ export class CheckoutAbonnementComponent implements OnInit {
                     this.manager.email = response.email;
                     this.manager.dateNaissance = response.dateNaissance;
                     this.manager.role = response.role;
+                    this.manager.img = response.img;
                 },
                 (error: HttpErrorResponse) => {
                     console.log(error.message);
@@ -115,7 +117,7 @@ export class CheckoutAbonnementComponent implements OnInit {
         }
         this.abonnement.dateDebut = this.date;
         this.abonnement.type = this.data.type;
-        this.managerService.updateManager(this.manager).subscribe(
+        this.managerService.updateManagerCheckout(this.manager).subscribe(
             value => this.abonnementService.addAbonnement(this.abonnement)
                 .subscribe(
                     (response: Abonnement) => {

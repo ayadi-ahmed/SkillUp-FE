@@ -1,0 +1,4 @@
+::ng-deep .mat-snack-bar-container {
+    color: rgba(255,255,255,.7);
+    background: green;
+}

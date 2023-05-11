@@ -143,8 +143,11 @@
                                 <div class="details">
                                     <div class="details-inner">
                                         <div class="emt-user">
-                                            <span>Starts: </span>
-                                            <span class="align-self-center">{{formation.dateDebut}}</span>
+
+                                            <span class="u-thumb">
+                                                <img src="assets/trainingCenter-photos/{{centers.get(formation.id).logo}}" alt="img">
+                                            </span>
+                                            <span class="align-self-center">{{centers.get(formation.id).nom}}</span>
                                         </div>
                                         <h6><a class="cursor-pointer"
                                                (click)="getDetails(formation.id)">{{formation.titre}}</a></h6>
