@@ -188,7 +188,11 @@
                                                            [(ngModel)]="formation.dateFin"
                                                            required
                                                            #dateFin="ngModel"
-                                                           [class.is-invalid]="dateFin.invalid && dateFin.touched">
+                                                           [class.is-invalid]="(dateFin.invalid && dateFin.touched) || formation.dateDebut && formation.dateFin && formation.dateDebut >= formation.dateFin">
+
+                                                    <div class="mb-3" *ngIf="formation.dateDebut && formation.dateFin && formation.dateDebut >= formation.dateFin">
+                                                        <small class="text-danger">Start date must be less than end date</small>
+                                                    </div>
                                                 </div>
                                                 <div class="mb-3" *ngIf="dateFin.errors && dateFin.touched">
                                                     <small class="text-danger" *ngIf="dateFin.errors['required']">end
@@ -241,7 +245,7 @@
                                             <button style="background-color: #008bfe; color: white" class="btn"
                                                     type="submit"
                                                     matStepperNext
-                                                    [disabled]="titre.errors || category.errors || img.errors || description.errors || center.errors || dateDebut.errors || dateFin.errors || prix.errors || nbMaxCan.errors"
+                                                    [disabled]="titre.errors || category.errors || img.errors || description.errors || center.errors || dateDebut.errors || dateFin.errors || prix.errors || nbMaxCan.errors || (formation.dateDebut && formation.dateFin && formation.dateDebut >= formation.dateFin)"
                                             >
                                                 Next
                                             </button>

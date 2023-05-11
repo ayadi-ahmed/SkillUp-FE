@@ -106,13 +106,13 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="categories-list">
+                            <div class="categories-list" *ngFor="let percentage of categoriesPercentage">
                                 <div class="d-flex align-items-center justify-content-between gap-3">
                                     <div class="flex-grow-1">
-                                        <p class="mb-2">Mobiles <span class="float-end">75%</span></p>
+                                        <p class="mb-2">{{percentage.categoryName}} <span class="float-end">{{percentage.percentage}}%</span></p>
                                         <div class="progress" style="height: 4px;">
                                             <div class="progress-bar bg-gradient-cosmic" role="progressbar"
-                                                 style="width: 75%"></div>
+                                                 [style.width]="percentage.percentage.toString()+'%'"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -131,15 +131,20 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="new-users-list">
+                            <div class="new-users-list" *ngFor="let manager of managers">
                                 <div class="d-flex align-items-center justify-content-between gap-3">
                                     <div class="">
-                                        <img src="assets/images/avatars/avatar-1.png" class="rounded-circle" width="45"
-                                             height="45" alt="user img">
+                                        <img *ngIf="manager.img == null" src="assets/imgProfile.jpg"
+                                             class="rounded-circle" width="45"
+                                             height="45" alt=" ">
+
+                                        <img *ngIf="manager.img != null" src="assets/user-photos/{{manager.img}}"
+                                             class="rounded-circle" width="45"
+                                             height="45" alt=" ">
                                     </div>
                                     <div class="flex-grow-1">
-                                        <h6 class="mb-0">Benji Harper</h6>
-                                        <p class="mb-0 extra-small-font">UI Designer</p>
+                                        <h6 class="mb-0">{{manager.nom}} {{manager.prenom}}</h6>
+                                        <p class="mb-0 extra-small-font">{{manager.email}}</p>
                                     </div>
                                 </div>
                                 <hr>
@@ -167,21 +172,21 @@
                                 <div class="tab-pane fade" id="primary-pills-home">
                                     <div class="d-flex align-items-center justify-content-center gap-3">
                                         <div>
-                                            <h3 class="mb-0">TND 9845.43</h3>
+                                            <h3 class="mb-0">TND {{monthSales}}</h3>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade show active" id="primary-pills-profile">
                                     <div class="d-flex align-items-center justify-content-center gap-3">
                                         <div>
-                                            <h3 class="mb-0">TND 45,245.37</h3>
+                                            <h3 class="mb-0">TND {{weekSales}}</h3>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="primary-pills-contact">
                                     <div class="d-flex align-items-center justify-content-center gap-3">
                                         <div>
-                                            <h3 class="mb-0">TND 7395.23</h3>
+                                            <h3 class="mb-0">TND {{ daySales ? daySales : 0 }}</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -213,13 +218,13 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>Iphone 5</td>
-                                <td><img src="assets/images/products/01.png" class="product-img-2" alt="product img">
+                            <tr *ngFor="let course of courses">
+                                <td>{{course.titre}}</td>
+                                <td><img src="assets/training-photos/{{course.img}}" class="product-img-2" alt="product img">
                                 </td>
-                                <td>TND 1250.00</td>
-                                <td>03 Feb 2020</td>
-                                <td>03 Feb 2020</td>
+                                <td>TND {{course.prix}}</td>
+                                <td>{{course.dateDebut | date:'dd/MM/yyyy'}}</td>
+                                <td>{{course.dateFin | date:'dd/MM/yyyy'}}</td>
                             </tr>
                             </tbody>
                         </table>

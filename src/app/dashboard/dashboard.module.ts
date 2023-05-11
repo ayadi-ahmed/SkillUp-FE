@@ -47,6 +47,7 @@ import { UpdateCenterComponent } from './Profile-Training-Center/update-center/u
 import { AreaChartsComponent } from './stats/area-charts/area-charts.component';
 import { NgApexchartsModule } from "ng-apexcharts";
 import { PieChartsComponent } from './stats/pie-charts/pie-charts.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -106,6 +107,7 @@ import { PieChartsComponent } from './stats/pie-charts/pie-charts.component';
         MatTableModule,
         MatMenuModule,
         NgApexchartsModule,
+        MatSnackBarModule,
     ]
 })
 export class DashboardModule {

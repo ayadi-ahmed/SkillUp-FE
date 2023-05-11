@@ -29,8 +29,14 @@ export class CandidatService {
     public addCandidat(candidat: any): Observable<any> {
         return this.http.post<any>(this.apiServerUrl + `/api/client/add`,candidat);
     }
-    public updateCandidat(candidat: Candidat): Observable<any> {
+    public updateCandidat(candidat: any): Observable<any> {
         return this.http.put<any>(this.apiServerUrl + `/api/client/update`,candidat,{
+            headers:new HttpHeaders({ authorization : 'Bearer '+ this.authentificationService.getToken()})
+        });
+    }
+
+    public updateCandidatCheckout(candidat: Candidat): Observable<any> {
+        return this.http.put<any>(this.apiServerUrl + `/api/client/update/checkout`,candidat,{
             headers:new HttpHeaders({ authorization : 'Bearer '+ this.authentificationService.getToken()})
         });
     }

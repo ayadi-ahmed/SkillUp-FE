@@ -73,4 +73,8 @@ export class TrainingCenterService {
             headers: new HttpHeaders({authorization: 'Bearer ' + this.authentificationService.getToken()})
         });
     }
+
+    public getCentreFormationByFormations_Id(courseId: number): Observable<any> {
+        return this.http.get<any>(this.apiServerUrl + `/api/CentreFormation/course/${courseId}`);
+    }
 }

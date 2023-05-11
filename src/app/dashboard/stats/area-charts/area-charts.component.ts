@@ -10,6 +10,8 @@ import {
     ApexTitleSubtitle,
     ApexLegend
 } from "ng-apexcharts";
+import {AbonnementService} from "../../../Services/abonnement.service";
+import {HttpErrorResponse} from "@angular/common/http";
 
 export type ChartOptions = {
     series: ApexAxisChartSeries;
@@ -31,58 +33,60 @@ export type ChartOptions = {
 })
 export class AreaChartsComponent implements OnInit {
 
+    nbAbonnements: number[] = [0,0,0,0,0,0,0,0,0,0,0,0]
     @ViewChild("chart") chart: ChartComponent | any;
     public chartOptions: Partial<ChartOptions> | any;
 
-    constructor() {
-
-        this.chartOptions = {
-            series: [
-                {
-                    name: "STOCK ABC",
-                    data: [
-                        8107.85,
-                        8128.0,
-                        8122.9,
-                        8165.5,
-                        8340.7,
-                        8423.7,
-                        8423.5,
-                        8514.3,
-                        8481.85,
-                        8487.7,
-                        8506.9,
-                        8626.2
-                    ]
-                }
-            ],
-            chart: {
-                type: "area",
-                height: 350,
-                zoom: {
-                    enabled: false
-                }
-            },
-            dataLabels: {
-                enabled: false
-            },
-            stroke: {
-                curve: "straight"
-            },
-            labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-            xaxis: {
-                type: "string"
-            },
-            yaxis: {
-                opposite: false
-            },
-            legend: {
-                horizontalAlign: "left"
-            }
-        };
+    constructor(private abonnementService: AbonnementService) {
     }
 
     ngOnInit(): void {
+        this.findSubscriptionsByMonthForCurrentYear();
     }
 
+    findSubscriptionsByMonthForCurrentYear(){
+        this.abonnementService.findSubscriptionsByMonthForCurrentYear().subscribe(
+            (response: any) => {
+                for (let i of response){
+                    this.nbAbonnements[i.month - 1] = i.count;
+                }
+
+                this.chartOptions = {
+                    series: [
+                        {
+                            name: "Subscriptions",
+                            data: this.nbAbonnements
+                        }
+                    ],
+                    chart: {
+                        type: "area",
+                        height: 350,
+                        zoom: {
+                            enabled: false
+                        }
+                    },
+                    dataLabels: {
+                        enabled: false
+                    },
+                    stroke: {
+                        curve: "straight"
+                    },
+                    labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+                    xaxis: {
+                        type: "string"
+                    },
+                    yaxis: {
+                        opposite: false
+                    },
+                    legend: {
+                        horizontalAlign: "left"
+                    }
+                };
+
+            },
+            (error:HttpErrorResponse) => {
+                console.log(error.message);
+            }
+        )
+    }
 }

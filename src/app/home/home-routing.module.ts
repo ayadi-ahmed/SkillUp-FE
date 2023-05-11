@@ -26,7 +26,7 @@ const routes: Routes = [
     {path: 'course/:id', component: SingleCourseComponent},
     {path: 'checkout/:id', component: CheckoutComponent, canActivate: [CandidatGuardService]},
     {path: 'interested/:id', component: InterstedComponent, canActivate: [CandidatGuardService]},
-    {path: 'thank-you', component: ThankYouComponent, canActivate: [AuthenticatedGuardService]},
+    {path: 'thank-you', component: ThankYouComponent, canActivate: [CandidatGuardService]},
     {path: 'login', component: LoginComponent, canActivate: [AuthenticatedGuardService]},
     {path: 'signup', component: SignupComponent, canActivate: [AuthenticatedGuardService]},
     {path: 'instructors', component: InstructorComponent},

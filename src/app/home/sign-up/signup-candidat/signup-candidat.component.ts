@@ -12,6 +12,10 @@ import {Subscription} from "rxjs";
 })
 export class SignupCandidatComponent implements OnInit, OnDestroy {
 
+    public image: any = {
+        file: new File([], ""),
+        url: ""
+    }
     private subscription: Subscription | undefined;
     public candidat: Candidat = {
         adresse: "",
@@ -22,8 +26,9 @@ export class SignupCandidatComponent implements OnInit, OnDestroy {
         mdp: "",
         nom: "",
         prenom: "",
-        role: "",
-        tel: 0
+        role: null,
+        tel: null,
+        img: ""
     }
 
     constructor(private candidatService: CandidatService,
@@ -40,16 +45,40 @@ export class SignupCandidatComponent implements OnInit, OnDestroy {
     }
 
     addCandidat() {
+        const candidatFormData = this.prepareFormData(this.candidat, this.image);
         this.subscription = this.candidatService
-            .addCandidat(this.candidat)
-            .subscribe(
+            .addCandidat(candidatFormData).subscribe(
                 (response: any) => {
-                    this.router.navigate(['/signup'])
+                    this.router.navigate(['/'])
                 },
                 (error: HttpErrorResponse) => {
                     console.log(error.message);
                 }
             )
+    }
+
+    prepareFormData(candidat: any, image: any): FormData {
+        const formData = new FormData();
+        formData.append(
+            'candidat',
+            new Blob([JSON.stringify(candidat)], {type: 'application/json'})
+        );
+        formData.append(
+            'image',
+            image.file,
+            image.file.name
+        );
+        return formData;
+    }
+
+    onFileSelected(event: any) {
+        if (event.target.files) {
+            const file = event.target.files[0];
+            this.image = {
+                file: file,
+                url: null
+            };
+        }
     }
 }
 

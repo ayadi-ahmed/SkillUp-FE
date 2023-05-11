@@ -12,7 +12,6 @@ import {MatAutocompleteSelectedEvent} from "@angular/material/autocomplete";
 import {COMMA, ENTER} from "@angular/cdk/keycodes";
 import {FormControl} from "@angular/forms";
 import {AuthentificationService} from "../../../Services/authentification.service";
-import {read} from "@popperjs/core";
 
 @Component({
     selector: 'app-signup-center',
@@ -41,7 +40,8 @@ export class SignupCenterComponent implements OnInit, OnDestroy {
         prenom: "",
         dateNaissance: "",
         tel: null,
-        centreFormation: []
+        centreFormation: [],
+        img: ""
     }
 
     public center: TrainingCenter = {

@@ -68,4 +68,12 @@ export class HeaderComponent implements OnInit {
   search(categoryName: string) {
     this.router.navigate(['/courses'], {queryParams: {category: categoryName, searchBy: ''}});
   }
+
+  navigateToBack() {
+    if (this.role != 'ADMIN'){
+      this.router.navigate(['/dashboard/profile']);
+    } else {
+      this.router.navigate(['/dashboard/stats']);
+    }
+  }
 }

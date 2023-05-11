@@ -8,6 +8,7 @@ import {CategorieService} from "../../Services/categorie.service";
 import {TagService} from "../../Services/tag.service";
 import {Tag} from "../../Entities/tag";
 import {Category} from "../../Entities/category";
+import {TrainingCenterService} from "../../Services/training-center.service";
 
 @Component({
     selector: 'app-courses',
@@ -16,6 +17,7 @@ import {Category} from "../../Entities/category";
 })
 export class CoursesComponent implements OnInit, OnDestroy {
 
+    centers = new Map<number, any>();
     p: any;
     itemsPerPage: number = 6;
     categorieId: any = "";
@@ -42,7 +44,8 @@ export class CoursesComponent implements OnInit, OnDestroy {
                 private router: Router,
                 private categorieService: CategorieService,
                 private tagService: TagService,
-                private route: ActivatedRoute) {
+                private route: ActivatedRoute,
+                private trainingCenterService: TrainingCenterService) {
     }
 
     ngOnInit(): void {
@@ -69,6 +72,9 @@ export class CoursesComponent implements OnInit, OnDestroy {
             (response: course[]) => {
                 if (this.category == '' && this.tagOrTitle == '' && this.categorieId == '') {
                     this.formations = response;
+                    for (let f of this.formations){
+                        this.getCenterByIdCourse(f);
+                    }
                 }
                 response.forEach(formation => {
                     if (!this.courseTagsTitle.includes(formation.titre.toUpperCase())) {
@@ -92,6 +98,9 @@ export class CoursesComponent implements OnInit, OnDestroy {
             (response: course[]) => {
                 this.formations = response;
                 this.value = [this.minPrice, this.maxPrice];
+                for (let f of this.formations){
+                    this.getCenterByIdCourse(f);
+                }
             },
             (error: HttpErrorResponse) => {
                 console.log(error.message);
@@ -149,6 +158,9 @@ export class CoursesComponent implements OnInit, OnDestroy {
                 .subscribe(
                     (response: course[]) => {
                         this.formations = response;
+                        for (let f of this.formations){
+                            this.getCenterByIdCourse(f);
+                        }
                         switch (this.priceSort) {
                             case "randomPrices" :
                                 this.randomPrices();
@@ -172,6 +184,9 @@ export class CoursesComponent implements OnInit, OnDestroy {
             .subscribe(
                 (response: any[]) => {
                     this.formations = response;
+                    for (let f of this.formations){
+                        this.getCenterByIdCourse(f);
+                    }
                 },
                 (error: HttpErrorResponse) => {
                     console.log(error.message);
@@ -200,6 +215,9 @@ export class CoursesComponent implements OnInit, OnDestroy {
             .subscribe(
                 (response: any) => {
                     this.formations = response;
+                    for (let f of this.formations){
+                        this.getCenterByIdCourse(f);
+                    }
                 },
                 (error: HttpErrorResponse) => {
                     console.log(error.message);
@@ -216,5 +234,14 @@ export class CoursesComponent implements OnInit, OnDestroy {
                 console.log(error.message);
             }
         )
+    }
+
+    getCenterByIdCourse(formation: any) {
+        this.trainingCenterService.getCentreFormationByFormations_Id(formation.id)
+            .subscribe(
+                (response: any) => {
+                    this.centers.set(formation.id, response);
+                }
+            )
     }
 }
