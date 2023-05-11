@@ -6,6 +6,10 @@ import {
     ApexResponsive,
     ApexChart
 } from "ng-apexcharts";
+import {CandidatService} from "../../../Services/candidat.service";
+import {CategorieService} from "../../../Services/categorie.service";
+import {TransactionCentreService} from "../../../Services/transaction-centre.service";
+import {TransactionCandidatService} from "../../../Services/transaction-candidat.service";
 
 export type ChartOptions = {
     series: ApexNonAxisChartSeries;
@@ -23,15 +27,19 @@ export class PieChartsComponent implements OnInit {
     @ViewChild("chart") chart: ChartComponent | any;
     public chartOptions: Partial<ChartOptions> | any;
 
-    constructor() {
+    constructor(private catagoryService:CategorieService,
+                private transactionClientService:TransactionCandidatService) {
         this.chartOptions = {
-            series: [44, 55, 13, 43, 22],
+            //series: [44, 55, 13, 43, 22],
+            series: [0],
             chart: {
                 width: 380,
                 type: "pie"
             },
-            labels: ["Team A", "Team B", "Team C", "Team D", "Team E"],
-            responsive: [
+            labels: [""],
+            //labels: ["Team A", "Team B", "Team C", "Team D", "Team E"],
+
+          responsive: [
                 {
                     breakpoint: 480,
                     options: {
@@ -48,6 +56,11 @@ export class PieChartsComponent implements OnInit {
     }
 
     ngOnInit(): void {
+      this.sumTransactionsClientPerCategory();
     }
+
+  sumTransactionsClientPerCategory(){
+      return this.transactionClientService.getSumTransactionsClientPerCategory().subscribe()
+  }
 
 }

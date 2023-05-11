@@ -44,19 +44,10 @@ export class TransactionCentreService {
     });
   }
 
-  public getTotalForDay(): Observable<any> {
-    return this.http.get<any>(this.apiServerUrl + `/api/transaction/centre/sales/day`,{
+  public getSumTransactionsCentres(): Observable<any> {
+    return this.http.get<any>(this.apiServerUrl + `/api/transaction/centre/stats/transactionsSum`,{
       headers:new HttpHeaders({ authorization : 'Bearer '+ this.authentificationService.getToken()})
     });
   }
-  public getTotalForWeek(): Observable<any> {
-    return this.http.get<any>(this.apiServerUrl + `/api/transaction/centre/sales/week`,{
-      headers:new HttpHeaders({ authorization : 'Bearer '+ this.authentificationService.getToken()})
-    });
-  }
-  public getTotalForMonth(): Observable<any> {
-    return this.http.get<any>(this.apiServerUrl + `/api/transaction/centre/sales/month`,{
-      headers:new HttpHeaders({ authorization : 'Bearer '+ this.authentificationService.getToken()})
-    });
-  }
+
 }

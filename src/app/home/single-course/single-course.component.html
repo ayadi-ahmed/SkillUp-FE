@@ -12,11 +12,11 @@
 
                     <div class="course-header-meta">
                         <ul class="inline-list list-info">
-                            <li>
+                           <!-- <li>
                                 <div class="course-author">
-                                    <img src="assets/trainingCenter-photos/{{center.logo}}" alt="#">{{center.nom}}
+                                    <img src="assets/images/course/course-author.png" alt="#">Madge Alvarez
                                 </div>
-                            </li>
+                            </li>-->
 
                             <li>
                                 <div class="list-rating">
@@ -25,19 +25,23 @@
                                     <span><i class="fas fa-star"></i></span>
                                     <span><i class="fas fa-star"></i></span>
                                     <span><i class="fas fa-star"></i></span>
-                                    <span class="rating-count">(19)</span>
+                                    <span class="rating-count">(23)</span>
                                 </div>
                             </li>
-                            <li><i class="fa fa-user me-2"></i>{{transactions.length}} enrolled students</li>
+                            <li><i class="fa fa-user me-2"></i>04 enrolled students</li>
                         </ul>
                     </div>
                 </div>
             </div>
 
-            <div class="col-xl-5 text-center">
-                <img src="assets/training-photos/{{course.img}}" alt=""
-                     style="max-width: 250px; max-height: 300px; border: solid 4px white; background-color: white; border-radius: 10px">
-                <!--<a class="popup-video video_icon" href="https://www.youtube.com/watch?v=cRXm1p-CNyk"><i class="fal fa-play"></i></a>-->
+            <div class="col-xl-5">
+                <div class="course-thumb-wrap">
+                    <div class="course-thumbnail mb-0">
+                        <img src="assets/images/course/1.jpeg" alt="" class="img-fluid w-100">
+                    </div>
+
+                    <!--<a class="popup-video video_icon" href="https://www.youtube.com/watch?v=cRXm1p-CNyk"><i class="fal fa-play"></i></a>-->
+                </div>
             </div>
         </div>
     </div>
@@ -52,8 +56,8 @@
                         <div class="nav nav-tabs course-nav" id="nav-tab" role="tablist">
                             <a class="nav-item nav-link active" id="nav-home-tab" data-bs-toggle="tab" href="#nav-home"
                                role="tab" aria-controls="nav-home-tab" aria-selected="true">Overview</a>
-                            <a class="nav-item nav-link" id="nav-topics-tab" data-bs-toggle="tab" href="#nav-topics"
-                               role="tab" aria-controls="nav-topics-tab" aria-selected="false">Curriculam</a>
+                            <!--<a class="nav-item nav-link" id="nav-topics-tab" data-bs-toggle="tab" href="#nav-topics"
+                               role="tab" aria-controls="nav-topics-tab" aria-selected="false">Curriculam</a>-->
                             <a class="nav-item nav-link" id="nav-instructor-tab" data-bs-toggle="tab"
                                href="#nav-instructor" role="tab" aria-controls="nav-instructor-tab"
                                aria-selected="false">Instructor</a>
@@ -69,37 +73,37 @@
                                 <p>{{course.description}}</p>
 
 
-                                <!--
-                                                                <div class="course-widget course-info">
-                                                                    <h4 class="course-title">What You will Learn?</h4>
-                                                                    <ul>
-                                                                        <li>
-                                                                            <i class="fa fa-check"></i>
-                                                                            Clean up face imperfections, improve and repair photos
-                                                                        </li>
-                                                                        <li>
-                                                                            <i class="fa fa-check"></i>
-                                                                            Remove people or objects from photos
-                                                                        </li>
-                                                                        <li>
-                                                                            <i class="fa fa-check"></i>
-                                                                            Master selections, layers, and working with the layers panel
-                                                                        </li>
-                                                                        <li>
-                                                                            <i class="fa fa-check"></i>
-                                                                            Use creative effects to design stunning text styles
-                                                                        </li>
-                                                                        <li>
-                                                                            <i class="fa fa-check"></i>
-                                                                            working with the layers panel
-                                                                        </li>
-                                                                        <li>
-                                                                            <i class="fa fa-check"></i>
-                                                                            Cut away a person from their background
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                -->
+<!--
+                                <div class="course-widget course-info">
+                                    <h4 class="course-title">What You will Learn?</h4>
+                                    <ul>
+                                        <li>
+                                            <i class="fa fa-check"></i>
+                                            Clean up face imperfections, improve and repair photos
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-check"></i>
+                                            Remove people or objects from photos
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-check"></i>
+                                            Master selections, layers, and working with the layers panel
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-check"></i>
+                                            Use creative effects to design stunning text styles
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-check"></i>
+                                            working with the layers panel
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-check"></i>
+                                            Cut away a person from their background
+                                        </li>
+                                    </ul>
+                                </div>
+-->
                             </div>
                         </div>
 
@@ -338,131 +342,111 @@
                 <div class="course-sidebar course-sidebar-5 mt-5 mt-xl-0">
                     <div class="course-widget course-details-info">
                         <div class="price-header">
-                            <h2 class="course-price">{{course.prix}} TND</h2>
-                            <!--                            <span class="course-price-badge onsale"> 39% off</span>-->
+                          <!--  <h2 class="course-price">{{course.prix}} TND<span>$150</span></h2>
+                            <span class="course-price-badge onsale"> 39% off</span>-->
+                          <h2 class="course-price"> Price: {{course.prix}} TND</h2>
+
                         </div>
                         <ul class="course-sidebar-list">
-                            <!--<li>
+                           <!-- <li>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <span><i class="far fa-sliders-h"></i>Level</span>
                                     Beginnner
                                 </div>
-                            </li>-->
+                            </li>
 
                             <li>
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <span><i class="fas fa-play-circle"></i>Sessions</span>
-                                    {{course.seances.length}}
+                                    <span><i class="fas fa-play-circle"></i>Lectures</span>
+                                    20
                                 </div>
-                            </li>
+                            </li>-->
+                          <li>
+                            <div class="d-flex justify-content-between align-items-center">
+                              <span><i class="far fa-clock"></i>Starts</span>
+                              {{course.dateDebut}}
+                            </div>
+                          </li>
+                          <li>
+                            <div class="d-flex justify-content-between align-items-center">
+                              <span><i class="far fa-clock"></i>Ends</span>
+                              {{course.dateFin}}
+                            </div>
+                          </li>
                             <li>
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <span><i class="far fa-user"></i>Students</span>
-                                    {{course.nbMaxCan}}
+                                    <span><i class="far fa-user"></i>Maximum Students</span>
+                                  {{course.nbMaxCan}}
                                 </div>
+
                             <li>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <span><i class="far fa-clock"></i>Duration</span>
-                                    {{ (dateFin.getTime() - dateDebut.getTime()) / (1000 * 3600 * 24) }} days
-                                </div>
-                            </li>
-                            <!--<li>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <span><i class="far fa-globe"></i>Language</span>
-                                    English
+                                    French
                                 </div>
-                            </li>-->
+                            </li>
 
-                            <li>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <span><i class="far fa-calendar"></i>Begin </span>
-                                    {{course.dateDebut | date:'dd/MM/yyyy'}}
-                                </div>
-                            </li>
-                            <li>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <span><i class="far fa-calendar"></i>End </span>
-                                    {{course.dateFin | date:'dd/MM/yyyy'}}
-                                </div>
-                            </li>
+
                         </ul>
 
-                        <div class="buy-btn" *ngIf="role == 'CANDIDAT'">
-                            <button class="button button-enroll-course btn btn-main-2 rounded"
-                                    (click)="getDetails(course.id)" *ngIf="subscribed == false"
-                                    [disabled]=" ((dateDebut.getTime() - currentDate.getTime()) / (1000 * 3600 * 24)) < 0">
+                        <div class="buy-btn">
+                            <button class="button button-enroll-course btn btn-main-2 rounded" (click)="getDetails(course.id)">
                                 <i class="far fa-shopping-cart me-2"></i> Enroll Course
                             </button>
-                            <div class="mb-3" *ngIf="subscribed == true && ((dateFin.getTime() - currentDate.getTime()) / (1000 * 3600 * 24)) > 0">
-                                <small style="font-weight: bold; font-size: 15px; color: green" class="text-capitalize">
-                                    You are already subscribed to this course</small>
-                            </div>
-                            <div class="mb-3" *ngIf="subscribed == false && ((dateDebut.getTime() - currentDate.getTime()) / (1000 * 3600 * 24)) < 0">
-                                <small style="font-weight: bold; font-size: 15px" class="text-capitalize text-danger">
-                                    Registrations are closed</small>
-                            </div>
-
-                            <div class="mb-3" *ngIf="subscribed == true && ((dateFin.getTime() < currentDate.getTime()))">
-                                <small style="font-weight: bold; font-size: 15px" class="text-capitalize text-danger">
-                                    This training is over</small>
-                            </div>
-
-
                         </div>
-                        <!-- <div class="buy-btn">
-                             <button class="button button-enroll-course btn btn-main-2 rounded"
-                                     (click)="getDetails1(course.id)">
-                                 <i class="far fa-info-circle me-2"></i> I'm Interested
-                             </button>
-                         </div>-->
+                      <div class="buy-btn">
+                        <button class="button button-enroll-course btn btn-main-2 rounded" (click)="getDetails1(course.id)">
+                          <i class="far fa-info-circle me-2"></i> I'm Interested
+                        </button>
+                      </div>
 
-                        <!--<div class="course-meterial">
+                        <div class="course-meterial">
                             <h4 class="mb-3">Material Includes</h4>
                             <ul class="course-meterial-list">
                                 <li><i class="fal fa-long-arrow-right"></i>Videos</li>
                                 <li><i class="fal fa-long-arrow-right"></i>Files For Development</li>
                                 <li><i class="fal fa-long-arrow-right"></i>Documentation Files</li>
                             </ul>
-                        </div>-->
+                        </div>
                     </div>
 
-                    <!--
-                                        <div class="course-latest">
-                                            <h4 class="mb-4">Popular Courses</h4>
-                                            <ul class="recent-posts course-popular">
-                                                <li>
-                                                    <div class="widget-post-thumb">
-                                                        <a href="#"><img src="assets/images/course/course-2.jpg" alt=""
-                                                                         class="img-fluid"></a>
-                                                    </div>
-                                                    <div class="widget-post-body">
-                                                        <h6><a href="#">Wordpress Theme Development</a></h6>
-                                                        <h5>$120</h5>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="widget-post-thumb">
-                                                        <a href="#"><img src="assets/images/course/course-2.jpg" alt=""
-                                                                         class="img-fluid"></a>
-                                                    </div>
-                                                    <div class="widget-post-body">
-                                                        <h6><a href="#">mastering Photoshop for beginners</a></h6>
-                                                        <h5>$100</h5>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="widget-post-thumb">
-                                                        <a href="#"><img src="assets/images/course/course-2.jpg" alt=""
-                                                                         class="img-fluid"></a>
-                                                    </div>
-                                                    <div class="widget-post-body">
-                                                        <h6><a href="#">Photography mastering adobe tool</a></h6>
-                                                        <h5>$100</h5>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                    -->
+<!--
+                    <div class="course-latest">
+                        <h4 class="mb-4">Popular Courses</h4>
+                        <ul class="recent-posts course-popular">
+                            <li>
+                                <div class="widget-post-thumb">
+                                    <a href="#"><img src="assets/images/course/course-2.jpg" alt=""
+                                                     class="img-fluid"></a>
+                                </div>
+                                <div class="widget-post-body">
+                                    <h6><a href="#">Wordpress Theme Development</a></h6>
+                                    <h5>$120</h5>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="widget-post-thumb">
+                                    <a href="#"><img src="assets/images/course/course-2.jpg" alt=""
+                                                     class="img-fluid"></a>
+                                </div>
+                                <div class="widget-post-body">
+                                    <h6><a href="#">mastering Photoshop for beginners</a></h6>
+                                    <h5>$100</h5>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="widget-post-thumb">
+                                    <a href="#"><img src="assets/images/course/course-2.jpg" alt=""
+                                                     class="img-fluid"></a>
+                                </div>
+                                <div class="widget-post-body">
+                                    <h6><a href="#">Photography mastering adobe tool</a></h6>
+                                    <h5>$100</h5>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+-->
                 </div>
                 <!-- Course Sidebar end -->
             </div>

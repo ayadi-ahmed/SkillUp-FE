@@ -51,4 +51,10 @@ export class CandidatService {
             headers:new HttpHeaders({ authorization : 'Bearer '+ this.authentificationService.getToken()})
         });
     }
+
+  public getClientsCount(): Observable<any> {
+    return this.http.get<any>(this.apiServerUrl + `/api/client/stats/clientsCount`,{
+      headers:new HttpHeaders({ authorization : 'Bearer '+ this.authentificationService.getToken()})
+    });
+  }
 }

@@ -14,18 +14,18 @@ import {CandidatService} from "../../Services/candidat.service";
     styleUrls: ['./checkout.component.css']
 })
 export class CheckoutComponent implements OnInit {
-    public courseId = 0;
-    public course: course = {
-        dateDebut: "",
-        dateFin: "",
-        description: "",
-        id: 0,
-        img: "",
-        nbMaxCan: null,
-        offres: [],
-        prix: 0,
-        titre: ""
-    };
+  public courseId = 0;
+  public course: course = {
+    dateDebut: "",
+    dateFin: "",
+    description: "",
+    id: 0,
+    img: "",
+    nbMaxCan: null,
+    offres: [],
+    prix: 0,
+    titre: ""
+  };
 
     candidat: any = {
         adresse: "",
