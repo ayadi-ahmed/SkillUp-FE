@@ -54,6 +54,7 @@ export class StatsComponent implements OnInit {
   getManagersCount(){
     return this.managerService.getManagersCount().subscribe((res1=>{
       this.managersCount=res1;
+      console.log(res1)
     }))
   }
 

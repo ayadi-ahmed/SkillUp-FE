@@ -7,6 +7,7 @@ import {TransactionCandidatService} from "../../Services/transaction-candidat.se
 import {TransactionClient} from "../../Entities/transaction-client";
 import {AuthentificationService} from "../../Services/authentification.service";
 import {CandidatService} from "../../Services/candidat.service";
+import {Candidat} from "../../Entities/candidat";
 
 @Component({
     selector: 'app-checkout',
@@ -31,7 +32,7 @@ export class CheckoutComponent implements OnInit {
         titre: ""
     };
 
-  candidat:Candidat = {
+  candidat:any = {
     adresse: "",
     dateNaissance: "",
     email: "",
@@ -71,9 +72,7 @@ export class CheckoutComponent implements OnInit {
     this.getCourseId();
     this.getCandidatId();
     this.getCourseByIdAndCandidatById();
-        this.getClientTransactions();
-
-
+    //this.getClientTransactions();
   }
 
   getCandidatId(){
@@ -88,7 +87,7 @@ export class CheckoutComponent implements OnInit {
       });
   }
 
-  getCourseByIdAndCandidatById(){
+/*  getCourseByIdAndCandidatById(){
     this.formationService.getFormationById(this.courseId).subscribe((response: course) => {
           this.course = response;
 
@@ -98,19 +97,11 @@ export class CheckoutComponent implements OnInit {
             (error: HttpErrorResponse) => {
               console.log(error.message);
 
+            })})}*/
 
 
-    getCandidatId() {
-        this.userId = this.authService.getUserId();
-    }
 
-    getCourseId() {
-        this.route.params
-            .subscribe(params => {
-                this.courseId = params['id'];
 
-            });
-    }
 
     getCourseByIdAndCandidatById() {
         this.formationService.getFormationById(this.courseId).subscribe((response: course) => {
@@ -138,7 +129,8 @@ export class CheckoutComponent implements OnInit {
     }
 
 
-    redirect() {
+
+              redirect() {
         this.formationService.getFormationById(this.courseId).subscribe((res: course) => {
             this.transaction.valeur = res.prix;
             this.transaction.client.id = this.userId;
