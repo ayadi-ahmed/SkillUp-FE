@@ -79,4 +79,10 @@ export class FormationService {
   public getAllCoursesForValidateAbonnement():Observable<any> {
     return this.http.get<any>(this.formationUrl+`/api/formation/all/valide`);
   }
+
+  public getCoursesCount():Observable<any> {
+    return this.http.get<any>(this.formationUrl+`/api/formation/stats/trainingsCount`,{
+      headers:new HttpHeaders({ authorization : 'Bearer '+ this.authentificationService.getToken()})
+    });
+  }
 }

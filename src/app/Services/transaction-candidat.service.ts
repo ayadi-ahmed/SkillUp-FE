@@ -40,8 +40,15 @@ export class TransactionCandidatService {
     });
   }
 
+
+  public getSumTransactionsClientPerCategory(): Observable<any> {
+    return this.http.get<any>(this.apiServerUrl + `/api/transaction/client/stats/sumTransactionsClientPerCategory`,{
+      headers:new HttpHeaders({ authorization : 'Bearer '+ this.authentificationService.getToken()})
+    });
+
   public getTransactionClientsByFormation_Id(cid: number): Observable<any> {
     return this.http.get<any>(this.apiServerUrl + `/api/transaction/client/course/${cid}`);
+
   }
 
 }

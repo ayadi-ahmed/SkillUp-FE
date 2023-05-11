@@ -14,7 +14,11 @@ import {CandidatService} from "../../Services/candidat.service";
     styleUrls: ['./checkout.component.css']
 })
 export class CheckoutComponent implements OnInit {
+
+
     public courseId = 0;
+    userId: number = 0;
+    public subscribed: boolean = false;
     public course: course = {
         dateDebut: "",
         dateFin: "",
@@ -27,17 +31,19 @@ export class CheckoutComponent implements OnInit {
         titre: ""
     };
 
-    candidat: any = {
-        adresse: "",
-        dateNaissance: "",
-        fonction: "",
-        id: 0,
-        email: "",
-        nom: "",
-        prenom: "",
-        tel: 0,
-        img: ""
-    };
+  candidat:Candidat = {
+    adresse: "",
+    dateNaissance: "",
+    email: "",
+    fonction: "",
+    id: 0,
+    mdp: "",
+    nom: "",
+    prenom: "",
+    role: "CANDIDAT",
+    tel: 0
+  };
+
     public transaction: TransactionClient = {
         client: this.candidat,
         formation: this.course,
@@ -48,24 +54,51 @@ export class CheckoutComponent implements OnInit {
     };
 
 
-    userId: number = 0;
-    public subscribed: boolean = false;
 
-    constructor(private route: ActivatedRoute,
-                private formationService: FormationService,
-                private router: Router,
-                private trancationService: TransactionCandidatService,
-                private authService: AuthentificationService,
-                private candidatService: CandidatService,
-                private transactionCandidatService: TransactionCandidatService) {
-    }
 
-    ngOnInit(): void {
-        this.getCourseId();
-        this.getCandidatId();
-        this.getCourseByIdAndCandidatById();
+
+  constructor(private route: ActivatedRoute,
+              private formationService: FormationService,
+              private router:Router,
+              private trancationService: TransactionCandidatService,
+              private authService: AuthentificationService,
+              private candidatService:CandidatService,
+             private transactionCandidatService: TransactionCandidatService)
+                {
+  }
+
+  ngOnInit(): void {
+    this.getCourseId();
+    this.getCandidatId();
+    this.getCourseByIdAndCandidatById();
         this.getClientTransactions();
-    }
+
+
+  }
+
+  getCandidatId(){
+    this.userId = this.authService.getUserId();
+  }
+
+  getCourseId() {
+    this.route.params
+      .subscribe(params => {
+        this.courseId = params['id'];
+        console.log(params['id']);
+      });
+  }
+
+  getCourseByIdAndCandidatById(){
+    this.formationService.getFormationById(this.courseId).subscribe((response: course) => {
+          this.course = response;
+
+          this.candidatService.getCandidatById(this.userId).subscribe((res:Candidat)=>{
+            this.candidat=res;
+          },
+            (error: HttpErrorResponse) => {
+              console.log(error.message);
+
+
 
     getCandidatId() {
         this.userId = this.authService.getUserId();
@@ -75,6 +108,7 @@ export class CheckoutComponent implements OnInit {
         this.route.params
             .subscribe(params => {
                 this.courseId = params['id'];
+
             });
     }
 

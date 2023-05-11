@@ -6,6 +6,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {course} from "../../Entities/courses";
 import {TransactionCandidatService} from "../../Services/transaction-candidat.service";
 import {CandidatService} from "../../Services/candidat.service";
+import {Manager} from "../../Entities/manager";
 
 @Component({
   selector: 'app-intersted',
@@ -26,7 +27,10 @@ export class InterstedComponent implements OnInit {
     prix: 0,
     titre: ""
 
+
   }
+
+
   constructor(private router: Router,
               private route: ActivatedRoute,
               private formationService: FormationService,

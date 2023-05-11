@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {FormationService} from "../../Services/formation.service";
 import {course} from "../../Entities/courses";
 import {HttpErrorResponse} from "@angular/common/http";
+import {Manager} from "../../Entities/manager";
 import {TransactionCandidatService} from "../../Services/transaction-candidat.service";
 import {TrainingCenterService} from "../../Services/training-center.service";
 import {AuthentificationService} from "../../Services/authentification.service";
@@ -14,6 +15,7 @@ import {AuthentificationService} from "../../Services/authentification.service";
 export class SingleCourseComponent implements OnInit {
 
     private courseId = 0;
+
     public course: any = {
         dateDebut: "",
         dateFin: "",

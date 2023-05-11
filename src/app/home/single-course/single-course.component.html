@@ -12,11 +12,11 @@
 
                     <div class="course-header-meta">
                         <ul class="inline-list list-info">
-                            <li>
+                           <!-- <li>
                                 <div class="course-author">
                                     <img src="assets/trainingCenter-photos/{{center.logo}}" alt="#">{{center.nom}}
                                 </div>
-                            </li>
+                            </li>-->
 
                             <li>
                                 <div class="list-rating">
@@ -25,9 +25,10 @@
                                     <span><i class="fas fa-star"></i></span>
                                     <span><i class="fas fa-star"></i></span>
                                     <span><i class="fas fa-star"></i></span>
-                                    <span class="rating-count">(19)</span>
+                                    <span class="rating-count">(23)</span>
                                 </div>
                             </li>
+
                             <li><i class="fa fa-user me-2"></i>{{transactions.length}} enrolled students</li>
                         </ul>
                     </div>
@@ -52,8 +53,8 @@
                         <div class="nav nav-tabs course-nav" id="nav-tab" role="tablist">
                             <a class="nav-item nav-link active" id="nav-home-tab" data-bs-toggle="tab" href="#nav-home"
                                role="tab" aria-controls="nav-home-tab" aria-selected="true">Overview</a>
-                            <a class="nav-item nav-link" id="nav-topics-tab" data-bs-toggle="tab" href="#nav-topics"
-                               role="tab" aria-controls="nav-topics-tab" aria-selected="false">Curriculam</a>
+                            <!--<a class="nav-item nav-link" id="nav-topics-tab" data-bs-toggle="tab" href="#nav-topics"
+                               role="tab" aria-controls="nav-topics-tab" aria-selected="false">Curriculam</a>-->
                             <a class="nav-item nav-link" id="nav-instructor-tab" data-bs-toggle="tab"
                                href="#nav-instructor" role="tab" aria-controls="nav-instructor-tab"
                                aria-selected="false">Instructor</a>
@@ -67,6 +68,7 @@
                             <div class="single-course-details ">
                                 <h4 class="course-title">Description</h4>
                                 <p>{{course.description}}</p>
+
 
 
                                 <!--
@@ -338,6 +340,7 @@
                 <div class="course-sidebar course-sidebar-5 mt-5 mt-xl-0">
                     <div class="course-widget course-details-info">
                         <div class="price-header">
+
                             <h2 class="course-price">{{course.prix}} TND</h2>
                             <!--                            <span class="course-price-badge onsale"> 39% off</span>-->
                         </div>
@@ -354,9 +357,22 @@
                                     <span><i class="fas fa-play-circle"></i>Sessions</span>
                                     {{course.seances.length}}
                                 </div>
-                            </li>
+                            </li>-->
+                          <li>
+                            <div class="d-flex justify-content-between align-items-center">
+                              <span><i class="far fa-clock"></i>Starts</span>
+                              {{course.dateDebut}}
+                            </div>
+                          </li>
+                          <li>
+                            <div class="d-flex justify-content-between align-items-center">
+                              <span><i class="far fa-clock"></i>Ends</span>
+                              {{course.dateFin}}
+                            </div>
+                          </li>
                             <li>
                                 <div class="d-flex justify-content-between align-items-center">
+
                                     <span><i class="far fa-user"></i>Students</span>
                                     {{course.nbMaxCan}}
                                 </div>
@@ -369,7 +385,7 @@
                             <!--<li>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <span><i class="far fa-globe"></i>Language</span>
-                                    English
+                                    French
                                 </div>
                             </li>-->
 
@@ -425,6 +441,7 @@
                             </ul>
                         </div>-->
                     </div>
+
 
                     <!--
                                         <div class="course-latest">

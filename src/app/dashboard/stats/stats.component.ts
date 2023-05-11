@@ -1,3 +1,5 @@
+
+import {CandidatService} from "../../Services/candidat.service";
 import {Component, OnInit} from '@angular/core';
 import {ManagerService} from "../../Services/manager.service";
 import {Manager} from "../../Entities/manager";
@@ -5,6 +7,7 @@ import {FormationService} from "../../Services/formation.service";
 import {course} from "../../Entities/courses";
 import {CategorieService} from "../../Services/categorie.service";
 import {TransactionCentreService} from "../../Services/transaction-centre.service";
+
 
 @Component({
     selector: 'app-stats',
@@ -20,22 +23,52 @@ export class StatsComponent implements OnInit {
     daySales = 0;
     weekSales = 0;
     monthSales = 0;
+  coursesCount:number=0;
+  managersCount:number=0;
+  sumTransactionsCentres:number=0;
+  clientsCount:number=0;
+  constructor(private formationService:FormationService, private managerService:ManagerService,
+              private transactionCentreService:TransactionCentreService,
+              private candidatService:CandidatService,
+               private categorieService: CategorieService
+                ) { }
 
-    constructor(private managerService: ManagerService,
-                private formationService: FormationService,
-                private categorieService: CategorieService,
-                private transactionCentreService: TransactionCentreService) {
+  ngOnInit(): void {
+    this.getCoursesCount();
+    this.getManagersCount();
+    this.getTransactionsCentresSum();
+    this.getClientsCount();
+    this.findFirst10OrderByIdDesc();
+    this.getLastCourses();
+    this.getPercentageOfCoursesInEachCategory();
+    this.getTotalForDay();
+    this.getTotalForWeek();
+    this.getTotalForMonth();
+  }
+  getCoursesCount(){
+    return this.formationService.getCoursesCount().subscribe((res=>{
+      this.coursesCount=res;
+    }))
+  }
 
-    }
+  getManagersCount(){
+    return this.managerService.getManagersCount().subscribe((res1=>{
+      this.managersCount=res1;
+    }))
+  }
 
-    ngOnInit(): void {
-        this.findFirst10OrderByIdDesc();
-        this.getLastCourses();
-        this.getPercentageOfCoursesInEachCategory();
-        this.getTotalForDay();
-        this.getTotalForWeek();
-        this.getTotalForMonth();
-    }
+  getTransactionsCentresSum(){
+    return this.transactionCentreService.getSumTransactionsCentres().subscribe((res2=>{
+      this.sumTransactionsCentres = res2;
+    }))
+  }
+
+  getClientsCount(){
+    return this.candidatService.getClientsCount().subscribe((res3=>{
+      this.clientsCount= res3;
+    }))
+  }
+
 
     findFirst10OrderByIdDesc() {
         this.managerService.findFirst10OrderByIdDesc().subscribe(

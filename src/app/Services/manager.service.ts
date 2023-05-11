@@ -61,4 +61,10 @@ export class ManagerService {
       headers:new HttpHeaders({ authorization : 'Bearer '+ this.authentificationService.getToken()})
     });
   }
+
+  public getManagersCount():Observable<any> {
+    return this.http.get<any>(this.apiServerUrl+`/api/manager/stats/managersCount`,{
+      headers:new HttpHeaders({ authorization : 'Bearer '+ this.authentificationService.getToken()})
+    });
+  }
 }
