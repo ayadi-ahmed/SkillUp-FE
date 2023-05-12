@@ -5,6 +5,7 @@ import {FormationService} from "../../Services/formation.service";
 import {course} from "../../Entities/courses";
 import {CategorieService} from "../../Services/categorie.service";
 import {TransactionCentreService} from "../../Services/transaction-centre.service";
+import {CandidatService} from "../../Services/candidat.service";
 
 @Component({
     selector: 'app-stats',
@@ -20,11 +21,16 @@ export class StatsComponent implements OnInit {
     daySales = 0;
     weekSales = 0;
     monthSales = 0;
+    coursesCount: number = 0;
+    managersCount: number = 0;
+    sumTransactionsCentres: number = 0;
+    clientsCount: number = 0;
 
     constructor(private managerService: ManagerService,
                 private formationService: FormationService,
                 private categorieService: CategorieService,
-                private transactionCentreService: TransactionCentreService) {
+                private transactionCentreService: TransactionCentreService,
+                private candidatService: CandidatService) {
 
     }
 
@@ -35,6 +41,10 @@ export class StatsComponent implements OnInit {
         this.getTotalForDay();
         this.getTotalForWeek();
         this.getTotalForMonth();
+        this.getCoursesCount();
+        this.getManagersCount();
+        this.getTransactionsCentresSum();
+        this.getClientsCount();
     }
 
     findFirst10OrderByIdDesc() {
@@ -72,5 +82,31 @@ export class StatsComponent implements OnInit {
         this.transactionCentreService.getTotalForMonth().subscribe(
             value => this.monthSales = value
         )
+    }
+
+
+    getCoursesCount() {
+        return this.formationService.getCoursesCount().subscribe((res => {
+            this.coursesCount = res;
+        }))
+    }
+
+    getManagersCount() {
+        return this.managerService.getManagersCount().subscribe((res1 => {
+            this.managersCount = res1;
+            console.log(res1)
+        }))
+    }
+
+    getTransactionsCentresSum() {
+        return this.transactionCentreService.getSumTransactionsCentres().subscribe((res2 => {
+            this.sumTransactionsCentres = res2;
+        }))
+    }
+
+    getClientsCount() {
+        return this.candidatService.getClientsCount().subscribe((res3 => {
+            this.clientsCount = res3;
+        }))
     }
 }

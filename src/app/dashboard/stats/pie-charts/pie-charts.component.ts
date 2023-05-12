@@ -6,6 +6,8 @@ import {
     ApexResponsive,
     ApexChart
 } from "ng-apexcharts";
+import {CategorieService} from "../../../Services/categorie.service";
+import {TransactionCandidatService} from "../../../Services/transaction-candidat.service";
 
 export type ChartOptions = {
     series: ApexNonAxisChartSeries;
@@ -22,15 +24,19 @@ export type ChartOptions = {
 export class PieChartsComponent implements OnInit {
     @ViewChild("chart") chart: ChartComponent | any;
     public chartOptions: Partial<ChartOptions> | any;
+    private categories: any[] = [];
+    private percentages: any[] = [];
 
-    constructor() {
+    constructor(private catagoryService: CategorieService,
+                private transactionClientService: TransactionCandidatService) {
         this.chartOptions = {
-            series: [44, 55, 13, 43, 22],
+            series: this.percentages,
             chart: {
                 width: 380,
                 type: "pie"
             },
-            labels: ["Team A", "Team B", "Team C", "Team D", "Team E"],
+            labels: this.percentages[1],
+
             responsive: [
                 {
                     breakpoint: 480,
@@ -48,6 +54,18 @@ export class PieChartsComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.sumTransactionsClientPerCategory();
+    }
+
+    sumTransactionsClientPerCategory() {
+        return this.transactionClientService.getSumTransactionsClientPerCategory().subscribe(
+            (response: any[]) => {
+                for (let l of response) {
+                    this.categories.push(l[0]);
+                    this.percentages.push(l[1]);
+                }
+            }
+        )
     }
 
 }

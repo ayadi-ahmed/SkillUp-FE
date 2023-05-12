@@ -59,4 +59,11 @@ export class TransactionCentreService {
       headers:new HttpHeaders({ authorization : 'Bearer '+ this.authentificationService.getToken()})
     });
   }
+
+  public getSumTransactionsCentres(): Observable<any> {
+    return this.http.get<any>(this.apiServerUrl + `/api/transaction/centre/stats/transactionsSum`,{
+      headers:new HttpHeaders({ authorization : 'Bearer '+ this.authentificationService.getToken()})
+    });
+  }
+
 }
