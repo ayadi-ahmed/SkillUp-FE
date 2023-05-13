@@ -23,14 +23,14 @@
                                 <div class="card-body">
                                     <div class="d-flex flex-column align-items-center text-center">
                                         <img *ngIf="candidat.img == null && imageUrl == ''" src="assets/imgProfile.jpg"
-                                             class="rounded-circle p-1 bg-primary" width="110" alt=" ">
+                                             class="rounded-circle p-1 bg-primary" width="150" height="150" alt=" ">
 
                                         <img *ngIf="candidat.img != null && imageUrl == ''"
                                              src="assets/user-photos/{{candidat.img}}"
-                                             class="rounded-circle p-1 bg-primary" width="110" alt=" ">
+                                             class="rounded-circle p-1 bg-primary" width="150" height="150" alt=" ">
 
                                         <img [src]="imageUrl" *ngIf="imageUrl!=''"
-                                             class="rounded-circle p-1 bg-primary" width="110">
+                                             class="rounded-circle p-1 bg-primary" width="150" height="150">
 
 
                                         <div class="mt-3">
@@ -198,14 +198,14 @@
                                 <div class="card-body">
                                     <div class="d-flex flex-column align-items-center text-center">
                                         <img *ngIf="manager.img == null && imageUrl == ''" src="assets/imgProfile.jpg"
-                                             class="rounded-circle p-1 bg-primary" width="110" alt=" ">
+                                             class="rounded-circle p-1 bg-primary" width="150" height="150" alt=" ">
 
                                         <img *ngIf="manager.img != null && imageUrl == ''"
                                              src="assets/user-photos/{{manager.img}}"
-                                             class="rounded-circle p-1 bg-primary" width="110" alt=" ">
+                                             class="rounded-circle p-1 bg-primary" width="150" height="150" alt=" ">
 
                                         <img [src]="imageUrl" *ngIf="imageUrl!=''"
-                                             class="rounded-circle p-1 bg-primary" width="110">
+                                             class="rounded-circle p-1 bg-primary" width="150" height="150">
 
 
                                         <div class="mt-3">

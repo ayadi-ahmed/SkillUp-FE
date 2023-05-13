@@ -20,12 +20,8 @@
 
                             <li>
                                 <div class="list-rating">
-                                    <span><i class="fas fa-star"></i></span>
-                                    <span><i class="fas fa-star"></i></span>
-                                    <span><i class="fas fa-star"></i></span>
-                                    <span><i class="fas fa-star"></i></span>
-                                    <span><i class="fas fa-star"></i></span>
-                                    <span class="rating-count">(19)</span>
+                                    <nz-rate [(ngModel)]="course.note" [disabled]="true"></nz-rate>
+                                    <span class="rating-count">({{course.avis.length}})</span>
                                 </div>
                             </li>
                             <li><i class="fa fa-user me-2"></i>{{transactions.length}} enrolled students</li>
@@ -262,64 +258,62 @@
                         <div class="tab-pane fade" id="nav-feedback" role="tabpanel" aria-labelledby="nav-feedback-tab">
                             <div id="course-reviews">
                                 <ul class="course-reviews-list">
-                                    <li>
-                                        <div class="course-review">
-                                            <div class="course-single-review">
-                                                <div class="user-image">
-                                                    <img src="assets/images/blog/author.jpg" alt="" class="img-fluid">
+                                    <li *ngIf="role == 'CANDIDAT' && addComment == true && subscribed == true && ((dateFin.getTime() < currentDate.getTime()))">
+                                        <div class="form-outline w-100 pl-3 pr-3"
+                                             style="background-color: rgba(248,249,250,0.46); border-radius: 10px">
+                                            <div class="card-footer py-3 border-0">
+                                                <h3>Add comment</h3>
+                                                <div class="d-flex flex-start w-100">
+                                                    <img class="rounded-circle shadow-1-strong me-3"
+                                                         *ngIf="user.img == null" src="assets/imgProfile.jpg"
+                                                         alt="avatar"
+                                                         width="60"
+                                                         height="60"/>
+                                                    <img class="rounded-circle shadow-1-strong me-3"
+                                                         *ngIf="user.img != null" src="assets/user-photos/{{user.img}}"
+                                                         alt="avatar"
+                                                         width="60"
+                                                         height="60"/>
+                                                    <div>
+                                                        <h5>{{user.prenom}} {{user.nom}}</h5>
+                                                        <nz-rate [(ngModel)]="avis.note"></nz-rate>
+                                                    </div>
                                                 </div>
-
-                                                <div class="user-content user-review-content">
-                                                    <div class="review-header mb-10">
-                                                        <h4 class="user-name">Tutori</h4>
-                                                        <p class="review-title">Cover all topicc </p>
-                                                        <div class="rating review-stars-rated">
-                                                            <a href="#"><i class="fa fa-star"></i></a>
-                                                            <a href="#"><i class="fa fa-star"></i></a>
-                                                            <a href="#"><i class="fa fa-star"></i></a>
-                                                            <a href="#"><i class="fa fa-star"></i></a>
-                                                            <a href="#"><i class="fa fa-star-half"></i></a>
-                                                        </div>
+                                                <div style="text-align: right">
+                                                    <textarea class="form-control" rows="4" placeholder="Add comment..."
+                                                              style="background: #fff;"
+                                                              #commentaire="ngModel"
+                                                              [class.is-invalid]="commentaire.invalid && commentaire.touched"
+                                                              [(ngModel)]="avis.commentaire"
+                                                              required></textarea>
+                                                    <div *ngIf="commentaire.errors && commentaire.touched">
+                                                        <small class="text-danger" *ngIf="commentaire.errors['required']">
+                                                            Comment is required</small>
                                                     </div>
-                                                    <div class="review-text">
-                                                        <div class="review-content">
-                                                            The course identify things we want to change and then figure
-                                                            out the things that need to be done to create the desired
-                                                            outcome. The course helped me in clearly define problems and
-                                                            generate a wider variety of quality solutions. Support more
-                                                            structures analysis of options leading to better decisions.
-                                                        </div>
-                                                    </div>
+                                                    <button (click)="addAvis()" class="btn btn-success mt-2 mr-2" [disabled]="commentaire.errors || avis.note == 0">Add</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </li>
-                                    <li>
+                                    <li *ngIf="course.avis.length == 0" class="text-center"><h1>No reviews found </h1></li>
+                                    <li *ngFor="let Avis of course.avis">
                                         <div class="course-review">
                                             <div class="course-single-review">
                                                 <div class="user-image">
-                                                    <img src="assets/images/blog/author.jpg" alt="" class="img-fluid">
+                                                    <img src="assets/user-photos/{{Avis.client.img}}" alt="" class="img-fluid">
+                                                    <p style="margin-top: 13px">{{Avis.date | date:'dd/MM/yyyy'}}</p>
                                                 </div>
 
                                                 <div class="user-content user-review-content">
                                                     <div class="review-header mb-10">
-                                                        <h4 class="user-name">Tutori</h4>
-                                                        <p class="review-title">Cover all topicc </p>
+                                                        <h4 class="user-name">{{Avis.client.prenom}} {{Avis.client.nom}}</h4>
                                                         <div class="rating review-stars-rated">
-                                                            <a href="#"><i class="fa fa-star"></i></a>
-                                                            <a href="#"><i class="fa fa-star"></i></a>
-                                                            <a href="#"><i class="fa fa-star"></i></a>
-                                                            <a href="#"><i class="fa fa-star"></i></a>
-                                                            <a href="#"><i class="fa fa-star-half"></i></a>
+                                                            <nz-rate [(ngModel)]="Avis.note"></nz-rate>
                                                         </div>
                                                     </div>
                                                     <div class="review-text">
                                                         <div class="review-content">
-                                                            The course identify things we want to change and then figure
-                                                            out the things that need to be done to create the desired
-                                                            outcome. The course helped me in clearly define problems and
-                                                            generate a wider variety of quality solutions. Support more
-                                                            structures analysis of options leading to better decisions.
+                                                            {{Avis.commentaire}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -393,21 +387,22 @@
                                     [disabled]=" ((dateDebut.getTime() - currentDate.getTime()) / (1000 * 3600 * 24)) < 0">
                                 <i class="far fa-shopping-cart me-2"></i> Enroll Course
                             </button>
-                            <div class="mb-3" *ngIf="subscribed == true && ((dateFin.getTime() - currentDate.getTime()) / (1000 * 3600 * 24)) > 0">
+                            <div class="mb-3"
+                                 *ngIf="subscribed == true && ((dateFin.getTime() - currentDate.getTime()) / (1000 * 3600 * 24)) > 0">
                                 <small style="font-weight: bold; font-size: 15px; color: green" class="text-capitalize">
                                     You are already subscribed to this course</small>
                             </div>
-                            <div class="mb-3" *ngIf="subscribed == false && ((dateDebut.getTime() - currentDate.getTime()) / (1000 * 3600 * 24)) < 0">
+                            <div class="mb-3"
+                                 *ngIf="subscribed == false && ((dateDebut.getTime() - currentDate.getTime()) / (1000 * 3600 * 24)) < 0">
                                 <small style="font-weight: bold; font-size: 15px" class="text-capitalize text-danger">
                                     Registrations are closed</small>
                             </div>
 
-                            <div class="mb-3" *ngIf="subscribed == true && ((dateFin.getTime() < currentDate.getTime()))">
+                            <div class="mb-3"
+                                 *ngIf="subscribed == true && ((dateFin.getTime() < currentDate.getTime()))">
                                 <small style="font-weight: bold; font-size: 15px" class="text-capitalize text-danger">
-                                    This training is over</small>
+                                    This training is over</small><br>
                             </div>
-
-
                         </div>
                         <!-- <div class="buy-btn">
                              <button class="button button-enroll-course btn btn-main-2 rounded"

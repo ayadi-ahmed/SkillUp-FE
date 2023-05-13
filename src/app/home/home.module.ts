@@ -39,6 +39,7 @@ import {MatTabsModule} from "@angular/material/tabs";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatChipsModule} from "@angular/material/chips";
 import {MatOptionModule} from "@angular/material/core";
+import {NzRateModule} from "ng-zorro-antd/rate";
 
 
 @NgModule({
@@ -93,6 +94,7 @@ import {MatOptionModule} from "@angular/material/core";
         MatAutocompleteModule,
         MatChipsModule,
         MatOptionModule,
+        NzRateModule,
     ],
 })
 export class HomeModule {

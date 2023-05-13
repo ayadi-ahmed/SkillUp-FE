@@ -12,7 +12,7 @@ import {CandidatService} from "../../Services/candidat.service";
 })
 export class CandidatesComponent implements OnInit, AfterViewInit {
 
-    displayedColumns: string[] = ['name', 'last name', 'email', 'tel', 'berth date', 'action'];
+    displayedColumns: string[] = ['name', 'last name', 'email', 'tel', 'action'];
     dataSource = new MatTableDataSource<any>([]);
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     public accountNonLocked: any = "";
