@@ -35,7 +35,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
                 term === '' ? [] : this.courseTagsTitle.filter((t) => t.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10),
             ),
         );
-    public formations: course[] = [];
+    public formations: any[] = [];
     public courseTagsTitle: string[] = [];
     public tagOrTitle: any = "";
     public category: any = "";

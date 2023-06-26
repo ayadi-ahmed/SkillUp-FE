@@ -216,6 +216,7 @@ export class UpdateTrainingComponent implements OnInit {
     }
 
     prepareFormData(formation: any, image: any): FormData {
+        formation.avis = [];
         const formData = new FormData();
         formData.append(
             'formation',

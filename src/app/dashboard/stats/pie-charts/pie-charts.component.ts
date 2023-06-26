@@ -32,17 +32,17 @@ export class PieChartsComponent implements OnInit {
         this.chartOptions = {
             series: this.percentages,
             chart: {
-                width: 380,
+                width: 500,
                 type: "pie"
             },
-            labels: this.percentages[1],
+            labels: this.categories,
 
             responsive: [
                 {
-                    breakpoint: 480,
+                    breakpoint: 500,
                     options: {
                         chart: {
-                            width: 200
+                            width: 500
                         },
                         legend: {
                             position: "bottom"

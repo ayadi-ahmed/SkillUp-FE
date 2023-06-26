@@ -185,6 +185,9 @@
                                              alt=" ">
                                         <h3>{{center.nom}}</h3>
                                     </div>
+                                    <span *ngIf="center.etatDemandeInscription == 'REFUSER'" matTooltip="Refused!"
+                                          style="color: #f04d5d;font-size: 50px; font-weight: bold" class="material-symbols-outlined">error</span>
+
                                     <span *ngIf="center.etatDemandeInscription == 'EN_ATTENTE'" matTooltip="Waiting for confirmation!"
                                           style="color: #fd9800;font-size: 50px; font-weight: bold" class="material-symbols-outlined">error</span>
 
@@ -213,15 +216,15 @@
                                                     <div class="course-content">
                                                         <div class="course-meta meta-style-1">
                                             <span class="lessons"><i
-                                                    class="far fa-play-circle me-2"></i>26 Lectures</span>
+                                                    class="far fa-play-circle me-2"></i>{{course.seances.length}} Session</span>
                                                             <span class="label">Beginner</span>
                                                         </div>
-                                                        <h4><a href="#">{{course.titre}}</a></h4>
+                                                        <h4><a >{{course.titre}}</a></h4>
 
                                                         <div class="course-footer mt-20 d-flex align-items-center justify-content-between">
                                             <span class="students"><i
                                                     class="far fa-user-alt me-2"></i>{{course.nbMaxCan}} Students</span>
-                                                            <a class="rounded-btn"><i
+                                                            <a class="rounded-btn" (click)="getDetails(course.id)"><i
                                                                     class="fa fa-long-arrow-right"></i></a>
                                                         </div>
                                                     </div>

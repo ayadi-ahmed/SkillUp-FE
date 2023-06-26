@@ -10,6 +10,7 @@ import {AbonnementService} from "../../../Services/abonnement.service";
 import {Abonnement} from "../../../Entities/abonnement";
 import {MatDialog} from "@angular/material/dialog";
 import {UpdateCenterComponent} from "../update-center/update-center.component";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-add-center',
@@ -48,7 +49,8 @@ export class AddCenterComponent implements OnInit {
                 private authentificationService: AuthentificationService,
                 private managerService: ManagerService,
                 private abonnementService: AbonnementService,
-                private dialog: MatDialog) {
+                private dialog: MatDialog,
+                private router: Router) {
     }
 
     ngOnInit(): void {
@@ -165,5 +167,9 @@ export class AddCenterComponent implements OnInit {
             width: '100%',
             height : '90vh'
         });
+    }
+
+    getDetails(courseId: number) {
+        this.router.navigate([`/course/${courseId}`]);
     }
 }
